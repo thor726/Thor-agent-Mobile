@@ -6,6 +6,20 @@ berkas, menjalankan terminal, mengunduh repo GitHub, menjelajah web, dan
 memakai skill **cara pengerjaan & penyelesaian tugas** dari repo sumber:
 **https://github.com/dwisetyabudi15581/Thor-agent.git**
 
+> **v0.7.0 — UX REDESIGN: NAVIGASI 4 TAB + SETELAN (PROGRESSIVE DISCLOSURE) + TYPOGRAPHY ROMBAK.**
+> NavigationBar ramping jadi 4 tab berlabel bahasa manusia — **[Chat AI]
+> [Skill] [Terminal] [Setelan]** — sidebar kembali fungsinya sebagai
+> riwayat sesi (nol menu kembar). Seluruh fitur teknis (Penyedia AI &
+> model, Akses Root, Penjelajah berkas, Pusat Perintah) diturunkan ke
+> Setelan → seksi "Lanjutan": pengguna awam tidak lagi disambut
+> "libsu/KernelSU/endpoint" sebelum sempat mengobrol. Typography
+> dirombak (`ui/theme/Type.kt`): bubble chat 14sp/20lh → **16sp/24lh
+> (1,5×)**, labelSmall subtitle 11sp → 12sp/16lh, kontras Title
+> ExtraBold → SemiBold → Medium — **hanya sp/weight/lineHeight;
+> tema & warna emas Thor tidak diubah sama sekali**. Komponen baru
+> `SettingItemRow` (icon + judul tebal + subtitle penjelas tipis)
+> dengan spacing lega 8-16dp.
+
 > **v0.5.0 — SIDEBAR ALA GEMINI + SLASH COMMAND JADI TOMBOL + MODEL PER PENYEDIA.**
 > Sidebar (drawer) ala Gemini: Chat baru, riwayat sesi, navigasi, goal aktif.
 > Slash command populer kini tombol aksi cepat di atas composer — tinggal
@@ -21,7 +35,7 @@ memakai skill **cara pengerjaan & penyelesaian tugas** dari repo sumber:
 | | |
 |---|---|
 | Paket | `com.thoragent.app` (debug: `.debug`) |
-| Versi | 0.5.0-thor-mobile |
+| Versi | 0.7.0-thor-mobile |
 | Bahasa UI | Indonesia |
 | minSdk / targetSdk | 29 (Android 10) / 36 (Android 16) |
 | Stack | Kotlin · Jetpack Compose (Material 3) · Coroutines/Flow · Room · DataStore · OkHttp SSE · libsu 6.0.0 · WorkManager · Foreground Service |
@@ -100,12 +114,36 @@ memakai skill **cara pengerjaan & penyelesaian tugas** dari repo sumber:
 13. **Anti-kill** — `AgentForegroundService` (tipe `dataSync`) aktif
     selama tugas berjalan + `AgentWorker` (WorkManager) keep-alive.
 
-## UI/UX hidup (v0.5.0 — sidebar ala Gemini + slash jadi tombol)
+## UI/UX hidup (v0.7.0 — navigasi 4 tab + Setelan progressive disclosure)
 
-- **SIDEBAR ala Gemini (v0.5.0)**: drawer dari kiri (ikon hamburger di top
+- **NAVIGATIONBAR 4 TAB (v0.7.0)**: navigasi utama dirampingkan dari 5 tab
+  (+5 menu sidebar kembar) menjadi **[Chat AI] · [Skill] · [Terminal] ·
+  [Setelan]** berlabel bahasa manusia — `enum ThorRoute` terpusat
+  (`ui/navigation/MainScaffold.kt`) sehingga label/ikon/rute tidak bisa
+  tidak sinkron. Label selalu tampil; terpilih SemiBold; keyboard terbuka
+  → bar menyembunyikan diri (perilaku lama dipertahankan).
+- **SETELAN = progressive disclosure (v0.7.0)**: layar baru
+  `ui/settings/SettingsScreen.kt` dengan dua seksi — **"Agent"** (Gaya
+  jawaban `/personality`, Kedalaman berpikir `/reasoning`) dan
+  **"Lanjutan"** (Penyedia AI & model → Provider, Akses Root → Root,
+  Penjelajah berkas → Files, Pusat Perintah → 105 slash ber-state).
+  Rute lama (`commands`/`files`/`root`/`provider`) tetap terdaftar —
+  deep-link & aksi lama tidak rusak, hanya pintu masuknya yang berpindah.
+- **SettingItemRow (v0.7.0)**: komponen baris pengaturan standar
+  (`ui/settings/components/`) — icon 20dp kontainer 40dp (area sentuh
+  lega), judul `titleSmall` SemiBold, **subtitle penjelas tipis**
+  `labelSmall` warna sekunder, slot kontrol inline / chevron bila bisa
+  dibuka. LazyColumn spacing 8dp + contentPadding 16dp.
+- **TYPOGRAPHY ROMBAK (v0.7.0, `ui/theme/Type.kt`)**: 15 slot didefinisikan
+  eksplisit — bubble chat `bodyMedium` 14sp/20lh → **16sp/24lh (1,5×)**,
+  `labelSmall` (dipakai 60× untuk subtitle) 11sp → **12sp/16lh**,
+  `titleLarge` 22sp Bold → ExtraBold, `titleMedium` 16→17sp. Hanya
+  ukuran/weight/lineHeight — **warna & tema emas Thor tidak diubah**.
+- **SIDEBAR (v0.5.0)**: drawer dari kiri (ikon hamburger di top
   bar Chat) berisi tombol **Chat baru**, **riwayat sesi 10 terbaru**
-  (pindah/hapus seketika), navigasi (Terminal, Berkas, Skill Hub,
-  Provider & Model, Root), goal aktif ringkas, dan identitas versi.
+  (pindah/hapus seketika), pintu **Setelan**, goal aktif ringkas, dan
+  identitas versi — murni urusan sesi obrolan (v0.7.0: blok menu
+  navigasi kembar dihapus; navigasi utama hanya di NavigationBar).
   ViewModel Chat di-scope aktivitas — pilih sesi di sidebar langsung
   terlihat di layar Chat.
 - **SLASH COMMAND JADI TOMBOL (v0.5.0)**: 15 aksi cepat ala Gemini di atas

@@ -1,12 +1,9 @@
 package com.thoragent.app.ui.theme
 
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Typography
 import androidx.compose.material3.darkColorScheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.text.font.FontFamily
-import androidx.compose.ui.text.font.FontWeight
 
 // Konstanta warna klasik Thor-agent tetap di Color.kt (satu sumber kebenaran).
 
@@ -64,13 +61,19 @@ private fun schemeFor(skin: ThorSkin) = darkColorScheme(
     onError = skin.bg
 )
 
-private val ThorTypography = Typography().let { t ->
-    t.copy(
-        titleLarge = t.titleLarge.copy(fontWeight = FontWeight.Bold),
-        titleMedium = t.titleMedium.copy(fontWeight = FontWeight.SemiBold),
-        labelLarge = t.labelLarge.copy(fontFamily = FontFamily.SansSerif)
-    )
-}
+// Typografi UX redesign v0.7.0 — HANYA fontSize (sp), fontWeight, dan
+// lineHeight yang dirombak; warna & font family tidak berubah sama sekali
+// (Color.kt + SKINS + schemeFor() tetap satu sumber kebenaran Thor).
+//
+// Definisi lengkap 15 slot ada di ui/theme/Type.kt (ThorType). Prinsip:
+// 1. KONTRAS HIERARKI JELAS — Title > Subtitle > Body dibedakan tiga hal
+//    sekaligus: ukuran (sp), ketebalan, dan lineHeight — struktur layar
+//    terbaca tanpa harus membaca.
+// 2. BODY CHAT LEGA — bodyMedium (bubble chat & Markdown) naik
+//    14sp/20sp → 16sp/24sp (1,5x); balasan agent panjang nyaman dibaca.
+// 3. LABEL TIDAK MIKROSKOPIS — labelSmall (dipakai 60× untuk subtitle
+//    menu & penjelas) naik 11sp → 12sp/16lh agar tetap terbaca jelas.
+private val ThorTypography = ThorType
 
 @Composable
 fun ThorTheme(skinId: String = "thor", content: @Composable () -> Unit) {

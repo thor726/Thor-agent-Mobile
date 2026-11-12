@@ -60,7 +60,6 @@ fun Sidebar(
     val sessions by vm.sessions.collectAsState()
     val sessionId by vm.sessionId.collectAsState()
     val goal by vm.goal.collectAsState()
-    val providerInfo by vm.providerInfo.collectAsState()
     val gold = MaterialTheme.colorScheme.primary
     val amber = MaterialTheme.colorScheme.secondary
 
@@ -194,42 +193,17 @@ fun Sidebar(
         HorizontalDivider(color = MaterialTheme.colorScheme.outlineVariant)
         Spacer(Modifier.height(10.dp))
 
-        // ---- navigasi utama (ala menu drawer Gemini) ----
+        // ---- v0.7.0: navigasi menuju Setelan (progressive disclosure) ----
+        // Blok menu Terminal/Berkas/Skill Hub/Provider/Root dihapus dari
+        // drawer: NavigationBar 4 tab kini menjadi satu-satunya navigasi
+        // utama; fitur teknis dibuka dari Setelan → seksi "Lanjutan".
         SidebarItem(
-            label = "Terminal",
-            subtitle = "Shell & su on-device",
-            icon = ThorIcons.Terminal,
-            active = currentRoute == "terminal",
+            label = "Setelan",
+            subtitle = "Penyedia AI, akses root, berkas & lainnya",
+            icon = ThorIcons.Settings,
+            active = currentRoute == "settings",
             highlight = gold
-        ) { onNavigate("terminal") }
-        SidebarItem(
-            label = "Berkas",
-            subtitle = "Penjelajah + CWD",
-            icon = ThorIcons.Folder,
-            active = currentRoute == "files",
-            highlight = gold
-        ) { onNavigate("files") }
-        SidebarItem(
-            label = "Skill Hub",
-            subtitle = "Kecerdasan repo sumber",
-            icon = ThorIcons.MenuBook,
-            active = currentRoute == "skillhub",
-            highlight = gold
-        ) { onNavigate("skillhub") }
-        SidebarItem(
-            label = "Provider & Model",
-            subtitle = providerInfo,
-            icon = ThorIconsExtra.SwitchAccess,
-            active = currentRoute == "provider",
-            highlight = gold
-        ) { onNavigate("provider") }
-        SidebarItem(
-            label = "Root",
-            subtitle = "KernelSU / Magisk",
-            icon = ThorIcons.Security,
-            active = currentRoute == "root",
-            highlight = gold
-        ) { onNavigate("root") }
+        ) { onNavigate("settings") }
 
         Spacer(Modifier.height(10.dp))
         HorizontalDivider(color = MaterialTheme.colorScheme.outlineVariant)

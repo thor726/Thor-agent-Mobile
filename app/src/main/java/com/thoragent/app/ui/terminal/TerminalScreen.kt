@@ -7,8 +7,8 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.lazy.rememberLazyListState
@@ -68,15 +68,18 @@ fun TerminalScreen(nav: NavHostController) {
             TopAppBar(
                 title = {
                     Row(verticalAlignment = androidx.compose.ui.Alignment.CenterVertically) {
-                        Icon(ThorIcons.Terminal, null, tint = ThorGold, modifier = Modifier.padding(end = 6.dp).height(20.dp))
-                        Text("Terminal")
+                        Icon(
+                            ThorIcons.Terminal, null, tint = ThorGold,
+                            modifier = Modifier.padding(end = 6.dp).size(20.dp)
+                        )
+                        Text("Terminal", style = MaterialTheme.typography.titleMedium)
                     }
                 },
                 actions = {
                     IconButton(onClick = {
                         vm.startSession(root = !(ui.rootMode), cwd = ui.cwd)
                     }) {
-                        Icon(ThorIcons.Refresh, "Sesi baru / ganti mode", tint = ThorGold)
+                        Icon(ThorIcons.Refresh, "Mulai sesi baru", tint = ThorGold)
                     }
                 }
             )
@@ -84,27 +87,27 @@ fun TerminalScreen(nav: NavHostController) {
     ) { pad ->
         Column(Modifier.padding(pad).fillMaxSize()) {
             Row(
-                Modifier.fillMaxWidth().padding(horizontal = 12.dp),
+                Modifier.fillMaxWidth().padding(horizontal = 16.dp, vertical = 4.dp),
                 horizontalArrangement = Arrangement.spacedBy(8.dp)
             ) {
                 FilterChip(
                     selected = !ui.rootMode,
                     onClick = { vm.startSession(root = false, cwd = ui.cwd) },
-                    label = { Text("sh") }
+                    label = { Text("Biasa (sh)") }
                 )
                 FilterChip(
                     selected = ui.rootMode,
                     onClick = { vm.startSession(root = true, cwd = ui.cwd) },
-                    label = { Text(if (rootStatus?.appGrantedRoot == true) "su (root)" else "su (perlu grant)") }
-                )
-                Text(
-                    ui.cwd,
-                    fontFamily = FontFamily.Monospace,
-                    style = MaterialTheme.typography.labelSmall,
-                    modifier = Modifier.padding(top = 12.dp),
-                    color = MaterialTheme.colorScheme.onSurfaceVariant
+                    label = { Text(if (rootStatus?.appGrantedRoot == true) "Root (su)" else "Root (perlu izin)") }
                 )
             }
+            Text(
+                ui.cwd,
+                fontFamily = FontFamily.Monospace,
+                style = MaterialTheme.typography.labelMedium,
+                modifier = Modifier.padding(horizontal = 16.dp, vertical = 2.dp),
+                color = MaterialTheme.colorScheme.onSurfaceVariant
+            )
             Box(
                 Modifier
                     .weight(1f)
@@ -122,7 +125,8 @@ fun TerminalScreen(nav: NavHostController) {
                             Text(
                                 line,
                                 fontFamily = FontFamily.Monospace,
-                                fontSize = 12.sp,
+                                fontSize = 13.sp,
+                                lineHeight = 18.sp,
                                 color = when {
                                     line.startsWith("[E]") -> MaterialTheme.colorScheme.error
                                     line.startsWith("[exit 0]") -> ThorOk
@@ -141,7 +145,7 @@ fun TerminalScreen(nav: NavHostController) {
                 value = input,
                 onValueChange = { input = it },
                 modifier = Modifier.fillMaxWidth().padding(8.dp),
-                placeholder = { Text(if (ui.rootMode) "# perintah root" else "$ perintah") },
+                placeholder = { Text(if (ui.rootMode) "perintah root" else "ketik perintah") },
                 leadingIcon = { Text(if (ui.rootMode) "#" else "$", color = ThorGold) },
                 trailingIcon = {
                     IconButton(
@@ -154,7 +158,7 @@ fun TerminalScreen(nav: NavHostController) {
                 },
                 keyboardOptions = KeyboardOptions(imeAction = ImeAction.Send),
                 singleLine = true,
-                shape = androidx.compose.foundation.shape.RoundedCornerShape(10.dp)
+                shape = androidx.compose.foundation.shape.RoundedCornerShape(12.dp)
             )
         }
     }

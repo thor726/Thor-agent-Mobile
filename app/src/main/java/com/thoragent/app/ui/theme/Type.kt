@@ -7,35 +7,31 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.sp
 
 /**
- * Type.kt — UX redesign v0.7.0. Skala typography Thor Mobile.
+ * Type.kt — perombakan keterbacaan v0.8.0. Skala typography Thor Mobile.
  *
  * HANYA fontSize (sp), fontWeight, dan lineHeight yang didefinisikan
  * ulang. Warna TIDAK disentuh sama sekali: Color.kt, SKINS, dan
- * schemeFor() di Theme.kt tetap menjadi satu sumber kebenaran tema
+ * schemeFor() di Theme.kt tetap menjadi satu-satunya sumber tema
  * (emas klasik / Midnight / Ember / Mono).
  *
- * Prinsip perombakan (mengganti default M3 yang sebelumnya hanya di-tweak
- * dua slot):
- * 1. KONTRAS HIERARKI JELAS — Title > Subtitle > Body kini punya tiga
- *    pembeda sekaligus: ukuran (sp), ketebalan (weight), dan jarak
- *    antar baris (lineHeight) — mata memindai struktur layar tanpa
- *    membaca. Sebelumnya titleMedium 16sp vs bodyLarge 16sp terlihat
- *    sama besar; kini 17sp SemiBold vs 17sp Normal — dibedakan ketebalan
- *    & lineHeight-nya.
- * 2. BODY CHAT LEGA — bodyMedium (teks bubble chat & MarkdownText,
- *    dipakai 24×) naik 14sp/20sp → 16sp/24sp (1,5×). Balasan agent
- *    Markdown multi-paragraf jadi nyaman dibaca di layar kecil.
- *    bodyLarge 17sp/26lh untuk paragraf panjang (dok skill).
- * 3. LABEL TIDAK LAGI MIKROSKOPIS — labelSmall (11sp) dipakai 60× di
- *    seluruh app untuk teks PENTING (subtitle menu, jam, badge) — naik
- *    ke 12sp/16lh; labelMedium naik ke 13sp/18lh. Tanpa zoom manual,
- *    subtitle tetap terbaca.
- * 4. TITLE DUA KELAS JELAS — titleLarge 22sp ExtraBold (judul layar),
- *    titleMedium 17sp SemiBold (judul Card), titleSmall 15sp SemiBold
- *    (judul baris item / SettingItemRow) — tidak lagi "semuanya sama".
+ * Prinsip skala v0.8.0 (keluhan pengguna: "susunan font berantakan"):
+ * 1. KETEBALAN DARI STYLE, BUKAN DITIMPA — komponen kini cukup memakai
+ *    slot tanpa menimpa FontWeight ad-hoc (dulu: `Bold` ditimpa di atas
+ *    titleMedium yang sudah SemiBold → bobot tidak konsisten antar layar).
+ * 2. HIERARKI 4 TINGKAT TERKALIBRASI — titleSmall 15/titleMedium 17/
+ *    titleLarge 22/displaySmall 30, semua Medium→Bold bertingkat, dan
+ *    setiap slot punya lineHeight 1.3–1.5× fontSize.
+ * 3. BODY DUA UKURAN — bodyMedium 15sp/22sp (UI & bubble chat, dipakai
+ *    paling luas) dan bodyLarge 16sp/24sp untuk paragraf panjang.
+ *    bodyMedium turun dari 16sp agar label chip & baris daftar tidak
+ *    terasa "gegem" berdampingan dengan label 13sp.
+ * 4. LABEL TERBACA — labelSmall 11sp/14sp (meta sekunder murni),
+ *    labelMedium 12sp/16sp (chip, meta), labelLarge 14sp/20sp (tombol &
+ *    tab). Dulu subtitle menu memakai labelSmall 12sp di bawah judul
+ *    15sp — kini pemetaan slot konsisten dengan bobotnya.
  *
- * FontFamily tetap SansSerif seperti sebelumnya (labelLarge lama juga
- * SansSerif) — nol perubahan identitas huruf & warna.
+ * FontFamily tetap SansSerif seperti sebelumnya — nol perubahan
+ * identitas huruf & warna.
  */
 val ThorType: Typography = Typography(
     // ---- DISPLAY / judul besar istimewa ----
@@ -58,14 +54,14 @@ val ThorType: Typography = Typography(
         lineHeight = 36.sp
     ),
 
-    // ---- TITLE: kontras tegas melawan Body ----
+    // ---- TITLE: 4 tingkat terkalibrasi, kontras tegas melawan Body ----
     titleLarge = TextStyle(                       // judul layar / TopAppBar
         fontFamily = FontFamily.SansSerif,
         fontWeight = FontWeight.Bold,
-        fontSize = 22.sp,
-        lineHeight = 28.sp
+        fontSize = 20.sp,
+        lineHeight = 26.sp
     ),
-    titleMedium = TextStyle(                      // judul Card / seksi
+    titleMedium = TextStyle(                      // judul Card / tombol besar
         fontFamily = FontFamily.SansSerif,
         fontWeight = FontWeight.SemiBold,
         fontSize = 17.sp,
@@ -82,59 +78,59 @@ val ThorType: Typography = Typography(
     headlineLarge = TextStyle(
         fontFamily = FontFamily.SansSerif,
         fontWeight = FontWeight.Bold,
-        fontSize = 28.sp,
-        lineHeight = 34.sp
+        fontSize = 26.sp,
+        lineHeight = 32.sp
     ),
     headlineMedium = TextStyle(
         fontFamily = FontFamily.SansSerif,
         fontWeight = FontWeight.Bold,
-        fontSize = 24.sp,
-        lineHeight = 30.sp
+        fontSize = 22.sp,
+        lineHeight = 28.sp
     ),
     headlineSmall = TextStyle(
         fontFamily = FontFamily.SansSerif,
-        fontWeight = FontWeight.Bold,
-        fontSize = 20.sp,
-        lineHeight = 26.sp
+        fontWeight = FontWeight.SemiBold,
+        fontSize = 19.sp,
+        lineHeight = 25.sp
     ),
 
     // ---- BODY: nyaman dibaca lama di layar kecil ----
     bodyLarge = TextStyle(                         // paragraf panjang / dok skill
         fontFamily = FontFamily.SansSerif,
         fontWeight = FontWeight.Normal,
-        fontSize = 17.sp,
-        lineHeight = 26.sp          // ~1.53x — baca panjang tetap lega
+        fontSize = 16.sp,
+        lineHeight = 24.sp          // 1.5× — kunci kenyamanan baca panjang
     ),
     bodyMedium = TextStyle(                        // TEKS BUBBLE CHAT & UI utama
         fontFamily = FontFamily.SansSerif,
         fontWeight = FontWeight.Normal,
-        fontSize = 16.sp,
-        lineHeight = 24.sp          // 1.5x — kunci kenyamanan chat
+        fontSize = 15.sp,
+        lineHeight = 22.sp          // ~1.47× — bubble & baris daftar ringkas
     ),
     bodySmall = TextStyle(                         // teks bantu sekunder
         fontFamily = FontFamily.SansSerif,
         fontWeight = FontWeight.Normal,
         fontSize = 13.sp,
-        lineHeight = 18.sp          // ~1.38x
+        lineHeight = 18.sp          // ~1.38×
     ),
 
-    // ---- LABEL: naik dari 11sp agar subtitle menu terbaca ----
+    // ---- LABEL: bobot Medium membedakan dari Body yang Normal ----
     labelLarge = TextStyle(                        // tombol & tab NavigationBar
         fontFamily = FontFamily.SansSerif,
         fontWeight = FontWeight.Medium,
         fontSize = 14.sp,
-        lineHeight = 18.sp
+        lineHeight = 20.sp
     ),
-    labelMedium = TextStyle(                       // chip, badge, meta kecil
+    labelMedium = TextStyle(                       // chip, badge, meta
         fontFamily = FontFamily.SansSerif,
         fontWeight = FontWeight.Medium,
-        fontSize = 13.sp,
-        lineHeight = 18.sp
-    ),
-    labelSmall = TextStyle(                        // subtitle helper & timestamp
-        fontFamily = FontFamily.SansSerif,
-        fontWeight = FontWeight.Normal,
         fontSize = 12.sp,
         lineHeight = 16.sp
+    ),
+    labelSmall = TextStyle(                        // timestamp & meta sekunder
+        fontFamily = FontFamily.SansSerif,
+        fontWeight = FontWeight.Normal,
+        fontSize = 11.sp,
+        lineHeight = 14.sp
     )
 )

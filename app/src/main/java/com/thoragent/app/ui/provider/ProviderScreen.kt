@@ -110,7 +110,7 @@ fun ProviderScreen(nav: NavHostController) {
                         Spacer(Modifier.width(10.dp))
                         Column(Modifier.weight(1f)) {
                             Row(verticalAlignment = Alignment.CenterVertically) {
-                                Text(p.name, fontWeight = FontWeight.Bold)
+                                Text(p.name, style = MaterialTheme.typography.titleSmall)
                                 if (p.isDefault) {
                                     Spacer(Modifier.width(6.dp))
                                     Surface(
@@ -151,7 +151,7 @@ fun ProviderScreen(nav: NavHostController) {
                 }
             }
             item {
-                Text("Formulir Provider", style = MaterialTheme.typography.titleMedium, fontWeight = FontWeight.Bold)
+                Text("Formulir Provider", style = MaterialTheme.typography.titleMedium)
             }
             item {
                 Card(Modifier.fillMaxWidth()) {
@@ -166,7 +166,7 @@ fun ProviderScreen(nav: NavHostController) {
                                 AssistChip(
                                     onClick = { vm.applyPreset(preset) },
                                     label = { Text(preset.label) },
-                                    leadingIcon = { Icon(ThorIcons.Cloud, null, Modifier.size(15.dp)) }
+                                    leadingIcon = { Icon(ThorIcons.Cloud, null, Modifier.size(20.dp)) }
                                 )
                             }
                         }
@@ -310,7 +310,7 @@ private fun ModelPickerForm(
     onPick: (String) -> Unit
 ) {
     Column(Modifier.padding(horizontal = 16.dp).padding(bottom = 20.dp)) {
-        Text("Pilih Model", style = MaterialTheme.typography.titleMedium, fontWeight = FontWeight.Bold)
+        Text("Pilih Model", style = MaterialTheme.typography.titleMedium)
         Text(
             "Daftar diambil langsung dari base URL profil ini (GET /models) — " +
                 "semua model di bawah pasti terdaftar di endpoint, jadi tidak mungkin " +

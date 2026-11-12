@@ -288,18 +288,18 @@ fun ChatScreen(
                 scrollBehavior = scrollBehavior,
                 title = {
                     Row(verticalAlignment = Alignment.CenterVertically) {
-                        // Hamburger — buka SIDEBAR ala Gemini (chat baru, riwayat, nav)
+                        // Hamburger — buka SIDEBAR ala Gemini (chat baru, riwayat)
                         IconButton(onClick = { onOpenDrawer() }) {
                             Icon(
                                 com.thoragent.app.ui.icons.ThorIconsExtra.Menu,
-                                "Buka sidebar",
+                                "Buka menu riwayat",
                                 tint = MaterialTheme.colorScheme.onSurface
                             )
                         }
                         Spacer(Modifier.width(2.dp))
                         Icon(ThorIcons.Bolt, null, tint = gold, modifier = Modifier.size(20.dp))
                         Spacer(Modifier.width(6.dp))
-                        Text("Thor Agent", fontWeight = FontWeight.Bold)
+                        Text("Thor Agent", style = MaterialTheme.typography.titleMedium)
                     }
                 },
                 colors = TopAppBarDefaults.topAppBarColors(
@@ -312,19 +312,19 @@ fun ChatScreen(
                         color = gold.copy(alpha = 0.12f),
                         modifier = Modifier.padding(end = 4.dp).clickable { showModelPicker = true }
                     ) {
-                        Row(
-                            Modifier.padding(horizontal = 10.dp, vertical = 5.dp),
-                            verticalAlignment = Alignment.CenterVertically
-                        ) {
-                            Icon(ThorIcons.AutoAwesome, null, tint = gold, modifier = Modifier.size(13.dp))
-                            Spacer(Modifier.width(4.dp))
-                            Text(
-                                modelName,
-                                style = MaterialTheme.typography.labelMedium,
-                                color = gold,
-                                maxLines = 1
-                            )
-                        }
+                    Row(
+                        Modifier.padding(horizontal = 10.dp, vertical = 5.dp),
+                        verticalAlignment = Alignment.CenterVertically
+                    ) {
+                        Icon(ThorIcons.AutoAwesome, null, tint = gold, modifier = Modifier.size(16.dp))
+                        Spacer(Modifier.width(4.dp))
+                        Text(
+                            modelName,
+                            style = MaterialTheme.typography.labelMedium,
+                            color = gold,
+                            maxLines = 1
+                        )
+                    }
                     }
                     IconButton(onClick = { showSessions = true }) {
                         Icon(ThorIcons.History, "Riwayat sesi")
@@ -335,37 +335,27 @@ fun ChatScreen(
                     DropdownMenu(expanded = showMenu, onDismissRequest = { showMenu = false }) {
                         DropdownMenuItem(
                             text = { Text("Sesi baru") },
-                            leadingIcon = { Icon(ThorIcons.Add, null, tint = gold) },
+                            leadingIcon = { Icon(ThorIcons.Add, null, tint = gold, modifier = Modifier.size(20.dp)) },
                             onClick = { showMenu = false; vm.send("/new") }
                         )
                         DropdownMenuItem(
-                            text = { Text("Pengaturan Provider") },
-                            leadingIcon = { Icon(ThorIcons.Key, null, tint = gold) },
-                            onClick = { showMenu = false; nav.navigate(MainActivity.Routes.PROVIDER) }
+                            text = { Text("Pilih model") },
+                            leadingIcon = { Icon(ThorIcons.AutoAwesome, null, tint = gold, modifier = Modifier.size(20.dp)) },
+                            onClick = { showMenu = false; showModelPicker = true }
                         )
                         DropdownMenuItem(
-                            text = { Text("Pusat Perintah — tombol /reasoning dll.") },
-                            leadingIcon = { Icon(ThorIcons.Bolt, null, tint = gold) },
-                            onClick = { showMenu = false; nav.navigate(MainActivity.Routes.COMMANDS) }
+                            text = { Text("Ganti gaya jawaban") },
+                            leadingIcon = { Icon(ThorIcons.Person, null, tint = gold, modifier = Modifier.size(20.dp)) },
+                            onClick = { showMenu = false; input = "/personality " }
                         )
                         DropdownMenuItem(
-                            text = { Text("Skill Hub — kecerdasan repo") },
-                            leadingIcon = { Icon(ThorIcons.Memory, null, tint = gold) },
-                            onClick = { showMenu = false; nav.navigate(com.thoragent.app.ui.navigation.ThorRoute.Skills.path) }
-                        )
-                        DropdownMenuItem(
-                            text = { Text("Set goal (tujuan berdiri)") },
-                            leadingIcon = { Icon(ThorIcons.Lightbulb, null, tint = gold) },
-                            onClick = { showMenu = false; input = "/goal " }
-                        )
-                        DropdownMenuItem(
-                            text = { Text("Ganti skin tampilan") },
-                            leadingIcon = { Icon(ThorIcons.Settings, null, tint = gold) },
+                            text = { Text("Ganti tema tampilan") },
+                            leadingIcon = { Icon(ThorIcons.Settings, null, tint = gold, modifier = Modifier.size(20.dp)) },
                             onClick = { showMenu = false; input = "/skin " }
                         )
                         DropdownMenuItem(
-                            text = { Text("Bantuan — 105 perintah") },
-                            leadingIcon = { Icon(ThorIcons.Info, null, tint = gold) },
+                            text = { Text("Bantuan perintah") },
+                            leadingIcon = { Icon(ThorIcons.Info, null, tint = gold, modifier = Modifier.size(20.dp)) },
                             onClick = { showMenu = false; showSlashPalette = true }
                         )
                     }
@@ -397,7 +387,7 @@ fun ChatScreen(
                         Modifier.padding(horizontal = 14.dp, vertical = 5.dp),
                         verticalAlignment = Alignment.CenterVertically
                     ) {
-                        Icon(ThorIcons.Lightbulb, null, tint = amber, modifier = Modifier.size(13.dp))
+                        Icon(ThorIcons.Lightbulb, null, tint = amber, modifier = Modifier.size(16.dp))
                         Spacer(Modifier.width(6.dp))
                         Text(
                             "goal: ${goal.take(70)}",
@@ -497,7 +487,7 @@ fun ChatScreen(
                         Modifier.padding(horizontal = 12.dp, vertical = 5.dp),
                         verticalAlignment = Alignment.CenterVertically
                     ) {
-                        Icon(ThorIcons.Schedule, null, tint = gold, modifier = Modifier.size(13.dp))
+                        Icon(ThorIcons.Schedule, null, tint = gold, modifier = Modifier.size(16.dp))
                         Spacer(Modifier.width(6.dp))
                         Text(
                             "${queue.size} pesan mengantre",
@@ -525,7 +515,7 @@ fun ChatScreen(
                         Modifier.padding(horizontal = 12.dp, vertical = 5.dp),
                         verticalAlignment = Alignment.CenterVertically
                     ) {
-                        Icon(ThorIcons.Image, null, tint = gold, modifier = Modifier.size(13.dp))
+                        Icon(ThorIcons.Image, null, tint = gold, modifier = Modifier.size(16.dp))
                         Spacer(Modifier.width(6.dp))
                         Text(
                             attachment?.substringAfterLast("/") ?: "",
@@ -614,14 +604,14 @@ fun ChatScreen(
                     ) {
                         // tombol slash → palet perintah penuh
                         IconButton(onClick = { showSlashPalette = true }) {
-                            Icon(ThorIcons.Bolt, "Perintah", tint = gold, modifier = Modifier.size(26.dp))
+                            Icon(ThorIcons.Bolt, "Perintah", tint = gold, modifier = Modifier.size(24.dp))
                         }
                         Spacer(Modifier.width(2.dp))
                         // lampirkan gambar (/image)
                         IconButton(onClick = {
                             pickImage.launch(PickVisualMediaRequest(ActivityResultContracts.PickVisualMedia.ImageOnly))
                         }) {
-                            Icon(ThorIcons.AttachFile, "Lampirkan gambar", tint = ThorTextSecondary, modifier = Modifier.size(22.dp))
+                            Icon(ThorIcons.AttachFile, "Lampirkan gambar", tint = ThorTextSecondary, modifier = Modifier.size(24.dp))
                         }
                         Spacer(Modifier.width(2.dp))
                         OutlinedTextField(
@@ -810,40 +800,40 @@ private fun StatusStrip(
     val gold = MaterialTheme.colorScheme.primary
     Surface(color = MaterialTheme.colorScheme.surface, modifier = Modifier.fillMaxWidth()) {
         Row(
-            Modifier.padding(horizontal = 14.dp, vertical = 3.dp),
+            Modifier.padding(horizontal = 14.dp, vertical = 4.dp),
             verticalAlignment = Alignment.CenterVertically,
             horizontalArrangement = Arrangement.spacedBy(10.dp)
         ) {
-            Icon(ThorIcons.AutoAwesome, null, tint = gold, modifier = Modifier.size(11.dp))
+            Icon(ThorIcons.AutoAwesome, null, tint = gold, modifier = Modifier.size(16.dp))
             Text(
                 model,
-                style = MaterialTheme.typography.labelSmall,
+                style = MaterialTheme.typography.labelMedium,
                 color = gold,
                 maxLines = 1,
                 modifier = Modifier.weight(1f, fill = false)
             )
-            Text("·", color = ThorTextSecondary, style = MaterialTheme.typography.labelSmall)
+            Text("·", color = ThorTextSecondary, style = MaterialTheme.typography.labelMedium)
             Text(
                 "$tokens tk",
-                style = MaterialTheme.typography.labelSmall,
+                style = MaterialTheme.typography.labelMedium,
                 color = ThorTextSecondary
             )
             if (queued > 0) {
-                Text("·", color = ThorTextSecondary, style = MaterialTheme.typography.labelSmall)
-                Text("$queued antre", style = MaterialTheme.typography.labelSmall, color = gold)
+                Text("·", color = ThorTextSecondary, style = MaterialTheme.typography.labelMedium)
+                Text("$queued antre", style = MaterialTheme.typography.labelMedium, color = gold)
             }
             if (bg > 0) {
-                Text("·", color = ThorTextSecondary, style = MaterialTheme.typography.labelSmall)
-                Text("$bg bg", style = MaterialTheme.typography.labelSmall, color = ThorTextSecondary)
+                Text("·", color = ThorTextSecondary, style = MaterialTheme.typography.labelMedium)
+                Text("$bg bg", style = MaterialTheme.typography.labelMedium, color = ThorTextSecondary)
             }
             if (showBattery && battery.first >= 0) {
-                Text("·", color = ThorTextSecondary, style = MaterialTheme.typography.labelSmall)
+                Text("·", color = ThorTextSecondary, style = MaterialTheme.typography.labelMedium)
                 Text(
                     buildString {
                         append(battery.first); append("%")
                         if (battery.second) append(" mengisi")
                     },
-                    style = MaterialTheme.typography.labelSmall,
+                    style = MaterialTheme.typography.labelMedium,
                     color = when {
                         battery.first <= 15 && !battery.second -> ThorErr
                         battery.second -> ThorOk
@@ -852,8 +842,8 @@ private fun StatusStrip(
                 )
             }
             if (paused) {
-                Text("·", color = ThorTextSecondary, style = MaterialTheme.typography.labelSmall)
-                Text("DIJEDA", style = MaterialTheme.typography.labelSmall, color = ThorErr, fontWeight = FontWeight.Bold)
+                Text("·", color = ThorTextSecondary, style = MaterialTheme.typography.labelMedium)
+                Text("DIJEDA", style = MaterialTheme.typography.labelMedium, color = ThorErr, fontWeight = FontWeight.Medium)
             }
         }
     }
@@ -917,7 +907,7 @@ private fun Avatar(role: String, gold: Color) {
             if (isUser) ThorIcons.Person else ThorIcons.SmartToy,
             null,
             tint = fg,
-            modifier = Modifier.size(17.dp)
+            modifier = Modifier.size(16.dp)
         )
     }
 }
@@ -957,10 +947,10 @@ private fun EmptyState(pet: String, gold: Color, onSuggestion: (String) -> Unit)
             Icon(ThorIcons.Bolt, null, tint = gold.copy(alpha = glow), modifier = Modifier.size(44.dp))
         }
         Spacer(Modifier.size(14.dp))
-        Text("Thor Agent Mobile", style = MaterialTheme.typography.titleLarge, fontWeight = FontWeight.Bold)
+        Text("Thor Agent Mobile", style = MaterialTheme.typography.titleLarge)
         Text(
-            "Agent pribadi otonom on-device — berkas, terminal, GitHub, web, " +
-                "dan 44 skill cara-pengerjaan-tugas dari repo Thor-agent.",
+            "Asisten pribadi yang bisa membaca berkas, menjalankan terminal, " +
+                "dan memakai 44 skill dari repo Thor-agent.",
             color = ThorTextSecondary,
             style = MaterialTheme.typography.bodyMedium,
             modifier = Modifier.padding(top = 4.dp, bottom = 6.dp)
@@ -983,22 +973,21 @@ private fun EmptyState(pet: String, gold: Color, onSuggestion: (String) -> Unit)
             Spacer(Modifier.size(6.dp))
         }
         Spacer(Modifier.size(8.dp))
+        // 4 saran inti, label saja — cukup mengarahkan tanpa memenuhi layar
         FlowRow(
             horizontalArrangement = Arrangement.spacedBy(6.dp),
             verticalArrangement = Arrangement.spacedBy(6.dp)
         ) {
-            SuggestionChip("/status", "kondisi sesi & model", gold, onSuggestion)
-            SuggestionChip("Jelajahi berkas saya", "agent memetakan direktori", gold, onSuggestion)
-            SuggestionChip("Ringkas repo dwisetyabudi15581/Thor-agent", "github_clone + analisis", gold, onSuggestion)
-            SuggestionChip("/skills", "pustaka kecerdasan repo", gold, onSuggestion)
-            SuggestionChip("/goal", "set tujuan berdiri", gold, onSuggestion)
-            SuggestionChip("/help", "105 perintah interaktif", gold, onSuggestion)
+            SuggestionChip("/status", null, gold, onSuggestion)
+            SuggestionChip("Jelajahi berkas", null, gold, onSuggestion)
+            SuggestionChip("/skills", null, gold, onSuggestion)
+            SuggestionChip("/help", null, gold, onSuggestion)
         }
     }
 }
 
 @Composable
-private fun SuggestionChip(label: String, sub: String, gold: Color, onSuggestion: (String) -> Unit) {
+private fun SuggestionChip(label: String, sub: String?, gold: Color, onSuggestion: (String) -> Unit) {
     val interaction = remember { MutableInteractionSource() }
     val pressed by interaction.collectIsPressedAsState()
     val scale by animateFloatAsState(if (pressed) 0.95f else 1f, label = "chip")
@@ -1011,8 +1000,10 @@ private fun SuggestionChip(label: String, sub: String, gold: Color, onSuggestion
             .clickable(interactionSource = interaction, indication = null) { onSuggestion(label) }
     ) {
         Column(Modifier.padding(horizontal = 12.dp, vertical = 7.dp)) {
-            Text(label, style = MaterialTheme.typography.labelMedium, color = gold, fontWeight = FontWeight.SemiBold)
-            Text(sub, style = MaterialTheme.typography.labelSmall, color = ThorTextSecondary)
+            Text(label, style = MaterialTheme.typography.labelMedium, color = gold, fontWeight = FontWeight.Medium)
+            if (sub != null) {
+                Text(sub, style = MaterialTheme.typography.labelSmall, color = ThorTextSecondary)
+            }
         }
     }
 }
@@ -1045,18 +1036,18 @@ private fun MessageRow(
             DropdownMenu(expanded = menu, onDismissRequest = { menu = false }) {
                 DropdownMenuItem(
                     text = { Text("Salin") },
-                    leadingIcon = { Icon(ThorIcons.ContentCopy, null, modifier = Modifier.size(17.dp)) },
+                    leadingIcon = { Icon(ThorIcons.ContentCopy, null, modifier = Modifier.size(20.dp)) },
                     onClick = { menu = false; onCopy() }
                 )
                 DropdownMenuItem(
                     text = { Text("Kutip") },
-                    leadingIcon = { Icon(ThorIcons.Chat, null, modifier = Modifier.size(17.dp)) },
+                    leadingIcon = { Icon(ThorIcons.Chat, null, modifier = Modifier.size(20.dp)) },
                     onClick = { menu = false; onQuote() }
                 )
                 if (m.role == "user") {
                     DropdownMenuItem(
                         text = { Text("Edit & kirim ulang") },
-                        leadingIcon = { Icon(ThorIcons.Edit, null, modifier = Modifier.size(17.dp)) },
+                        leadingIcon = { Icon(ThorIcons.Edit, null, modifier = Modifier.size(20.dp)) },
                         onClick = { menu = false; onEdit() }
                     )
                 }
@@ -1179,7 +1170,7 @@ fun ToolCallCard(toolName: String, args: String, gold: Color, expandedDefault: B
                 Modifier.fillMaxWidth().clickable { expanded = !expanded },
                 verticalAlignment = Alignment.CenterVertically
             ) {
-                Icon(toolIcon(toolName), null, tint = MaterialTheme.colorScheme.secondary, modifier = Modifier.size(15.dp))
+                Icon(toolIcon(toolName), null, tint = MaterialTheme.colorScheme.secondary, modifier = Modifier.size(16.dp))
                 Spacer(Modifier.width(8.dp))
                 Text(
                     toolName,
@@ -1252,7 +1243,7 @@ fun ToolResultCard(toolName: String?, result: String, gold: Color, expandedDefau
                     if (ok) ThorIcons.CheckCircle else ThorIcons.Cancel,
                     if (ok) "Berhasil" else "Gagal",
                     tint = if (ok) ThorOk else ThorErr,
-                    modifier = Modifier.size(15.dp)
+                    modifier = Modifier.size(16.dp)
                 )
                 Spacer(Modifier.width(8.dp))
                 Text(
@@ -1305,7 +1296,7 @@ private fun QueueSheet(
         Row(verticalAlignment = Alignment.CenterVertically) {
             Icon(ThorIcons.Schedule, null, tint = gold, modifier = Modifier.size(20.dp))
             Spacer(Modifier.width(8.dp))
-            Text("Antrean Pesan", style = MaterialTheme.typography.titleMedium, fontWeight = FontWeight.Bold)
+            Text("Antrean Pesan", style = MaterialTheme.typography.titleMedium)
             Spacer(Modifier.weight(1f))
             if (queue.isNotEmpty()) {
                 TextButton(onClick = { onClear() }) { Text("Kosongkan", color = ThorErr) }
@@ -1364,7 +1355,7 @@ private fun SessionList(
         Row(verticalAlignment = Alignment.CenterVertically) {
             Icon(ThorIcons.History, null, tint = gold, modifier = Modifier.size(20.dp))
             Spacer(Modifier.width(8.dp))
-            Text("Riwayat Sesi", style = MaterialTheme.typography.titleMedium, fontWeight = FontWeight.Bold)
+            Text("Riwayat Sesi", style = MaterialTheme.typography.titleMedium)
             Spacer(Modifier.weight(1f))
             TextButton(onClick = onNew) {
                 Icon(ThorIcons.Add, null, modifier = Modifier.size(16.dp))
@@ -1403,7 +1394,7 @@ private fun SessionList(
                             )
                         }
                         IconButton(onClick = { onDelete(s.id) }) {
-                            Icon(ThorIcons.Delete, "Hapus", tint = ThorErr, modifier = Modifier.size(17.dp))
+                            Icon(ThorIcons.Delete, "Hapus", tint = ThorErr, modifier = Modifier.size(20.dp))
                         }
                     }
                 }

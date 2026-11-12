@@ -83,7 +83,7 @@ fun FilesScreen(nav: NavHostController) {
             item {
                 Card(Modifier.fillMaxWidth()) {
                     Column(Modifier.padding(12.dp), verticalArrangement = Arrangement.spacedBy(8.dp)) {
-                        Text("Akses berkas gaya Termux", style = MaterialTheme.typography.titleMedium, fontWeight = FontWeight.Bold)
+                        Text("Akses berkas gaya Termux", style = MaterialTheme.typography.titleMedium)
                         Text(
                             if (ui.allFilesGranted) "All-Files-Access: AKTIF ✓" else "All-Files-Access: belum aktif",
                             color = if (ui.allFilesGranted) MaterialTheme.colorScheme.primary else ThorErr
@@ -131,7 +131,7 @@ fun FilesScreen(nav: NavHostController) {
                             Row {
                                 Icon(ThorIcons.Description, null, tint = ThorGold)
                                 Spacer(Modifier.padding(4.dp))
-                                Text(name, fontWeight = FontWeight.Bold, modifier = Modifier.weight(1f))
+                                Text(name, style = MaterialTheme.typography.titleSmall, modifier = Modifier.weight(1f))
                                 IconButton(onClick = { vm.closePreview() }) {
                                     Icon(ThorIcons.Close, "Tutup pratinjau")
                                 }

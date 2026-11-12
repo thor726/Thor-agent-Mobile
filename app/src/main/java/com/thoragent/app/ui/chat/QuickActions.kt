@@ -33,11 +33,12 @@ import com.thoragent.app.ui.icons.ThorIconsExtra
 import com.thoragent.app.ui.theme.ThorTextSecondary
 
 /**
- * SLASH COMMAND JADI TOMBOL (v0.5.0) — aksi cepat ala Gemini:
- * perintah paling sering dipakai tinggal disentuh, tanpa mengetik "/".
+ * SLASH COMMAND JADI TOMBOL (v0.8.0) — 8 aksi paling sering dipakai.
+ * Dulu 15 tombol sekaligus menumpuk di atas keyboard; riset UX kognitif
+ * (Miller's law, progressive disclosure) → pangkas ke 8 inti. Perintah
+ * lengkap tetap tersedia lewat tombol petir (palet 105 perintah).
  * Setiap tombol mengeksekusi perintah aslinya — registry repo sumber
- * tetap menjadi satu sumber kebenaran (MobileCommands tier terlihat
- * sebagai titik kecil di kanan label).
+ * tetap menjadi satu sumber kebenaran.
  */
 private data class QuickAction(
     val command: String,   // "/status" — dikirim apa adanya
@@ -48,19 +49,12 @@ private data class QuickAction(
 
 private val QUICK_ACTIONS = listOf(
     QuickAction("/plan", "Rencanakan", ThorIcons.Description, fills = true),
-    QuickAction("/goal", "Set goal", ThorIcons.Lightbulb, fills = true),
-    QuickAction("/learn", "Pelajari", ThorIcons.MenuBook, fills = true),
-    QuickAction("/review", "Review kerja", ThorIcons.CheckCircle),
     QuickAction("/status", "Status", ThorIcons.Info),
-    QuickAction("/compress", "Padatkan", ThorIcons.Refresh),
-    QuickAction("/usage", "Token", ThorIcons.Bolt),
-    QuickAction("/queue", "Antrean", ThorIcons.Schedule),
     QuickAction("/model", "Model", ThorIcons.AutoAwesome),
-    QuickAction("/personality", "Gaya", ThorIcons.Person, fills = true),
-    QuickAction("/skin", "Skin", ThorIcons.Settings, fills = true),
+    QuickAction("/review", "Review", ThorIcons.CheckCircle),
+    QuickAction("/learn", "Pelajari", ThorIcons.MenuBook, fills = true),
     QuickAction("/skills", "Skill", ThorIcons.Memory),
-    QuickAction("/voice", "Suara", ThorIcons.VolumeUp),
-    QuickAction("/agents", "Agent", ThorIcons.SmartToy),
+    QuickAction("/personality", "Gaya", ThorIcons.Person, fills = true),
     QuickAction("/new", "Sesi baru", ThorIcons.Add)
 )
 
@@ -77,7 +71,7 @@ fun QuickActions(
     expanded: Boolean = true
 ) {
     val gold = MaterialTheme.colorScheme.primary
-    val actions = remember(expanded) { if (expanded) QUICK_ACTIONS else QUICK_ACTIONS.take(8) }
+    val actions = remember(expanded) { if (expanded) QUICK_ACTIONS else QUICK_ACTIONS.take(6) }
 
     FlowRow(
         modifier = modifier.padding(horizontal = 8.dp, vertical = 2.dp),
@@ -117,8 +111,8 @@ private fun QuickChip(
             Modifier.padding(horizontal = 10.dp, vertical = 5.dp),
             verticalAlignment = androidx.compose.ui.Alignment.CenterVertically
         ) {
-            Icon(a.icon, null, tint = tint, modifier = Modifier.size(14.dp))
-            Spacer(Modifier.size(4.dp))
+            Icon(a.icon, null, tint = tint, modifier = Modifier.size(16.dp))
+            Spacer(Modifier.size(5.dp))
             Text(
                 a.label,
                 style = MaterialTheme.typography.labelMedium,

@@ -4,12 +4,15 @@ import android.app.Application
 import androidx.compose.foundation.horizontalScroll
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.rememberScrollState
@@ -34,7 +37,6 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontFamily
-import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.viewModelScope
@@ -105,7 +107,7 @@ fun SkillHubScreen(nav: NavHostController) {
     doc?.let { d ->
         androidx.compose.material3.AlertDialog(
             onDismissRequest = { vm.closeDoc() },
-            title = { Text("SKILL.md", fontWeight = FontWeight.Bold) },
+            title = { Text("SKILL.md", style = MaterialTheme.typography.titleMedium) },
             text = {
                 Column(
                     Modifier
@@ -139,10 +141,10 @@ fun SkillHubScreen(nav: NavHostController) {
     ) { pad ->
         Column(Modifier.padding(pad).fillMaxSize()) {
             Text(
-                "Kecerdasan dari repo Thor-agent — prosedur langkah-demi-langkah yang dibaca agent.",
-                style = MaterialTheme.typography.labelSmall,
+                "Prosedur langkah-demi-langkah yang bisa dipakai agent.",
+                style = MaterialTheme.typography.labelMedium,
                 color = ThorTextSecondary,
-                modifier = Modifier.padding(horizontal = 12.dp, vertical = 2.dp)
+                modifier = Modifier.padding(horizontal = 16.dp, vertical = 6.dp)
             )
             TabRow(selectedTabIndex = tab) {
                 Tab(selected = tab == 0, onClick = { tab = 0 }, text = { Text("Skill") })
@@ -151,25 +153,27 @@ fun SkillHubScreen(nav: NavHostController) {
             OutlinedTextField(
                 value = query,
                 onValueChange = { query = it },
-                modifier = Modifier.fillMaxWidth().padding(8.dp),
-                placeholder = { Text("Cari nama/deskripsi…") },
-                leadingIcon = { Icon(ThorIcons.Search, null, tint = ThorGold) }
+                modifier = Modifier.fillMaxWidth().padding(horizontal = 16.dp, vertical = 8.dp),
+                placeholder = { Text("Cari skill atau tool…") },
+                leadingIcon = { Icon(ThorIcons.Search, null, tint = ThorGold, modifier = Modifier.size(20.dp)) },
+                singleLine = true
             )
             if (tab == 0) {
                 Row(
-                    Modifier.padding(8.dp).horizontalScroll(rememberScrollState()),
+                    Modifier.padding(horizontal = 16.dp, vertical = 2.dp)
+                        .horizontalScroll(rememberScrollState()),
                     horizontalArrangement = Arrangement.spacedBy(6.dp)
                 ) {
                     categories.forEach { c ->
                         FilterChip(
                             selected = category == c,
                             onClick = { category = if (category == c) null else c },
-                            label = { Text("$c (${skills.count { it.category == c }})") }
+                            label = { Text(c) }
                         )
                     }
                 }
                 LazyColumn(
-                    contentPadding = androidx.compose.foundation.layout.PaddingValues(8.dp),
+                    contentPadding = androidx.compose.foundation.layout.PaddingValues(16.dp),
                     verticalArrangement = Arrangement.spacedBy(6.dp)
                 ) {
                     items(filteredSkills, key = { it.origin + it.path }) { s ->
@@ -177,48 +181,65 @@ fun SkillHubScreen(nav: NavHostController) {
                             onClick = { vm.openSkill(s.path) },
                             modifier = Modifier.fillMaxWidth()
                         ) {
-                            Column(Modifier.padding(10.dp)) {
+                            Column(Modifier.padding(12.dp)) {
                                 Row(verticalAlignment = androidx.compose.ui.Alignment.CenterVertically) {
                                     Icon(
                                         if (s.origin == "user") ThorIcons.AutoAwesome else ThorIcons.MenuBook,
                                         null,
                                         tint = if (s.origin == "user") ThorOk else ThorAmber,
-                                        modifier = Modifier.padding(end = 6.dp).height(16.dp)
+                                        modifier = Modifier.size(20.dp)
                                     )
-                                    Text(s.name, fontWeight = FontWeight.Bold, color = ThorAmber, modifier = Modifier.weight(1f))
+                                    Spacer(Modifier.width(8.dp))
+                                    Text(
+                                        s.name,
+                                        style = MaterialTheme.typography.titleSmall,
+                                        color = ThorAmber,
+                                        modifier = Modifier.weight(1f)
+                                    )
                                     Text(
                                         when (s.origin) {
                                             "builtin" -> "bawaan"
                                             "user" -> "dipelajari"
                                             else -> "opsional"
                                         },
-                                        style = MaterialTheme.typography.labelSmall,
+                                        style = MaterialTheme.typography.labelMedium,
                                         color = ThorTextSecondary
                                     )
                                 }
                                 if (s.description.isNotBlank()) {
-                                    Text(s.description, style = MaterialTheme.typography.bodySmall)
+                                    Spacer(Modifier.height(4.dp))
+                                    Text(
+                                        s.description,
+                                        style = MaterialTheme.typography.bodySmall,
+                                        color = ThorTextSecondary,
+                                        maxLines = 2
+                                    )
                                 }
-                                Text(
-                                    "kategori: ${s.category} — sentuh untuk prosedur lengkap",
-                                    style = MaterialTheme.typography.labelSmall,
-                                    color = ThorTextSecondary
-                                )
                             }
                         }
                     }
                 }
             } else {
                 LazyColumn(
-                    contentPadding = androidx.compose.foundation.layout.PaddingValues(8.dp),
-                    verticalArrangement = Arrangement.spacedBy(4.dp)
+                    contentPadding = androidx.compose.foundation.layout.PaddingValues(16.dp),
+                    verticalArrangement = Arrangement.spacedBy(6.dp)
                 ) {
                     items(filteredTools, key = { it.name }) { t ->
                         Card(Modifier.fillMaxWidth()) {
-                            Column(Modifier.padding(8.dp)) {
-                                Text(t.name, fontWeight = FontWeight.Bold, color = ThorAmber, style = MaterialTheme.typography.bodyMedium)
+                            Column(Modifier.padding(12.dp)) {
+                                Text(
+                                    t.name,
+                                    style = MaterialTheme.typography.titleSmall,
+                                    color = ThorAmber
+                                )
                                 if (t.description.isNotBlank()) {
-                                    Text(t.description, style = MaterialTheme.typography.bodySmall, color = ThorTextSecondary)
+                                    Spacer(Modifier.height(4.dp))
+                                    Text(
+                                        t.description,
+                                        style = MaterialTheme.typography.bodySmall,
+                                        color = ThorTextSecondary,
+                                        maxLines = 2
+                                    )
                                 }
                             }
                         }

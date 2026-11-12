@@ -104,7 +104,7 @@ fun SlashPalette(
                 Modifier.fillMaxWidth().padding(horizontal = 16.dp),
                 verticalAlignment = Alignment.CenterVertically
             ) {
-                Icon(ThorIcons.Bolt, null, tint = MaterialTheme.colorScheme.primary, modifier = Modifier.size(22.dp))
+                Icon(ThorIcons.Bolt, null, tint = MaterialTheme.colorScheme.primary, modifier = Modifier.size(20.dp))
                 Spacer(Modifier.width(8.dp))
                 Text(
                     "Perintah Thor (${all.size})",

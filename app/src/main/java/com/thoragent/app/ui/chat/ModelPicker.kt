@@ -80,9 +80,9 @@ fun ModelPickerSheet(
                 Modifier.fillMaxWidth().padding(horizontal = 16.dp),
                 verticalAlignment = Alignment.CenterVertically
             ) {
-                Icon(ThorIcons.AutoAwesome, null, tint = ThorGold, modifier = Modifier.size(22.dp))
+                Icon(ThorIcons.AutoAwesome, null, tint = ThorGold, modifier = Modifier.size(20.dp))
                 Spacer(Modifier.width(8.dp))
-                Text("Pilih Model", style = MaterialTheme.typography.titleMedium, fontWeight = FontWeight.Bold)
+                Text("Pilih Model", style = MaterialTheme.typography.titleMedium)
                 Spacer(Modifier.weight(1f))
                 if (loading) CircularProgressIndicator(Modifier.size(16.dp), strokeWidth = 2.dp)
             }
@@ -192,7 +192,7 @@ private fun SectionLabel(text: String, icon: androidx.compose.ui.graphics.vector
         Modifier.padding(top = 10.dp, bottom = 4.dp),
         verticalAlignment = Alignment.CenterVertically
     ) {
-        Icon(icon, null, tint = ThorGold, modifier = Modifier.size(15.dp))
+        Icon(icon, null, tint = ThorGold, modifier = Modifier.size(16.dp))
         Spacer(Modifier.width(6.dp))
         Text(text, style = MaterialTheme.typography.labelLarge, color = ThorGold)
     }

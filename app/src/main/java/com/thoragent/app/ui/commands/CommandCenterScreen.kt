@@ -115,7 +115,7 @@ fun CommandCenterScreen(
                         Row(verticalAlignment = Alignment.CenterVertically) {
                             Icon(ThorIcons.Bolt, null, tint = ThorGold, modifier = Modifier.size(18.dp))
                             Spacer(Modifier.width(8.dp))
-                            Text("Reasoning effort", style = MaterialTheme.typography.titleMedium, fontWeight = FontWeight.Bold)
+                            Text("Reasoning effort", style = MaterialTheme.typography.titleMedium)
                             Spacer(Modifier.weight(1f))
                             Text(
                                 reasoning.ifBlank { "bawaan" },

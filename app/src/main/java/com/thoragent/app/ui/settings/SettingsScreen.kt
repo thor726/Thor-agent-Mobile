@@ -22,22 +22,16 @@ import com.thoragent.app.ui.icons.ThorIconsExtra
 import com.thoragent.app.ui.settings.components.SettingItemRow
 
 /**
- * SettingsScreen — rumah baru fitur teknis hasil re-strukturisasi menu
- * (v0.7.0).
+ * SettingsScreen — rumah fitur teknis hasil re-strukturisasi menu (v0.7.0),
+ * dirapikan v0.8.0: judul TopAppBar pakai slot titleLarge tanpa timpaan
+ * bobot, seksi diberi labelMedium + jarak lebih lega, item dipangkas
+ * deskripsinya agar layar tidak terasa padat.
  *
  * Ini wujud "Progressive Disclosure": semua yang sebelumnya menjadi tab
  * level-atas (Root) atau menu sidebar (Provider, Root, Berkas, Pusat
  * Perintah) kini menjadi baris di satu layar Setelan dengan penjelasan
- * bahasa manusia. Pengguna awam tidak lagi dipaksa melewati kata-kata
- * seperti "libsu" atau "endpoint" saat hanya ingin chat.
- *
- * Tata letak: LazyColumn + SettingItemRow dengan spacing 8dp dan
- * contentPadding 16dp — kelompok pengaturan sejenis dipisah judul seksi
- * (labelLarge, warna sekunder) supaya tidak terasa padat.
- *
- * Rute yang dibuka adalah rute NavHost yang SAMA seperti sebelumnya
- * (provider/root/files/commands) — hanya pintu masuknya yang berpindah,
- * sehingga deep-link dan perilaku lama tetap berfungsi.
+ * bahasa manusia. Pengguna awam tidak dipaksa melewati istilah seperti
+ * "libsu" atau "endpoint" saat hanya ingin chat.
  */
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -48,7 +42,7 @@ fun SettingsScreen(
     Scaffold(
         topBar = {
             TopAppBar(
-                title = { Text("Setelan", style = MaterialTheme.typography.titleLarge) },
+                title = { Text("Setelan") },
                 navigationIcon = {
                     IconButton(onClick = { nav.popBackStack() }) {
                         Icon(ThorIcons.ArrowBack, "Kembali")
@@ -63,11 +57,11 @@ fun SettingsScreen(
             verticalArrangement = Arrangement.spacedBy(8.dp)
         ) {
             // ===== Seksi: Agent — sering dipakai, bahasa manusia =====
-            sectionHeader("Agent")
+            sectionHeader("Sering dipakai")
             item {
                 SettingItemRow(
                     title = "Gaya jawaban",
-                    subtitle = "Ubah kepribadian & cara agent menyampaikan balasan (/personality)",
+                    subtitle = "Kepribadian & cara agent menyampaikan balasan",
                     icon = ThorIcons.Person,
                     onClick = { onSendSlash("/personality") }
                 )
@@ -75,7 +69,7 @@ fun SettingsScreen(
             item {
                 SettingItemRow(
                     title = "Kedalaman berpikir",
-                    subtitle = "Agent berpikir lebih lama untuk soal yang sulit (/reasoning)",
+                    subtitle = "Agent berpikir lebih lama untuk soal yang sulit",
                     icon = ThorIcons.Bolt,
                     onClick = { nav.navigate("commands") }
                 )
@@ -86,7 +80,7 @@ fun SettingsScreen(
             item {
                 SettingItemRow(
                     title = "Penyedia AI & model",
-                    subtitle = "Pilih server otak agent: OpenRouter, OpenAI, atau komputer lokal",
+                    subtitle = "OpenRouter, OpenAI, atau komputer lokal",
                     icon = ThorIconsExtra.SwitchAccess,
                     onClick = { nav.navigate("provider") }
                 )
@@ -94,7 +88,7 @@ fun SettingsScreen(
             item {
                 SettingItemRow(
                     title = "Akses Root",
-                    subtitle = "Izinkan agent memakai hak akses penuh hanya saat dibutuhkan",
+                    subtitle = "Hak akses penuh, hanya saat dibutuhkan",
                     icon = ThorIcons.Security,
                     onClick = { nav.navigate("root") }
                 )
@@ -102,7 +96,7 @@ fun SettingsScreen(
             item {
                 SettingItemRow(
                     title = "Penjelajah berkas",
-                    subtitle = "Lihat dan atur folder kerja agent di penyimpanan",
+                    subtitle = "Folder kerja agent di penyimpanan",
                     icon = ThorIcons.Folder,
                     onClick = { nav.navigate("files") }
                 )
@@ -110,7 +104,7 @@ fun SettingsScreen(
             item {
                 SettingItemRow(
                     title = "Pusat Perintah",
-                    subtitle = "Semua 105 perintah cepat dalam satu layar",
+                    subtitle = "Semua 105 perintah dalam satu layar",
                     icon = ThorIconsExtra.Tune,
                     onClick = { nav.navigate("commands") }
                 )
@@ -126,9 +120,9 @@ private fun LazyListScope.sectionHeader(title: String) {
     item {
         Text(
             title,
-            style = MaterialTheme.typography.labelLarge,
+            style = MaterialTheme.typography.labelMedium,
             color = MaterialTheme.colorScheme.onSurfaceVariant,
-            modifier = Modifier.padding(top = 8.dp, bottom = 2.dp)
+            modifier = Modifier.padding(start = 16.dp, top = 12.dp, bottom = 2.dp)
         )
     }
 }

@@ -24,29 +24,16 @@ import androidx.compose.ui.unit.dp
 import com.thoragent.app.ui.icons.ThorIcons
 
 /**
- * SettingItemRow — pola baris pengaturan standar Thor Mobile (v0.7.0).
+ * SettingItemRow — pola baris pengaturan standar Thor Mobile.
  *
  * Anatomi satu baris (progressive disclosure skala mikro):
- *   [Icon] Nama Fitur (tebal, 15sp)          [chevron kalau bisa dibuka]
- *          Subtitle penjelas (tipis, 12sp, warna sekunder)
+ *   [Icon 20dp] Nama Fitur (titleSmall SemiBold)     [chevron kalau bisa dibuka]
+ *               Subtitle penjelas (bodySmall, warna sekunder)
  *
- * Fungsi:
- * - Nama fitur memakai titleSmall (Medium/SemiBold) — kontras jelas
- *   dengan subtitle labelSmall (Normal) di bawahnya.
- * - Subtitle WAJIB diisi teks penjelasan bahasa manusia, bukan istilah
- *   teknis ("KernelSU / Magisk" → "Akses penuh sistem bila perlu").
- * - Icon 20dp + kontainer 40dp memberi area sentuh lega.
- * - chevron hanya muncul kalau ada onClick (mengisyaratkan "bisa dibuka").
- * - `content` slot opsional untuk kontrol inline (Switch, teks nilai
- *   saat ini) di sisi kanan — chevron otomatis disembunyikan.
- *
- * Pemakaian di SettingsScreen:
- *   SettingItemRow(
- *       title = "Akses Root",
- *       subtitle = "Izinkan agent memakai su hanya saat dibutuhkan",
- *       icon = ThorIcons.Security,
- *       onClick = { nav.navigate("settings/root") }
- *   )
+ * v0.8.0: subtitle memakai bodySmall (13sp) — sebelumnya labelSmall 12sp
+ * yang berdempetan dengan judul; ikon kontainer 40dp + chevron 20dp
+ * seragam dengan seluruh app (16/20/24dp saja); bobot judul cukup
+ * SemiBold agar tidak "berteriak" di layar berisi banyak baris.
  */
 @Composable
 fun SettingItemRow(
@@ -60,7 +47,7 @@ fun SettingItemRow(
     val titleStyle = MaterialTheme.typography.titleSmall.copy(
         fontWeight = androidx.compose.ui.text.font.FontWeight.SemiBold
     )
-    val subtitleStyle = MaterialTheme.typography.labelSmall
+    val subtitleStyle = MaterialTheme.typography.bodySmall
 
     Surface(
         shape = RoundedCornerShape(14.dp),

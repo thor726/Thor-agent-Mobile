@@ -64,6 +64,12 @@ fun MainScaffold(
     val currentRoute = backstack?.destination?.route ?: ThorRoute.Chat.path
 
     Scaffold(
+        // v0.8.1: inset NOL — tanpa ini terjadi DOUBLE status-bar padding
+        // (Scaffold luar memasang inset ke NavHost, lalu TopAppBar tiap
+        // layar memasang LAGI) sehingga judul layar muncul dengan ruang
+        // kosong berlebih di atasnya. Tiap layar punya TopAppBar sendiri
+        // yang sudah menangani inset status bar satu kali.
+        contentWindowInsets = androidx.compose.foundation.layout.WindowInsets(0, 0, 0, 0),
         bottomBar = {
             AnimatedVisibility(
                 visible = !imeVisible,

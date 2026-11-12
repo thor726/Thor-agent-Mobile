@@ -7,6 +7,8 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.imePadding
+import androidx.compose.foundation.layout.navigationBarsPadding
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
@@ -85,7 +87,16 @@ fun TerminalScreen(nav: NavHostController) {
             )
         }
     ) { pad ->
-        Column(Modifier.padding(pad).fillMaxSize()) {
+        // v0.8.1: imePadding + navigationBarsPadding — kolom perintah tidak
+        // lagi TERTIMPA keyboard (keyboard muncul → input naik ke atasnya)
+        // dan tidak tertelan gesture bar saat keyboard tertutup.
+        Column(
+            Modifier
+                .padding(pad)
+                .fillMaxSize()
+                .imePadding()
+                .navigationBarsPadding()
+        ) {
             Row(
                 Modifier.fillMaxWidth().padding(horizontal = 16.dp, vertical = 4.dp),
                 horizontalArrangement = Arrangement.spacedBy(8.dp)

@@ -111,7 +111,7 @@ fun SettingsScreen(
                 SettingItemRow(
                     title = "Pusat Perintah",
                     subtitle = "Semua 105 perintah cepat dalam satu layar",
-                    icon = ThorIcons.Tune,
+                    icon = ThorIconsExtra.Tune,
                     onClick = { nav.navigate("commands") }
                 )
             }

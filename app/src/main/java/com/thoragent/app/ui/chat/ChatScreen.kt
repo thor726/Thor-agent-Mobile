@@ -215,8 +215,8 @@ fun ChatScreen(
             when (action) {
                 ChatUiAction.OpenModelPicker -> showModelPicker = true
                 ChatUiAction.OpenSessions -> showSessions = true
-                ChatUiAction.OpenSkillHub -> nav.navigate(MainActivity.Routes.SKILLHUB)
-                ChatUiAction.OpenTools -> nav.navigate(MainActivity.Routes.SKILLHUB)
+                ChatUiAction.OpenSkillHub -> nav.navigate(com.thoragent.app.ui.navigation.ThorRoute.Skills.path)
+                ChatUiAction.OpenTools -> nav.navigate(com.thoragent.app.ui.navigation.ThorRoute.Skills.path)
                 ChatUiAction.OpenHelp -> showSlashPalette = true
                 ChatUiAction.FocusComposer -> composerFocus.requestFocus()
                 ChatUiAction.PickImage -> pickImage.launch(PickVisualMediaRequest(ActivityResultContracts.PickVisualMedia.ImageOnly))
@@ -351,7 +351,7 @@ fun ChatScreen(
                         DropdownMenuItem(
                             text = { Text("Skill Hub — kecerdasan repo") },
                             leadingIcon = { Icon(ThorIcons.Memory, null, tint = gold) },
-                            onClick = { showMenu = false; nav.navigate(MainActivity.Routes.SKILLHUB) }
+                            onClick = { showMenu = false; nav.navigate(com.thoragent.app.ui.navigation.ThorRoute.Skills.path) }
                         )
                         DropdownMenuItem(
                             text = { Text("Set goal (tujuan berdiri)") },

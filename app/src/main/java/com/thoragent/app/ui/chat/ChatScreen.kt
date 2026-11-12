@@ -1142,17 +1142,20 @@ fun Bubble(
     }
 }
 
-/** Ikon per tool — meniru marker tool TUI repo sumber. */
+/** Ikon per tool — nama mengikuti registry Thor desktop. */
 @Composable
 private fun toolIcon(name: String) = when {
-    name == "shell" -> ThorIcons.Terminal
-    name.startsWith("read_") || name.startsWith("write_") || name.startsWith("edit_") -> ThorIcons.Description
+    name == "terminal" || name == "shell" -> ThorIcons.Terminal
+    name == "read_file" || name == "write_file" || name == "edit_file" -> ThorIcons.Description
+    name == "patch" -> ThorIcons.Description
     name == "list_dir" -> ThorIcons.FolderOpen
     name == "search_files" -> ThorIcons.Search
     name == "github_clone" -> ThorIcons.Code
     name == "web_fetch" -> ThorIcons.Link
-    name.startsWith("skill_") -> ThorIcons.Memory
-    name == "root_status" -> ThorIcons.Security
+    name.startsWith("skill") -> ThorIcons.Memory
+    name == "memory" -> ThorIcons.Memory
+    name == "todo_list" -> ThorIcons.Bolt
+    name == "root_status" || name == "device" -> ThorIcons.Security
     else -> ThorIcons.Bolt
 }
 

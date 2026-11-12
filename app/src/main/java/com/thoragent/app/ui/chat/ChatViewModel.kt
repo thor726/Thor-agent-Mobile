@@ -12,6 +12,7 @@ import android.speech.tts.TextToSpeech
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.viewModelScope
 import com.thoragent.app.core.agent.AgentEvent
+import com.thoragent.app.core.agent.AgentTools
 import com.thoragent.app.core.llm.LlmMessage
 import com.thoragent.app.core.llm.LlmUsage
 import com.thoragent.app.core.provider.ProviderProfile
@@ -1344,7 +1345,7 @@ class ChatViewModel(app: Application) : AndroidViewModel(app) {
                 val skillsDir = rt.skills.userSkillsDir.absolutePath
                 sendToAgent(
                     "[MODE LEARN — loop pembelajaran tertutup repo Thor-agent] Pelajari: $args\n\n" +
-                        "Baca sumber yang relevan (berkas lokal via read_file/search_files, web via web_fetch), lalu TULIS skill baru yang bisa dipakai ulang " +
+                        "Baca sumber yang relevan (berkas lokal via read_file/search_files, web via terminal+curl bila tersedia), lalu TULIS skill baru yang bisa dipakai ulang " +
                         "ke \"$skillsDir/<nama-skill>/SKILL.md\" dengan tool write_file. Format SKILL.md: baris pertama `# <Judul>`, " +
                         "satu paragraf deskripsi kapan skill dipakai, lalu `## Langkah` berisi prosedur langkah-demi-langkah yang konkret. " +
                         "Nama skill singkat-kecil (kebab-case). Setelah menulis, sebutkan nama skill yang dibuat.",
@@ -1368,7 +1369,7 @@ class ChatViewModel(app: Application) : AndroidViewModel(app) {
                     "Jalankan via shell lalu RINGKAS: berkas berubah, tambahan/hapus, temuan penting."
             }; true }
             "init" -> { agentCommand(name, args) {
-                "[MODE INIT — meniru /init repo] Scan proyek di `${cwd.value}` (list_dir + search_files: README, struktur direktori, " +
+                "[MODE INIT — meniru /init repo] Scan proyek di `${cwd.value}` (search_files target=files + read_file: README, struktur direktori, " +
                     "berkas konfigurasi/dependensi) lalu TULIS `AGENTS.md` berisi instruksi proyek untuk agent: " +
                     "overview, cara build/jalankan, struktur penting, konvensi, hal yang harus dihindari. Args tambahan: $args"
             }; true }
@@ -1395,7 +1396,7 @@ class ChatViewModel(app: Application) : AndroidViewModel(app) {
                 "[MODE KANBAN — papan berbasis berkas] Kelola papan di \"${cwd.value.trimEnd('/')}/.thor/kanban/board.md\" " +
                     "(kolom: Backlog | Doing | Review | Done; format `- [ ] kartu`).\n\nArgs: ${args.ifBlank { "show" }}\n" +
                     "show/list → baca & tampilkan papan; create/add → tambah kartu; complete → pindah ke Done; " +
-                    "assign/comment → catat di kartu. Gunakan read_file/write_file/edit_file. Balas dengan isi papan setelah diubah."
+                    "assign/comment → catat di kartu. Gunakan read_file/write_file/patch. Balas dengan isi papan setelah diubah."
             }; true }
             "suggestions" -> { agentCommand(name, args) {
                 "[MODE SUGGESTIONS] Analisis riwayat percakapan dan isi `${cwd.value}`; usulkan 3 otomasi/skill " +
@@ -1410,7 +1411,7 @@ class ChatViewModel(app: Application) : AndroidViewModel(app) {
                     "Tampilkan ringkasannya."
             }; true }
             "curator" -> { agentCommand(name, args) {
-                "[MODE CURATOR — perawatan skill background] Periksa pustaka skill (skill_list) di CWD `${cwd.value}`.\n\n" +
+                "[MODE CURATOR — perawatan skill background] Periksa pustaka skill (skills_list) di CWD `${cwd.value}`.\n\n" +
                     "Args: ${args.ifBlank { "status" }}\n" +
                     "status → ringkas kesehatan skill (jumlah, kategori, yang mirip/duplikat); run → tulis laporan " +
                     "ke \"${cwd.value.trimEnd('/')}/.thor/curator-report.md\" berisi usulan merge/hapus/urutan belajar."
@@ -1432,7 +1433,7 @@ class ChatViewModel(app: Application) : AndroidViewModel(app) {
                 true
             }
             "browser" -> {
-                insertAssistantNotice("**Koneksi CDP Chromium** tidak tersedia di Android.\n\nPadanan: agent memakai tool `web_fetch` untuk mengambil & membaca halaman web — minta saja: \"baca https://…\".")
+                insertAssistantNotice("**Koneksi CDP Chromium** tidak tersedia di Android.\n\nPadanan: agent memakai `terminal` (curl/wget bila ada di perangkat) untuk mengambil halaman web — minta saja: \"baca https://…\".")
                 true
             }
             "wake" -> {
@@ -1885,6 +1886,10 @@ class ChatViewModel(app: Application) : AndroidViewModel(app) {
                             is AgentEvent.Finished -> {
                                 ev.usage?.let { _usage.value = _usage.value.add(it) }
                             }
+                            // Peringatan dini budget iterasi (port WARN_RATIO 80%) —
+                            // tampil sebagai toast supaya pengguna tahu giliran hampir penuh.
+                            is AgentEvent.IterationWarning ->
+                                _toast.tryEmit("iterasi ${ev.used}/${ev.max} — sisa ${ev.remaining}, agent hampir menutup giliran")
                         }
                     }
                 }
@@ -1925,13 +1930,15 @@ class ChatViewModel(app: Application) : AndroidViewModel(app) {
         }
     }
 
-    /** System prompt stabil per (cwd, root, skills, goal, personality, subgoal). */
+    /** System prompt stabil per (cwd, root, skills, goal, personality, subgoal, model). */
     private suspend fun systemPrompt(): String {
         val rootSt = runCatching { rt.root.status() }.getOrNull()
         val goal = rt.settings.goal.first()
         val personality = rt.settings.personality.first()
         val subgoals = rt.settings.subgoals.first()
-        val key = "${cwd.value}|${rootSt?.appGrantedRoot ?: false}|$goal|$personality|$subgoals"
+        val model = rt.settings.sessionModel.first()
+        val provider = ""
+        val key = "${cwd.value}|${rootSt?.appGrantedRoot ?: false}|$goal|$personality|$subgoals|$model"
         if (cachedPromptKey == key && cachedPrompt != null) return cachedPrompt!!
         cachedPrompt = rt.promptBuilder.build(
             cwd = cwd.value,
@@ -1939,7 +1946,12 @@ class ChatViewModel(app: Application) : AndroidViewModel(app) {
             skillsEnabled = true,
             goal = goal,
             personality = personality,
-            subgoals = subgoals
+            subgoals = subgoals,
+            model = model,
+            provider = provider,
+            sessionId = _sessionId.value?.toString().orEmpty(),
+            // Guidance per-tool: baris yang menyebut tool absen dibuang prompt.
+            skillNames = rt.tools.toolNames()
         )
         cachedPromptKey = key
         return cachedPrompt!!
@@ -1947,16 +1959,17 @@ class ChatViewModel(app: Application) : AndroidViewModel(app) {
 
     /** Persetujuan interaktif untuk tool berbahaya — dipanggil SEBELUM eksekusi. */
     private suspend fun approveTool(id: String, name: String, argsJson: String): Boolean {
+        // HARDLINE adalah lantai keras: mode yolo tidak membebaskannya.
+        if (rt.tools.hardlineReasonFor(name, argsJson) != null) return false
+
         val yolo = runCatching { rt.settings.yolo.first() }.getOrDefault(false)
         if (yolo) return true
         val confirm = runCatching { rt.settings.confirmDangerous.first() }.getOrDefault(true)
         if (!confirm) return true
-        // Bukan shell → tidak lewat gerbang pola berbahaya (tetap jalan).
-        if (name != "shell") return true
-        val command = runCatching {
-            val args = Json.parseToJsonElement(argsJson).jsonObject
-            (args["command"] as? kotlinx.serialization.json.JsonPrimitive)?.content
-        }.getOrNull() ?: return true
+        // Hanya tool terminal yang melewati gerbang pola berbahaya.
+        if (name != "terminal") return true
+        val command = AgentTools.commandOf(name, argsJson)
+        if (command.isBlank()) return true
         val reason = rt.tools.approvalReason(command)
         return suspendCancellableCoroutine { cont ->
             _approval.value = ApprovalRequest(name, command, reason) { r -> cont.resume(r) }

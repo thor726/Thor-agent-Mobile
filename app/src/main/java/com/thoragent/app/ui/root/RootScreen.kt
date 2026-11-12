@@ -119,7 +119,7 @@ fun RootScreen(nav: NavHostController) {
                     Column(Modifier.padding(12.dp), verticalArrangement = Arrangement.spacedBy(6.dp)) {
                         Text("Tanpa root tetap jalan", style = MaterialTheme.typography.titleMedium)
                         Text(
-                            "Agent, terminal, berkas di /sdcard, github_clone, web_fetch, dan semua skill " +
+                            "Agent, terminal, berkas di /sdcard, unduh repo/web via terminal, dan semua skill " +
                                 "berfungsi penuh tanpa root. Root hanya memperluas akses filesystem bila ada.",
                             style = MaterialTheme.typography.bodySmall,
                             color = ThorTextSecondary

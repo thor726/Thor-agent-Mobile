@@ -1,0 +1,359 @@
+{
+ "source": "https://github.com/dwisetyabudi15581/Thor-agent.git",
+ "generated": "2026-11-12",
+ "count": 44,
+ "skills": [
+  {
+   "name": "apple-notes",
+   "description": "Manage Apple Notes via memo CLI: create, search, edit.",
+   "category": "apple",
+   "origin": "builtin",
+   "path": "skills/apple/apple-notes/SKILL.md",
+   "hint": "# Apple Notes /  / Use `memo` to manage Apple Notes directly from the terminal. Notes sync across all Apple devices via iCloud. /  / ## Prerequisites /  / - **macOS** with Notes.app / - Install: `brew tap antoniorodr/memo && brew inst"
+  },
+  {
+   "name": "apple-reminders",
+   "description": "Apple Reminders via remindctl: add, list, complete.",
+   "category": "apple",
+   "origin": "builtin",
+   "path": "skills/apple/apple-reminders/SKILL.md",
+   "hint": "# Apple Reminders /  / Use `remindctl` to manage Apple Reminders directly from the terminal. Tasks sync across all Apple devices via iCloud. /  / ## Prerequisites /  / - **macOS** with Reminders.app / - Install: `brew install steipete"
+  },
+  {
+   "name": "findmy",
+   "description": "Track Apple devices/AirTags via FindMy.app on macOS.",
+   "category": "apple",
+   "origin": "builtin",
+   "path": "skills/apple/findmy/SKILL.md",
+   "hint": "# Find My (Apple) /  / Track Apple devices and AirTags via the FindMy.app on macOS. Since Apple doesn't / provide a CLI for FindMy, this skill uses AppleScript to open the app and / screen capture to read device locations. /  / ## P"
+  },
+  {
+   "name": "imessage",
+   "description": "Send and receive iMessages/SMS via the imsg CLI on macOS.",
+   "category": "apple",
+   "origin": "builtin",
+   "path": "skills/apple/imessage/SKILL.md",
+   "hint": "# iMessage /  / Use `imsg` to read and send iMessage/SMS via macOS Messages.app. /  / ## Prerequisites /  / - **macOS** with Messages.app signed in / - Install: `brew install steipete/tap/imsg` / - Grant Full Disk Access for terminal (S"
+  },
+  {
+   "name": "claude-code",
+   "description": "Delegate coding to Claude Code CLI (features, PRs).",
+   "category": "autonomous-ai-agents",
+   "origin": "builtin",
+   "path": "skills/autonomous-ai-agents/claude-code/SKILL.md",
+   "hint": "# Claude Code — Thor Orchestration Guide /  / Delegate coding tasks to [Claude Code](https://code.claude.com/docs/en/cli-reference) (Anthropic's autonomous coding agent CLI) via the Thor terminal. Claude Code v2.x can read f"
+  },
+  {
+   "name": "codex",
+   "description": "Delegate coding to OpenAI Codex CLI (features, PRs).",
+   "category": "autonomous-ai-agents",
+   "origin": "builtin",
+   "path": "skills/autonomous-ai-agents/codex/SKILL.md",
+   "hint": "# Codex CLI /  / Delegate coding tasks to [Codex](https://github.com/openai/codex) via the Thor terminal. Codex is OpenAI's autonomous coding agent CLI. /  / ## When to use /  / - Building features / - Refactoring / - PR reviews / - Batch"
+  },
+  {
+   "name": "computer-use",
+   "description": "Drive the desktop background-first; escalate on signal.",
+   "category": "autonomous-ai-agents",
+   "origin": "builtin",
+   "path": "skills/autonomous-ai-agents/computer-use/SKILL.md",
+   "hint": "# Computer Use (universal, any-model, cross-platform) /  / You have a `computer_use` tool that drives the user's desktop in the / **background** — your actions do NOT move the user's cursor, steal / keyboard focus, or switch vir"
+  },
+  {
+   "name": "thor-agent",
+   "description": "Use, configure, theme, extend, and orchestrate Thor Agent.",
+   "category": "autonomous-ai-agents",
+   "origin": "builtin",
+   "path": "skills/autonomous-ai-agents/thor-agent/SKILL.md",
+   "hint": "# Thor Agent /  / Thor Agent is an open-source AI agent framework by Thor Agent that runs in your terminal, a native desktop app, messaging platforms, and IDEs. It's in the same category as Claude Code (Anthropic), Codex (Op"
+  },
+  {
+   "name": "architecture-diagram",
+   "description": "Dark-themed SVG architecture/cloud/infra diagrams as HTML.",
+   "category": "creative",
+   "origin": "builtin",
+   "path": "skills/creative/architecture-diagram/SKILL.md",
+   "hint": "# Architecture Diagram Skill /  / Generate professional, dark-themed technical architecture diagrams as standalone HTML files with inline SVG graphics. No external tools, no API keys, no rendering libraries — just write the "
+  },
+  {
+   "name": "ascii-video",
+   "description": "ASCII video: convert video/audio to colored ASCII MP4/GIF.",
+   "category": "creative",
+   "origin": "builtin",
+   "path": "skills/creative/ascii-video/SKILL.md",
+   "hint": "# ASCII Video Production Pipeline /  / ## When to use /  / Use when users request: ASCII video, text art video, terminal-style video, character art animation, retro text visualization, audio visualizer in ASCII, converting video"
+  },
+  {
+   "name": "baoyu-infographic",
+   "description": "Infographics: 21 layouts x 21 styles (信息图, 可视化).",
+   "category": "creative",
+   "origin": "builtin",
+   "path": "skills/creative/baoyu-infographic/SKILL.md",
+   "hint": "# Infographic Generator /  / Adapted from [baoyu-infographic](https://github.com/JimLiu/baoyu-skills) for Thor Agent's tool ecosystem. /  / Two dimensions: **layout** (information structure) × **style** (visual aesthetics). Free"
+  },
+  {
+   "name": "claude-design",
+   "description": "Design one-off HTML artifacts (landing, deck, prototype).",
+   "category": "creative",
+   "origin": "builtin",
+   "path": "skills/creative/claude-design/SKILL.md",
+   "hint": "# Claude Design for CLI/API Agents /  / Use this skill when the user asks for design work that would normally fit Claude Design, but the agent is running in a CLI/API environment instead of the hosted Claude Design web UI. /  / "
+  },
+  {
+   "name": "humanizer",
+   "description": "Humanize text: strip AI-isms and add real voice.",
+   "category": "creative",
+   "origin": "builtin",
+   "path": "skills/creative/humanizer/SKILL.md",
+   "hint": "# Humanizer: Remove AI Writing Patterns /  / Identify and remove signs of AI-generated text to make writing sound natural and human. Based on Wikipedia's \"Signs of AI writing\" guide (maintained by WikiProject AI Cleanup), de"
+  },
+  {
+   "name": "manim-video",
+   "description": "Manim CE animations: 3Blue1Brown math/algo videos.",
+   "category": "creative",
+   "origin": "builtin",
+   "path": "skills/creative/manim-video/SKILL.md",
+   "hint": "# Manim Video Production Pipeline /  / ## When to use /  / Use when users request: animated explanations, math animations, concept visualizations, algorithm walkthroughs, technical explainers, 3Blue1Brown style videos, or any pr"
+  },
+  {
+   "name": "p5js",
+   "description": "p5.js sketches: gen art, shaders, interactive, 3D.",
+   "category": "creative",
+   "origin": "builtin",
+   "path": "skills/creative/p5js/SKILL.md",
+   "hint": "# p5.js Production Pipeline /  / ## When to use /  / Use when users request: p5.js sketches, creative coding, generative art, interactive visualizations, canvas animations, browser-based visual art, data viz, shader effects, or "
+  },
+  {
+   "name": "popular-web-designs",
+   "description": "54 real design systems (Stripe, Linear, Vercel) as HTML/CSS.",
+   "category": "creative",
+   "origin": "builtin",
+   "path": "skills/creative/popular-web-designs/SKILL.md",
+   "hint": "# Popular Web Designs /  / 54 real-world design systems ready for use when generating HTML/CSS. Each template captures a / site's complete visual language: color palette, typography hierarchy, component styles, spacing / system,"
+  },
+  {
+   "name": "songwriting-and-ai-music",
+   "description": "Songwriting craft and Suno AI music prompts.",
+   "category": "creative",
+   "origin": "builtin",
+   "path": "skills/creative/songwriting-and-ai-music/SKILL.md",
+   "hint": "# Songwriting & AI Music Generation /  / Everything here is a GUIDELINE, not a rule. Art breaks rules on purpose. / Use what serves the song. Ignore what doesn't. /  / --- /  / ## 1. Song Structure (Pick One or Invent Your Own) /  / Commo"
+  },
+  {
+   "name": "sdlc-review",
+   "description": "Review Kanban handoffs and route verified outcomes.",
+   "category": "devops",
+   "origin": "builtin",
+   "path": "skills/devops/sdlc-review/SKILL.md",
+   "hint": "# SDLC Review Skill /  / Independently verify work handed from a Kanban implementation run to the review lane, then approve it, request changes, or escalate. This skill reviews the deliverable and its evidence; it does not t"
+  },
+  {
+   "name": "email-inbox-triage",
+   "description": "Triage an inbox: prioritize threads, draft replies safely.",
+   "category": "email",
+   "origin": "builtin",
+   "path": "skills/email/email-inbox-triage/SKILL.md",
+   "hint": "# Email Inbox Triage /  / Turn a mailbox into a bounded queue of decisions. This skill owns thread-aware prioritization and reply policy; connector skills (`himalaya`, `google-workspace`) own provider commands. /  / ## When to U"
+  },
+  {
+   "name": "himalaya",
+   "description": "Himalaya CLI: IMAP/SMTP email from terminal.",
+   "category": "email",
+   "origin": "builtin",
+   "path": "skills/email/himalaya/SKILL.md",
+   "hint": "# Himalaya Email CLI /  / Himalaya is a CLI email client that lets you manage emails from the terminal using IMAP, SMTP, Notmuch, or Sendmail backends. /  / This skill is separate from the Thor Email gateway adapter. The gateway"
+  },
+  {
+   "name": "youtube-content",
+   "description": "YouTube transcripts to summaries, threads, blogs.",
+   "category": "media",
+   "origin": "builtin",
+   "path": "skills/media/youtube-content/SKILL.md",
+   "hint": "# YouTube Content Tool /  / ## When to use /  / Use when the user shares a YouTube URL or video link, asks to summarize a video, requests a transcript, or wants to extract and reformat content from any YouTube video. Transforms "
+  },
+  {
+   "name": "obsidian",
+   "description": "Read, search, create, and edit notes in the Obsidian vault.",
+   "category": "note-taking",
+   "origin": "builtin",
+   "path": "skills/note-taking/obsidian/SKILL.md",
+   "hint": "# Obsidian Vault /  / Use this skill for filesystem-first Obsidian vault work: reading notes, listing notes, searching note files, creating notes, appending content, and adding wikilinks. /  / ## Vault path /  / Use a known or resol"
+  },
+  {
+   "name": "document-to-action-items",
+   "description": "Extract cited obligations, deadlines, tasks from documents.",
+   "category": "productivity",
+   "origin": "builtin",
+   "path": "skills/productivity/document-to-action-items/SKILL.md",
+   "hint": "# Document to Action Items /  / Turn documents into cited facts and proposed actions. Extraction is not legal advice, and low-confidence OCR or ambiguous language must remain visible. The `pdf` and `microsoft-office` skills "
+  },
+  {
+   "name": "google-workspace",
+   "description": "Gmail, Calendar, Drive, Docs, Sheets via gws CLI or Python.",
+   "category": "productivity",
+   "origin": "builtin",
+   "path": "skills/productivity/google-workspace/SKILL.md",
+   "hint": "# Google Workspace /  / Gmail, Calendar, Drive, Contacts, Sheets, and Docs — through Thor-managed OAuth and a thin CLI wrapper. When `gws` is installed, the skill uses it as the execution backend for broader Google Workspace"
+  },
+  {
+   "name": "maps",
+   "description": "Geocode, POIs, routes, timezones via OpenStreetMap/OSRM.",
+   "category": "productivity",
+   "origin": "builtin",
+   "path": "skills/productivity/maps/SKILL.md",
+   "hint": "# Maps Skill /  / Location intelligence using free, open data sources. 8 commands, 44 POI / categories, zero dependencies (Python stdlib only), no API key required. /  / Data sources: OpenStreetMap/Nominatim, Overpass API, OSRM, T"
+  },
+  {
+   "name": "meeting-action-items",
+   "description": "Turn meeting notes into cited decisions, owners, tickets.",
+   "category": "productivity",
+   "origin": "builtin",
+   "path": "skills/productivity/meeting-action-items/SKILL.md",
+   "hint": "# Meeting Action Items /  / Convert an existing transcript or notes set into accountable follow-through. `teams-meeting-pipeline` can retrieve Teams artifacts; this skill begins once notes/transcript content is available, fr"
+  },
+  {
+   "name": "microsoft-office",
+   "description": "Create, read, and edit Word, PowerPoint, and Excel files.",
+   "category": "productivity",
+   "origin": "builtin",
+   "path": "skills/productivity/microsoft-office/SKILL.md",
+   "hint": "# Microsoft Office Skill /  / Create, read, edit, and template Word (`.docx`), PowerPoint (`.pptx`), and / Excel (`.xlsx`, `.csv`) files offline with small Python CLIs built on / python-docx, python-pptx, and openpyxl. Office it"
+  },
+  {
+   "name": "pdf",
+   "description": "PDF files: create, read, merge, fill, OCR, edit text.",
+   "category": "productivity",
+   "origin": "builtin",
+   "path": "skills/productivity/pdf/SKILL.md",
+   "hint": "# PDF Skill /  / Create PDFs from structured specs, build and fill AcroForm forms (with layout linting and visual overlays), extract text/tables/metadata, merge/split/rotate/watermark/stamp pages, export page images, manage "
+  },
+  {
+   "name": "product-price-monitor",
+   "description": "Watch product, flight, or listing prices; alert on target.",
+   "category": "productivity",
+   "origin": "builtin",
+   "path": "skills/productivity/product-price-monitor/SKILL.md",
+   "hint": "# Product Price Monitor /  / Monitor a concrete purchasable item and alert on a normalized all-in price or availability condition. Handle variants, taxes, fees, currencies, stock, cancellation terms, and duplicate alerts exp"
+  },
+  {
+   "name": "teams-meeting-pipeline",
+   "description": "Teams meeting summaries, job replay, Graph subscriptions.",
+   "category": "productivity",
+   "origin": "builtin",
+   "path": "skills/productivity/teams-meeting-pipeline/SKILL.md",
+   "hint": "# Teams Meeting Pipeline /  / Use this skill whenever the user asks about Microsoft Teams meeting summaries, transcripts, recordings, action items, Graph subscriptions, or any operational question about the Teams meeting pip"
+  },
+  {
+   "name": "weekly-review-planning",
+   "description": "Weekly reset: commitments, stalled work, next-week plan.",
+   "category": "productivity",
+   "origin": "builtin",
+   "path": "skills/productivity/weekly-review-planning/SKILL.md",
+   "hint": "# Weekly Review and Planning /  / Run a bounded weekly reset across the user's chosen systems. This is a concrete recurring task, not a generic productivity methodology — the `weekly-review` Automation Blueprint schedules it"
+  },
+  {
+   "name": "arxiv",
+   "description": "Search arXiv papers by keyword, author, category, or ID.",
+   "category": "research",
+   "origin": "builtin",
+   "path": "skills/research/arxiv/SKILL.md",
+   "hint": "# arXiv Research /  / Search and retrieve academic papers from arXiv via their free REST API. No API key, no dependencies — just curl. /  / ## Quick Reference /  / | Action | Command | / |--------|---------| / | Search papers | `curl \"h"
+  },
+  {
+   "name": "competitor-news-monitor",
+   "description": "Watch named companies for material news; cited digests.",
+   "category": "research",
+   "origin": "builtin",
+   "path": "skills/research/competitor-news-monitor/SKILL.md",
+   "hint": "# Competitor News Monitor /  / Track a declared company set and report only material, new developments with primary-source evidence. This is not a generic page-diff watcher: it applies company-news categories, source hierarc"
+  },
+  {
+   "name": "grounded-citations",
+   "description": "Ground answers and documents in cited, verifiable sources.",
+   "category": "research",
+   "origin": "builtin",
+   "path": "skills/research/grounded-citations/SKILL.md",
+   "hint": "# Grounded Citations /  / Every claim taken from an outside source gets an inline numbered citation and a / `Sources:` list, Perplexity-style. A ledger script owns the `url → [n]` mapping / so the numbers and URLs come from retr"
+  },
+  {
+   "name": "xurl",
+   "description": "X/Twitter via xurl CLI: raw post search, posting, DM, media.",
+   "category": "social-media",
+   "origin": "builtin",
+   "path": "skills/social-media/xurl/SKILL.md",
+   "hint": "# xurl — X (Twitter) API via the Official CLI /  / `xurl` is the X developer platform's official CLI for the X API. It supports shortcut commands for common actions AND raw curl-style access to any v2 endpoint. All commands "
+  },
+  {
+   "name": "codebase-inspection",
+   "description": "Inspect codebases w/ pygount: LOC, languages, ratios.",
+   "category": "software-development",
+   "origin": "builtin",
+   "path": "skills/software-development/codebase-inspection/SKILL.md",
+   "hint": "# Codebase Inspection with pygount /  / Analyze repositories for lines of code, language breakdown, file counts, and code-vs-comment ratios using `pygount`. /  / ## When to Use /  / - User asks for LOC (lines of code) count / - User w"
+  },
+  {
+   "name": "dogfood",
+   "description": "Exploratory QA of web apps: find bugs, evidence, reports.",
+   "category": "software-development",
+   "origin": "builtin",
+   "path": "skills/software-development/dogfood/SKILL.md",
+   "hint": "# Dogfood: Systematic Web Application QA Testing /  / ## Overview /  / This skill guides you through systematic exploratory QA testing of web applications with `browser_exec`. You will navigate the application, interact with ele"
+  },
+  {
+   "name": "github",
+   "description": "GitHub via gh CLI: PRs, issues, reviews, repos, auth.",
+   "category": "software-development",
+   "origin": "builtin",
+   "path": "skills/software-development/github/SKILL.md",
+   "hint": "# GitHub /  / Work GitHub end to end with the `gh` CLI (REST fallback where noted): auth, / issues, the PR lifecycle, issue-to-PR delivery, code review, and repo / management. This skill consolidates six former skills; each work"
+  },
+  {
+   "name": "requesting-code-review",
+   "description": "Pre-commit review: security scan, quality gates, auto-fix.",
+   "category": "software-development",
+   "origin": "builtin",
+   "path": "skills/software-development/requesting-code-review/SKILL.md",
+   "hint": "# Pre-Commit Code Verification /  / Automated verification pipeline before code lands. Static scans, baseline-aware / quality gates, an independent reviewer subagent, and an auto-fix loop. /  / **Core principle:** No agent should "
+  },
+  {
+   "name": "simplify-code",
+   "description": "Parallel 4-agent cleanup of recent code changes.",
+   "category": "software-development",
+   "origin": "builtin",
+   "path": "skills/software-development/simplify-code/SKILL.md",
+   "hint": "# Simplify Code — Parallel Review & Cleanup /  / Review your recent code changes with four focused reviewers running in / parallel, aggregate their findings, and apply the fixes worth applying. /  / **This is a cleanup pass, not a"
+  },
+  {
+   "name": "spike",
+   "description": "Throwaway experiments to validate an idea before build.",
+   "category": "software-development",
+   "origin": "builtin",
+   "path": "skills/software-development/spike/SKILL.md",
+   "hint": "# Spike /  / Use this skill when the user wants to **feel out an idea** before committing to a real build — validating feasibility, comparing approaches, or surfacing unknowns that no amount of research will answer. Spikes a"
+  },
+  {
+   "name": "systematic-debugging",
+   "description": "4-phase root cause debugging: understand bugs before fixing.",
+   "category": "software-development",
+   "origin": "builtin",
+   "path": "skills/software-development/systematic-debugging/SKILL.md",
+   "hint": "# Systematic Debugging /  / ## Overview /  / Random fixes waste time and create new bugs. Quick patches mask underlying issues. /  / **Core principle:** ALWAYS find root cause before attempting fixes. Symptom fixes are failure. /  / **V"
+  },
+  {
+   "name": "test-driven-development",
+   "description": "TDD: enforce RED-GREEN-REFACTOR, tests before code.",
+   "category": "software-development",
+   "origin": "builtin",
+   "path": "skills/software-development/test-driven-development/SKILL.md",
+   "hint": "# Test-Driven Development (TDD) /  / ## Overview /  / Write the test first. Watch it fail. Write minimal code to pass. /  / **Core principle:** If you didn't watch the test fail, you don't know if it tests the right thing. /  / **Violat"
+  },
+  {
+   "name": "blocked-page-recovery",
+   "description": "Use when a fetch fails: 403/429, paywall, WAF, bot wall.",
+   "category": "web",
+   "origin": "builtin",
+   "path": "skills/web/blocked-page-recovery/SKILL.md",
+   "hint": "# Blocked-Page Recovery /  / When a page won't fetch — 403/429, Cloudflare \"Just a moment...\", a paywall, / or a bot-detection interstitial — don't give up and don't loop on the same / URL. Third-party services often hold a **co"
+  }
+ ]
+}

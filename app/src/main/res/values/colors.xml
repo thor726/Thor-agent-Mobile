@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Palet brand Thor-agent (diambil dari ui-tui/src/theme.ts repo) -->
+    <color name="thor_gold">#FFD700</color>
+    <color name="thor_amber">#FFBF00</color>
+    <color name="thor_bg">#0D0D10</color>
+    <color name="thor_surface">#17171C</color>
+    <color name="ic_launcher_background">#0D0D10</color>
+</resources>

@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Thor Agent</string>
+    <string name="notif_channel_agent">Agen Thor Berjalan</string>
+    <string name="notif_channel_agent_desc">Status loop agen native dan sesi terminal.</string>
+    <string name="notif_agent_title">Thor Agent aktif</string>
+    <string name="notif_agent_text">Agent otonom berjalan di latar depan. Sentuh untuk membuka.</string>
+</resources>

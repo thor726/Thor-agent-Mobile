@@ -1,0 +1,1493 @@
+{
+ "source": "https://github.com/dwisetyabudi15581/Thor-agent.git",
+ "generated": "2026-11-12",
+ "count": 297,
+ "note": "Katalog referensi tool engine desktop Thor-agent — dipakai sebagai pengetahuan; eksekusi mobile via tool native aplikasi (shell/berkas/terminal/skill).",
+ "tools": [
+  {
+   "name": "annotate_preview_tool",
+   "description": "Persistent element annotations in the Thor desktop GUI's in-app browser.",
+   "origin": "core"
+  },
+  {
+   "name": "ansi_strip",
+   "description": "Strip ANSI escape sequences from subprocess output so they never reach the model's context (models otherwise copy them into file writes). Covers full ECMA-48: CSI, OSC (BEL/ST), DCS/SOS/PM/APC, nF, Fp/Fe/Fs and 8-bit C1 controls.",
+   "origin": "core"
+  },
+  {
+   "name": "approval",
+   "description": "Dangerous command approval -- the gate flow and per-session state.",
+   "origin": "core"
+  },
+  {
+   "name": "approval_context",
+   "description": "Approval context: who is asking, from where, under which policy.",
+   "origin": "core"
+  },
+  {
+   "name": "approval_detection",
+   "description": "Dangerous-command detection: normalization, tokenizing, and pattern tables.",
+   "origin": "core"
+  },
+  {
+   "name": "approval_floors",
+   "description": "Pre-gate floors for :mod:`tools.approval`: decisions that never reach a prompt.",
+   "origin": "core"
+  },
+  {
+   "name": "approval_gateway_wait",
+   "description": "Blocking gateway approval wait for :mod:`tools.approval`.",
+   "origin": "core"
+  },
+  {
+   "name": "approval_human_wait",
+   "description": "Human-wait accounting for :mod:`tools.approval` (per session).",
+   "origin": "core"
+  },
+  {
+   "name": "approval_prompt",
+   "description": "Human prompt surfaces for :mod:`tools.approval`.",
+   "origin": "core"
+  },
+  {
+   "name": "approval_provenance",
+   "description": "Why a flagged command ran without a prompt.",
+   "origin": "core"
+  },
+  {
+   "name": "approval_smart",
+   "description": "Smart approval: auxiliary-LLM risk assessment for :mod:`tools.approval`.",
+   "origin": "core"
+  },
+  {
+   "name": "approval_yolo",
+   "description": "Session ``/yolo``: the one toggle / restore / carry contract every surface calls.",
+   "origin": "core"
+  },
+  {
+   "name": "arg_coercion",
+   "description": "Tool-argument type coercion: repair string-typed values the model emitted against a tool's JSON Schema.",
+   "origin": "core"
+  },
+  {
+   "name": "async_delegation",
+   "description": "Async (background) delegation registry behind ``delegate_task(background=true)``.",
+   "origin": "core"
+  },
+  {
+   "name": "async_delegation_recovery_hints",
+   "description": "Forensic hints attached to an abandoned-delegation recovery event.",
+   "origin": "core"
+  },
+  {
+   "name": "async_delegation_worker",
+   "description": "Process-bound worker ledger routing through the existing durable outbox.",
+   "origin": "core"
+  },
+  {
+   "name": "audio_container",
+   "description": "Shared magic-byte audio/AV container detection — the ONE sniffer for the codebase.",
+   "origin": "core"
+  },
+  {
+   "name": "binary_extensions",
+   "description": "Binary file extensions to skip for text-based operations (ported from free-code src/constants/files.ts).",
+   "origin": "core"
+  },
+  {
+   "name": "blueprints",
+   "description": "Blueprints: shareable plain-language automations layered on skills + cron.",
+   "origin": "core"
+  },
+  {
+   "name": "bot_failure_reasons",
+   "description": "Typed failure-reason codes for bot turns and relay replies.",
+   "origin": "core"
+  },
+  {
+   "name": "bot_live_delivery",
+   "description": "Canonical Bot Chat transport and durable legacy delivery receipts.",
+   "origin": "core"
+  },
+  {
+   "name": "bot_mode_dm",
+   "description": "Bot Mode agent-to-agent DM tool — ``message_agent``.",
+   "origin": "core"
+  },
+  {
+   "name": "bot_mode_dm_chain",
+   "description": "``message_agent``'s chain gate (``agent/bot_chain.py``): resolve each target to the identity the receiving turn's author carries, ask the gate once per call, and dispatch what it admits.",
+   "origin": "core"
+  },
+  {
+   "name": "bot_mode_dm_coordination",
+   "description": "``message_agent`` coordination: a fan-out to several teammates and cancelling one's own request.",
+   "origin": "core"
+  },
+  {
+   "name": "bot_mode_dm_outcome",
+   "description": "One plain sentence per ``message_agent`` request outcome, for the sender's wake-up.",
+   "origin": "core"
+  },
+  {
+   "name": "bot_mode_probe",
+   "description": "Bot Mode roster probe — canonical Bot Chat system prompt section.",
+   "origin": "core"
+  },
+  {
+   "name": "bot_relay",
+   "description": "Bot Mode cross-connection relay — connections ARE the peer set.",
+   "origin": "core"
+  },
+  {
+   "name": "browser_cdp_tool",
+   "description": "Raw Chrome DevTools Protocol (CDP) passthrough tool ``browser_cdp``.",
+   "origin": "core"
+  },
+  {
+   "name": "browser_dialog_tool",
+   "description": "Agent-facing tool: respond to a native JS dialog captured by the CDP supervisor.",
+   "origin": "core"
+  },
+  {
+   "name": "browser_harness_dirs",
+   "description": "Per-profile runtime and tmp dirs for browser-harness daemons (Browser Use mode).",
+   "origin": "core"
+  },
+  {
+   "name": "browser_launcher",
+   "description": "Launch, track and stop the Chromium processes ``browser_exec`` drives.",
+   "origin": "core"
+  },
+  {
+   "name": "browser_launcher_holders",
+   "description": "Cross-process holders of a shared-profile Chromium (``tools/browser_launcher.py``).",
+   "origin": "core"
+  },
+  {
+   "name": "browser_lightpanda",
+   "description": "Lightpanda local engine.",
+   "origin": "core"
+  },
+  {
+   "name": "browser_real_profile_logins",
+   "description": "Read the real-profile browser's saved logins for the vault's read-only ``browser:`` backend.",
+   "origin": "core"
+  },
+  {
+   "name": "browser_session",
+   "description": "Browser sessions for ``browser_exec``: one session per cache key, created in a fixed precedence and always carrying a ``cdp_url``.",
+   "origin": "core"
+  },
+  {
+   "name": "browser_session_cdp",
+   "description": "User-supplied CDP endpoints (live ``/browser connect``, ``BROWSER_CDP_URL``, ``browser.cdp_url``), dialog-policy config and the per-task CDP supervisor lifecycle.",
+   "origin": "core"
+  },
+  {
+   "name": "browser_session_cloud",
+   "description": "``browser.*`` config knobs and cloud browser provider resolution (explicit ``browser.cloud_provider``, auto-detect, per-profile cache).",
+   "origin": "core"
+  },
+  {
+   "name": "browser_session_lifecycle",
+   "description": "Browser session lifecycle: inactivity janitor, orphan reap, per-session teardown, ``cleanup_*`` entry points and the atexit sweep.",
+   "origin": "core"
+  },
+  {
+   "name": "browser_session_real_profile",
+   "description": "Real-profile local browsing: snapshot the user's default Chromium profile into a Thor-owned copy and launch the user's REAL browser binary on it through the launcher.",
+   "origin": "core"
+  },
+  {
+   "name": "browser_session_sandbox",
+   "description": "The bot's Chromium INSIDE the terminal backend's sandbox (Bot Desktop placed there).",
+   "origin": "core"
+  },
+  {
+   "name": "browser_supervisor",
+   "description": "Persistent CDP supervisor for browser dialog + frame detection.",
+   "origin": "core"
+  },
+  {
+   "name": "browser_supervisor_capture",
+   "description": "Captured CDP connection handle for trusted in-process plugins.",
+   "origin": "core"
+  },
+  {
+   "name": "browser_supervisor_dialogs",
+   "description": "Dialog capture + response half of the CDP supervisor.",
+   "origin": "core"
+  },
+  {
+   "name": "browser_supervisor_frames",
+   "description": "Frame / OOPIF target tracking half of the CDP supervisor.",
+   "origin": "core"
+  },
+  {
+   "name": "browser_tool",
+   "description": "Frozen old-updater compatibility stub (tests/compat/old_updater_surface.json, ``bare`` list).",
+   "origin": "core"
+  },
+  {
+   "name": "browser_tool_install",
+   "description": "Frozen old-updater compatibility stub (tests/compat/old_updater_surface.json, ``bare`` list).",
+   "origin": "core"
+  },
+  {
+   "name": "browser_url_policy",
+   "description": "URL safety for ``browser_exec`` (pre-scan of URL literals, hybrid local routing) and the SSRF helpers ``browser_cdp`` uses on raw CDP calls.",
+   "origin": "core"
+  },
+  {
+   "name": "browser_use_cli",
+   "description": "``browser_exec``: drive a real browser through the Browser Use CLI engine (browser-harness, https://browser-use.com), Thor' only core browser tool.",
+   "origin": "core"
+  },
+  {
+   "name": "browser_use_shot",
+   "description": "Screenshot and tab helpers that browser_exec installs over browser-harness's own.",
+   "origin": "core"
+  },
+  {
+   "name": "browser_vault_context",
+   "description": "Run a vault fill, or an automatic one-time-code entry, inside the selected backend's ``fill_context`` (a plugin backend's lock/snapshot/manager session).",
+   "origin": "core"
+  },
+  {
+   "name": "browser_vault_preview",
+   "description": "Vault page operations on the Thor Desktop in-app browser (the preview ``<webview>``).",
+   "origin": "core"
+  },
+  {
+   "name": "browser_vault_tool",
+   "description": "Vault-backed model-blind browser autofill tools.",
+   "origin": "core"
+  },
+  {
+   "name": "budget_config",
+   "description": "Configurable budget constants for tool result persistence. Per-tool resolution: pinned > config overrides > registry > default.",
+   "origin": "core"
+  },
+  {
+   "name": "checkpoint_maintenance",
+   "description": "Checkpoint store retention, orphan pruning, status and cleanup.",
+   "origin": "core"
+  },
+  {
+   "name": "checkpoint_manager",
+   "description": "Checkpoint Manager — Transparent filesystem snapshots via a single shared shadow git store.",
+   "origin": "core"
+  },
+  {
+   "name": "checkpoint_manager_profile_rename",
+   "description": "Rekey profile-local checkpoint projects after a named profile directory moves (#112973).",
+   "origin": "core"
+  },
+  {
+   "name": "checkpoint_pruning",
+   "description": "Checked history rewrites shared by snapshot limits and store maintenance.",
+   "origin": "core"
+  },
+  {
+   "name": "checkpoint_refs",
+   "description": "The one reading of a ``/rollback`` argument every surface shares: a list number or a checkpoint hash.",
+   "origin": "core"
+  },
+  {
+   "name": "checkpoint_undo_hint",
+   "description": "``/undo``'s line naming the files the undone turns changed, so the user knows ``/rollback`` can bring them back.",
+   "origin": "core"
+  },
+  {
+   "name": "clarify_batch",
+   "description": "The terminal result of a batch clarify, shared by every registry that holds one.",
+   "origin": "core"
+  },
+  {
+   "name": "clarify_gateway",
+   "description": "Gateway-side clarify primitive (blocking event-based queue). The agent runs on a worker thread while the event loop handles the user's reply, so a pending clarify is stored module-level (same shape as ``tools.approval``) and the agent thread blocks on an ``Event`` until an adapter button callback or the gateway text-intercept resolves it, or the timeout fires. Adapters render inline buttons (an \"O",
+   "origin": "core"
+  },
+  {
+   "name": "clarify_tool",
+   "description": "Clarify tool: structured multiple-choice / open-ended questions to the user. Schema, validation and a thin dispatcher; the UI lives in a platform-provided callback (cli.py, gateway/run.py, tui_gateway).",
+   "origin": "core"
+  },
+  {
+   "name": "close_preview_tool",
+   "description": "Close the Thor desktop GUI's preview pane, or one tab (``preview.close``). Registration lives in `desktop_preview`. The renderer drops the matching tab — or the whole pane when no url is given — only for the window that asked.",
+   "origin": "core"
+  },
+  {
+   "name": "close_terminal_tool",
+   "description": "Close a read-only agent terminal tab in the Thor desktop GUI WITHOUT killing the mirrored ``terminal(background=true)`` process (output keeps buffering; the user can reopen it). Routes through the process registry's ``on_close`` sink, which the desktop gateway wires to a ``terminal.close`` event. ``desktop_ui`` toolset only.",
+   "origin": "core"
+  },
+  {
+   "name": "code_execution_env",
+   "description": "Child-process environment for execute_code: env scrubbing, interpreter and cwd resolution.",
+   "origin": "core"
+  },
+  {
+   "name": "code_execution_rpc",
+   "description": "Host-side RPC servers for execute_code sandboxes.",
+   "origin": "core"
+  },
+  {
+   "name": "code_execution_tool",
+   "description": "Code Execution Tool -- Programmatic Tool Calling (PTC).",
+   "origin": "core"
+  },
+  {
+   "name": "code_kernel",
+   "description": "Session-persistent Python kernels for execute_code: one child per (owner, mode, interpreter, cwd, tool-set), one code cell per call, state survives across calls.",
+   "origin": "core"
+  },
+  {
+   "name": "code_kernel_remote",
+   "description": "Session-persistent kernels for REMOTE terminal backends (docker/ssh/modal).",
+   "origin": "core"
+  },
+  {
+   "name": "computer_use_tool",
+   "description": "Discovery shim: tools.registry auto-imports ``tools/*.py``, so this top-level module registers ``computer_use`` for the ``tools/computer_use/`` package.",
+   "origin": "core"
+  },
+  {
+   "name": "credential_files",
+   "description": "File passthrough registry for remote terminal backends (Docker, Modal, SSH).",
+   "origin": "core"
+  },
+  {
+   "name": "cronjob_job_args",
+   "description": "Cron job argument normalization, validation and result shaping (re-exported by tools/cronjob_tools.py).",
+   "origin": "core"
+  },
+  {
+   "name": "cronjob_prompt_scan",
+   "description": "Cron prompt threat scanning: the small user-authored prompt gets the strict pattern set; the assembled prompt (with skill bodies) gets only prose-proof directives.",
+   "origin": "core"
+  },
+  {
+   "name": "cronjob_tools",
+   "description": "Cron job management tool: one compressed action-oriented `cronjob_manage` tool (schema/context bloat avoided); `cronjob()` stays callable for direct Python callers.",
+   "origin": "core"
+  },
+  {
+   "name": "daemon_pool",
+   "description": "Shared daemon-thread ThreadPoolExecutor.",
+   "origin": "core"
+  },
+  {
+   "name": "debug_helpers",
+   "description": "Shared per-tool debug session: records tool calls to a JSON log when a tool-specific env var (e.g. WEB_TOOLS_DEBUG=true) is set; no-ops otherwise.",
+   "origin": "core"
+  },
+  {
+   "name": "delegate_tool",
+   "description": "Delegate Tool -- Subagent Architecture",
+   "origin": "core"
+  },
+  {
+   "name": "delegate_tool_child_run",
+   "description": "Running ONE pre-built child agent: heartbeat, registry entry, workspace seeding, timeout/failure handling, result-entry assembly and cleanup (``_ChildRun``).",
+   "origin": "core"
+  },
+  {
+   "name": "delegate_tool_config",
+   "description": "Delegation config knobs (delegation.* keys) and child credential/provider resolution.",
+   "origin": "core"
+  },
+  {
+   "name": "delegate_tool_dispatch",
+   "description": "Batch execution + background dispatch for delegate_task: ``delegate_task`` builds a ``_Batch`` (children + origin identity) and hands it to ``_run_batch``, which runs it synchrothorly or as detached async units — one per task ``group`` (ungrouped tasks are a unit each), so a finished review does not wait for the slowest sibling.",
+   "origin": "core"
+  },
+  {
+   "name": "delegate_tool_prefix_gate",
+   "description": "Prompt-cache warm-up gate for batch subagents (``delegation.prefix_stagger_seconds``).",
+   "origin": "core"
+  },
+  {
+   "name": "delegate_tool_progress",
+   "description": "Child progress relay, console formatting and child system-prompt construction for delegate_task.",
+   "origin": "core"
+  },
+  {
+   "name": "delegate_tool_registry",
+   "description": "Live-subagent registry + model-facing control plane (list/steer/stop) for delegate_task.",
+   "origin": "core"
+  },
+  {
+   "name": "delegate_tool_results",
+   "description": "Subagent result post-processing: summary budget/spill, tool-trace summaries, lifecycle hooks and cost rollup.",
+   "origin": "core"
+  },
+  {
+   "name": "delegate_tool_routes",
+   "description": "Per-task child routes from the active delegation provider (``delegation.backend``).",
+   "origin": "core"
+  },
+  {
+   "name": "delegate_tool_sessions",
+   "description": "The stored session of a delegated child, addressed by its ``subagent_id``.",
+   "origin": "core"
+  },
+  {
+   "name": "delegate_tool_tasks",
+   "description": "delegate_task input validation: tasks=[...] / legacy goal normalisation, per-task output schemas and images.",
+   "origin": "core"
+  },
+  {
+   "name": "delegate_tool_toolsets",
+   "description": "Child toolset resolution for delegate_task: what a child may and may never use.",
+   "origin": "core"
+  },
+  {
+   "name": "delegate_tool_tuning",
+   "description": "Speed tier for ``delegate_task`` children.",
+   "origin": "core"
+  },
+  {
+   "name": "delegation_live_log",
+   "description": "Live, tail-able transcripts for delegated subagents.",
+   "origin": "core"
+  },
+  {
+   "name": "delegation_output_schema",
+   "description": "Structured-output schema helpers for delegate_task.",
+   "origin": "core"
+  },
+  {
+   "name": "delegation_redaction",
+   "description": "Delegation-owned output projections, using the existing text redactor.",
+   "origin": "core"
+  },
+  {
+   "name": "desktop_ui",
+   "description": "Bridge desktop-only tools to Thor-desktop renderer events.",
+   "origin": "core"
+  },
+  {
+   "name": "discord_tool",
+   "description": "Discord server introspection and management tool (REST API + bot token).",
+   "origin": "core"
+  },
+  {
+   "name": "drive_preview_tool",
+   "description": "Interact with the in-app browser / preview pane in the Thor desktop GUI (click, type, scroll).",
+   "origin": "core"
+  },
+  {
+   "name": "env_passthrough",
+   "description": "Environment variable passthrough registry: the session-scoped allowlist of vars a skill's ``required_environment_variables`` (registered by ``skill_view``) or ``terminal.env_passthrough`` in config.yaml may forward into sandboxed children (execute_code, terminal), which strip secrets by default. Under profile multiplexing, forwarded values resolve through the profile's secret scope, not the proces",
+   "origin": "core"
+  },
+  {
+   "name": "env_probe",
+   "description": "Local-environment toolchain probe for the system prompt: when the terminal backend is local, one deterministic line about Python tooling (python3/python versions, missing pip, pip bound to another Python, PEP 668) so models don't discover it by hitting walls. Cached per process; \"\" when clean. Remote backends are skipped (the sandbox has its own probe in agent/prompt_builder). Toggle: ``agent.envi",
+   "origin": "core"
+  },
+  {
+   "name": "escape_drift_autocorrect",
+   "description": "Conservative correction of escape drift before shared fuzzy matching.",
+   "origin": "core"
+  },
+  {
+   "name": "fal_common",
+   "description": "Shared FAL.ai SDK plumbing: lazy import, managed-gateway sync client, small helpers.",
+   "origin": "core"
+  },
+  {
+   "name": "feishu_doc_tool",
+   "description": "Feishu Document Tool -- read document content via Feishu/Lark API.",
+   "origin": "core"
+  },
+  {
+   "name": "feishu_drive_tool",
+   "description": "Feishu Drive Tools -- document comment operations via Feishu/Lark API.",
+   "origin": "core"
+  },
+  {
+   "name": "feishu_lark",
+   "description": "Shared lark_oapi plumbing for the feishu_doc / feishu_drive tool modules.",
+   "origin": "core"
+  },
+  {
+   "name": "file_operations",
+   "description": "File operations (read, write, patch, search) over any terminal backend.",
+   "origin": "core"
+  },
+  {
+   "name": "file_operations_common",
+   "description": "Result dataclasses and pure text helpers shared by ``tools.file_operations`` and its search/lint mixins. Leaf module (imports nothing from ``tools`` at module scope) so nothing cycles. The ``to_dict`` output of every class here IS tool behavior — key names, order and omission rules are pinned by tests and read by the model.",
+   "origin": "core"
+  },
+  {
+   "name": "file_operations_lint",
+   "description": "Syntax-lint and LSP-diagnostics tier for ``tools.file_operations``.",
+   "origin": "core"
+  },
+  {
+   "name": "file_operations_native",
+   "description": "In-process write primitives for the local POSIX backend.",
+   "origin": "core"
+  },
+  {
+   "name": "file_operations_search",
+   "description": "Content/file search tier for ``tools.file_operations``.",
+   "origin": "core"
+  },
+  {
+   "name": "file_state",
+   "description": "Cross-agent file state coordination.",
+   "origin": "core"
+  },
+  {
+   "name": "file_tools",
+   "description": "File Tools Module - LLM agent file manipulation tools.",
+   "origin": "core"
+  },
+  {
+   "name": "file_tools_paths",
+   "description": "Path resolution for the file tools: task-aware base dir, ``~`` expansion, workspace-divergence warning.",
+   "origin": "core"
+  },
+  {
+   "name": "file_tools_read_tracking",
+   "description": "Per-task read/search bookkeeping for the file tools.",
+   "origin": "core"
+  },
+  {
+   "name": "file_tools_write_guards",
+   "description": "Write-side safety guards for write_file / patch.",
+   "origin": "core"
+  },
+  {
+   "name": "focus_pane_tool",
+   "description": "Reveal/focus a pane in the Thor desktop GUI (``pane.reveal`` via ``desktop_ui``).",
+   "origin": "core"
+  },
+  {
+   "name": "fuzzy_match",
+   "description": "Fuzzy find-and-replace for LLM-generated edits.",
+   "origin": "core"
+  },
+  {
+   "name": "hook_output_spill",
+   "description": "Spill oversized hook-injected context to disk with a preview placeholder.",
+   "origin": "core"
+  },
+  {
+   "name": "human_input_hooks",
+   "description": "Plugin observers for every point where the agent blocks waiting on a human (#132333).",
+   "origin": "core"
+  },
+  {
+   "name": "image_generation_catalog",
+   "description": "FAL image model catalog + upscaler constants for ``tools.image_generation_tool``.",
+   "origin": "core"
+  },
+  {
+   "name": "image_generation_managed",
+   "description": "Managed (\"Thor Subscription\") image generation: one picker row, one model catalog.",
+   "origin": "core"
+  },
+  {
+   "name": "image_generation_tool",
+   "description": "Image generation via FAL.ai (model picked in ``thor tools``, persisted to ``image_gen.model``).",
+   "origin": "core"
+  },
+  {
+   "name": "image_source",
+   "description": "Single resolver for every media source (data:/http(s)/file/local/container) -> bytes + mime.",
+   "origin": "core"
+  },
+  {
+   "name": "interpreter_shutdown",
+   "description": "Shared interpreter-shutdown predicate for background threads that can outlive process teardown (cron delivery, concurrent tool submission, retry paths).",
+   "origin": "core"
+  },
+  {
+   "name": "interrupt",
+   "description": "Per-thread interrupt signaling for all tools: thread-scoped so interrupting one agent session does not kill tools in other sessions (the gateway runs many agents in one process). The agent passes its execution thread id to set_interrupt(); tools call is_interrupted(), which checks the CURRENT thread.",
+   "origin": "core"
+  },
+  {
+   "name": "kanban_tools",
+   "description": "Kanban tools — structured tool-call surface for worker + orchestrator agents.",
+   "origin": "core"
+  },
+  {
+   "name": "kanban_tools_schemas",
+   "description": "Tool schemas for tools.kanban_tools (model-facing; strings are byte-frozen).",
+   "origin": "core"
+  },
+  {
+   "name": "kanban_toolset_context",
+   "description": "Explicit Kanban selection during one model-schema build.",
+   "origin": "core"
+  },
+  {
+   "name": "lazy_deps",
+   "description": "Shims to suppress old updater work until relaunch. New code must not use these.",
+   "origin": "core"
+  },
+  {
+   "name": "managed_gateway_auth",
+   "description": "First-party gateway bearer trust, ported from connectors-only 43608084f4.",
+   "origin": "core"
+  },
+  {
+   "name": "managed_gateway_identity",
+   "description": "Caller identity for requests to the first-party gateways: who is calling, and which turn asked.",
+   "origin": "core"
+  },
+  {
+   "name": "managed_tool_gateway",
+   "description": "Generic managed-tool gateway helpers for Thor-hosted vendor passthroughs.",
+   "origin": "core"
+  },
+  {
+   "name": "mcp_dashboard_oauth",
+   "description": "Dashboard-mediated callback bridge for MCP OAuth: the SDK still does discovery, DCR, PKCE, state validation and token exchange; this only moves the two human/browser callbacks from a loopback listener into the already-authenticated dashboard session.",
+   "origin": "core"
+  },
+  {
+   "name": "mcp_liveness",
+   "description": "Application-backed MCP liveness parsing and user-facing status descriptions.",
+   "origin": "core"
+  },
+  {
+   "name": "mcp_oauth",
+   "description": "MCP OAuth 2.1 client support: browser authorization-code flow with PKCE.",
+   "origin": "core"
+  },
+  {
+   "name": "mcp_oauth_device",
+   "description": "Explicit RFC 8628 MCP login, sharing SDK discovery, client auth and token storage.",
+   "origin": "core"
+  },
+  {
+   "name": "mcp_oauth_manager",
+   "description": "Central manager for per-server MCP OAuth state (one instance per process): per-server providers, cross-process token reload (mtime-based disk watch so tokens refreshed by cron/another CLI are picked up without a restart), 401 deduplication (N concurrent 401s with the same access_token trigger one recovery) and reconnect signalling (``MCPServerTask`` drives the reconnect; the manager decides when).",
+   "origin": "core"
+  },
+  {
+   "name": "mcp_oauth_provider",
+   "description": "Shared ``OAuthClientProvider`` customizations for Thor MCP OAuth.",
+   "origin": "core"
+  },
+  {
+   "name": "mcp_schema_cache",
+   "description": "Persistent MCP tool-schema cache for lazy server startup: per-server tool manifests on disk so Thor can register MCP tools into the agent snapshot without spawning the stdio child at idle dashboard startup. Entries are keyed by server name + a fingerprint of the connection config (command/args/url/tools filters).",
+   "origin": "core"
+  },
+  {
+   "name": "mcp_tool",
+   "description": "MCP (Model Context Protocol) client: connects to the ``mcp_servers`` configured in ~/.thor/config.yaml (stdio, Streamable HTTP or SSE), discovers their tools and registers them into the thor tool registry. The ``mcp`` package is optional (no-op without it).",
+   "origin": "core"
+  },
+  {
+   "name": "mcp_tool_agent",
+   "description": "Live-agent tool-list maintenance after MCP (re)discovery: refreshing an AIAgent's tools/tool names, preserving the cached tools[] prefix across rebuilds, and re-injecting post-build tools.",
+   "origin": "core"
+  },
+  {
+   "name": "mcp_tool_common",
+   "description": "Small pure helpers shared by the tools.mcp_tool_* modules: SDK 1.x/2.x field access, error-text sanitising, numeric/bool coercion, timeouts and jitter. No origin state.",
+   "origin": "core"
+  },
+  {
+   "name": "mcp_tool_config",
+   "description": "MCP server config loading and stdio launch environment: ${VAR}/Cursor-style interpolation, hidden-whitespace and suspicious-entry filtering, the filtered subprocess env, command resolution, the cached-npx binary shortcut and the shared stderr log.",
+   "origin": "core"
+  },
+  {
+   "name": "mcp_tool_content",
+   "description": "Rendering of MCP tool-result content blocks into model-facing text: size capping, _meta filtering, image/audio caching to MEDIA tags, resource links and embedded resources.",
+   "origin": "core"
+  },
+  {
+   "name": "mcp_tool_costs",
+   "description": "Declared per-tool MCP costs and the per-chat spend tally behind the budget gate.",
+   "origin": "core"
+  },
+  {
+   "name": "mcp_tool_discovery",
+   "description": "Connecting and discovery for tools.mcp_tool: per-server connect cooldown, connect / lazy-start / recycled-stdio wake-up, ``register_mcp_servers`` / ``discover_mcp_tools`` and the status / probe public API. Origin state (``_servers``, ``_lock``, the loop, patchable helpers) is read through ``_core`` so ``mock.patch(\"tools.mcp_tool.X\")`` keeps working.",
+   "origin": "core"
+  },
+  {
+   "name": "mcp_tool_errors",
+   "description": "MCP connection/transport error classification: URL validation, TLS client certs, identity headers, redirect header stripping, exception-group unwrapping, auth/session-expired/ method-not-found detection and connect-error formatting. Split from tools/mcp_tool.py.",
+   "origin": "core"
+  },
+  {
+   "name": "mcp_tool_events",
+   "description": "MCP Events client, webhook delivery (the experimental ``events/*`` extension of the Triggers & Events WG: modelcontextprotocol/experimental-ext-triggers-events ``docs/design-sketch-proposal.md``).",
+   "origin": "core"
+  },
+  {
+   "name": "mcp_tool_handlers",
+   "description": "Registry-facing sync handlers for MCP tools and utility tools (resources/prompts), plus the per-call recovery ladder: trust gating, circuit breaker, auth (401) refresh, session-expired reconnect and dead-stdio respawn retry.",
+   "origin": "core"
+  },
+  {
+   "name": "mcp_tool_health",
+   "description": "Session health for MCPServerTask: dynamic tool refresh on list_changed notifications, server log forwarding, keepalive probes, suspect-mark / lazy-verify, in-flight call fail-fast, stdio child liveness and stdio idle/lifetime recycling.",
+   "origin": "core"
+  },
+  {
+   "name": "mcp_tool_lifecycle",
+   "description": "MCP process lifecycle: stdio child PID tracking and orphan cleanup, graceful server shutdown and draining of the background MCP loop.",
+   "origin": "core"
+  },
+  {
+   "name": "mcp_tool_loop",
+   "description": "Background-loop plumbing for tools.mcp_tool: cross-process discovery file lock, scheduling coroutines onto the MCP loop from caller threads (with profile HOME override and dashboard OAuth flow propagation) and the loop's exception handler. Origin state (``_lock``, ``_mcp_loop``) is read through ``_core`` so ``mock.patch(\"tools.mcp_tool.X\")`` keeps working.",
+   "origin": "core"
+  },
+  {
+   "name": "mcp_tool_node_abi",
+   "description": "Stdio MCP servers whose native addon was built for a different Node.js (#124264).",
+   "origin": "core"
+  },
+  {
+   "name": "mcp_tool_registration",
+   "description": "Registering a connected (or schema-cached) MCP server's tools into the tool registry: include/exclude filtering, trust-tier metadata capture, utility-tool selection, name-collision resolution and the schema-cache write-through. Both entry points (``_register_server_tools`` live, ``_register_from_cache_sync`` lazy) build ``_Candidate`` records for ``_register_candidates``.",
+   "origin": "core"
+  },
+  {
+   "name": "mcp_tool_sampling",
+   "description": "MCP client-side handlers for server-initiated requests: sampling (sampling/createMessage, text and tool-use results) and elicitation.",
+   "origin": "core"
+  },
+  {
+   "name": "mcp_tool_schema",
+   "description": "MCP tool schema conversion and naming: JSON-schema normalisation for provider compatibility, mcp__server__tool naming, utility-tool schemas, include/exclude filters and description injection scanning.",
+   "origin": "core"
+  },
+  {
+   "name": "mcp_tool_scope",
+   "description": "Connection-ledger keys for tools.mcp_tool under a profile multiplexer.",
+   "origin": "core"
+  },
+  {
+   "name": "mcp_tool_server_run",
+   "description": "Lifecycle of :class:`tools.mcp_tool.MCPServerTask`: the long-lived ``run`` state machine (connect -> serve -> reconnect/park/recycle), keepalive-driven lifecycle waits, start/shutdown and tool deregistration. Origin state and patchable helpers are read through ``_core`` so ``mock.patch(\"tools.mcp_tool.X\")`` keeps working.",
+   "origin": "core"
+  },
+  {
+   "name": "mcp_tool_transport",
+   "description": "Transport bring-up for MCPServerTask: stdio spawn (OSV preflight, cached-npx swap, child PID ledger + death-supervisor registration), Streamable HTTP / SSE connect (preflight, identity header, client certs, OAuth), protocol negotiation and initial tool discovery. Split from tools/mcp_tool.py.",
+   "origin": "core"
+  },
+  {
+   "name": "memory_tool",
+   "description": "Memory Tool - persistent curated memory (MEMORY.md = agent notes, USER.md = user profile). Both enter the system prompt as a FROZEN snapshot at session start; mid-session writes hit disk but never change the prompt (prefix cache intact). Single `memory` tool: add/patch/remove or a batch `operations` list.",
+   "origin": "core"
+  },
+  {
+   "name": "memory_tool_store",
+   "description": "MemoryStore — bounded, file-backed curated memory (MEMORY.md / USER.md). Entries are joined by ``ENTRY_DELIMITER``; budgets are in chars (model-independent). Module state that tests monkeypatch (``get_memory_dir``, ``fcntl``/``msvcrt``) stays in ``tools.memory_tool`` and is read lazily.",
+   "origin": "core"
+  },
+  {
+   "name": "microsoft_graph_auth",
+   "description": "Microsoft Graph app-only (client-credentials) authentication helpers.",
+   "origin": "core"
+  },
+  {
+   "name": "microsoft_graph_client",
+   "description": "Reusable Microsoft Graph REST client helpers.",
+   "origin": "core"
+  },
+  {
+   "name": "neutts_synth",
+   "description": "Standalone NeuTTS synthesis helper.",
+   "origin": "core"
+  },
+  {
+   "name": "open_preview_tool",
+   "description": "Open a URL, dev server, or file in the Thor desktop GUI's preview pane.",
+   "origin": "core"
+  },
+  {
+   "name": "openrouter_client",
+   "description": "OpenRouter API key probe shared by Thor tools.",
+   "origin": "core"
+  },
+  {
+   "name": "osv_check",
+   "description": "OSV malware check for MCP extension packages.",
+   "origin": "core"
+  },
+  {
+   "name": "patch_parser",
+   "description": "V4A patch parser/applier (codex, cline). ``*** Begin Patch``/``*** End Patch`` wrap ops: ``*** Update File: p`` + hunks (``@@ hint @@``, `` ctx``, ``-old``, ``+new``); ``*** Add File: n`` + ``+`` lines; ``*** Delete File: o``; ``*** Move File: a -> b``. Entry points: ``parse_v4a_patch(text) -> (ops, error)`` and ``apply_v4a_operations(ops, file_ops)``.",
+   "origin": "core"
+  },
+  {
+   "name": "path_security",
+   "description": "Shared path validation helpers for tool implementations (skills, cron, credential files).",
+   "origin": "core"
+  },
+  {
+   "name": "plugin_guard",
+   "description": "Plugin Guard — ``skills_guard`` engine applied to ``thor plugins install``/``update``.",
+   "origin": "core"
+  },
+  {
+   "name": "plugin_guard_context",
+   "description": "Context demotions for plugin install-scan findings (``tools.plugin_guard``).",
+   "origin": "core"
+  },
+  {
+   "name": "preview_tool",
+   "description": "The `desktop_preview` tool — the preview pane beside the chat, as ONE tool.",
+   "origin": "core"
+  },
+  {
+   "name": "process_registry",
+   "description": "Process Registry -- in-memory registry for background processes spawned via terminal(background=true): rolling 200KB output buffer, poll/log/wait/kill, JSON checkpoint for crash recovery, session-scoped tracking for gateway reset protection. Nothing runs on the host unless TERMINAL_ENV=local; other backends run in their sandbox.",
+   "origin": "core"
+  },
+  {
+   "name": "process_registry_awaiting",
+   "description": "Whether a background process will still report back to the agent that spawned it.",
+   "origin": "core"
+  },
+  {
+   "name": "process_registry_checkpoint",
+   "description": "Running-process checkpoint persistence and PID-safe recovery.",
+   "origin": "core"
+  },
+  {
+   "name": "process_registry_env_log",
+   "description": "Incremental sandbox log reads for ProcessRegistry's non-local poller.",
+   "origin": "core"
+  },
+  {
+   "name": "process_registry_notifications",
+   "description": "Human-readable rendering of ``ProcessRegistry.completion_queue`` events (completion, watch_match, watch_disabled, watch_overflow_*, async_delegation) into the ``[IMPORTANT: ...]`` / ``[ASYNC DELEGATION ...]`` text the CLI drain loop, gateway and TUI inject into the agent conversation.",
+   "origin": "core"
+  },
+  {
+   "name": "process_registry_output_log",
+   "description": "File-backed output for background processes a registered worker starts.",
+   "origin": "core"
+  },
+  {
+   "name": "process_registry_ownership",
+   "description": "Which local background jobs die with their owner, for ProcessRegistry (process_identity layer 4).",
+   "origin": "core"
+  },
+  {
+   "name": "process_registry_results",
+   "description": "Bounded, profile-local receipts for completed terminal processes.",
+   "origin": "core"
+  },
+  {
+   "name": "process_registry_stdin",
+   "description": "Why a background process has no writable stdin, phrased as the fix the agent can act on.",
+   "origin": "core"
+  },
+  {
+   "name": "process_registry_termination",
+   "description": "Process-tree termination and post-kill survivor verification for ProcessRegistry.",
+   "origin": "core"
+  },
+  {
+   "name": "process_registry_wait_policy",
+   "description": "Stop repeated ``process_manage`` wait/poll calls on a silent running process.",
+   "origin": "core"
+  },
+  {
+   "name": "process_registry_wsl",
+   "description": "Detect background spawns routed through a ``wsl[.exe]`` launcher chain (#120546).",
+   "origin": "core"
+  },
+  {
+   "name": "project_tools",
+   "description": "Project tools — the agent's INTENTIONAL handle on first-class Projects (per-profile ``projects.db``, the desktop sidebar's named workspaces). Creating/switching is an explicit tool call, never a side effect of ``cd``. GUI-only: the `project` toolset stays off ``_THOR_CORE_TOOLS``; the desktop/TUI gateway folds it in and wires ``set_project_workspace_callback`` so the live session's cwd and sidebar",
+   "origin": "core"
+  },
+  {
+   "name": "pty_query_responder",
+   "description": "Answer a bounded set of blocking terminal queries from PTY subprocesses.",
+   "origin": "core"
+  },
+  {
+   "name": "react_to_message_tool",
+   "description": "Agent emoji reaction in the Thor desktop app: the counterpart to the user's tapback (same store, one-per-author, ``author=\"agent\"``). Lives in the ``desktop_ui`` toolset so it costs nothing elsewhere (adapters expose reactions via ``send_message(action=\"react\")``); defaults to the triggering message and emits ``message.reaction`` for live painting.",
+   "origin": "core"
+  },
+  {
+   "name": "read_extract",
+   "description": "Document-to-text extraction for ``read_file``: stdlib Jupyter/DOCX/XLSX (always authoritative for those three), plus legacy Office/OpenDocument/RTF/EPUB/PDF when the optional ``firecrawl-anydoc`` package (imports as ``anydoc``) is installed. Malformed documents raise :class:`ExtractionError`; callers fall back to text/binary handling.",
+   "origin": "core"
+  },
+  {
+   "name": "read_preview_tool",
+   "description": "Read the in-app browser / preview pane in the Thor desktop GUI.",
+   "origin": "core"
+  },
+  {
+   "name": "read_terminal_tool",
+   "description": "Read the in-app terminal pane in the Thor desktop GUI.",
+   "origin": "core"
+  },
+  {
+   "name": "read_window_tool",
+   "description": "Read which OS window sits directly underneath the Thor desktop window.",
+   "origin": "core"
+  },
+  {
+   "name": "registry",
+   "description": "Central registry for all thor-agent tools: each tool file calls ``registry.register()`` at import to declare schema, handler, toolset membership and availability check; ``model_tools.py`` queries the registry instead of keeping parallel data structures. Cycle-safe import chain: this module imports nothing from model_tools or tool files; tools/*.py import it at module level; model_tools.py imports ",
+   "origin": "core"
+  },
+  {
+   "name": "schema_sanitizer",
+   "description": "Sanitize tool JSON schemas for strict LLM backends. llama.cpp's grammar converter fails on ``{\"type\": \"object\"}`` without ``properties``, bare-string schemas and ``type`` arrays; Anthropic rejects nullable ``anyOf`` at the top of ``input_schema``; Fireworks rejects ``default`` beside ``$ref``; Codex rejects top-level combinators. Walks a deep copy and fixes only those shapes. Legacy boolean ``requ",
+   "origin": "core"
+  },
+  {
+   "name": "self_repo_guard",
+   "description": "Detect Git operations that can rewrite the checkout backing this process.",
+   "origin": "core"
+  },
+  {
+   "name": "send_message_senders",
+   "description": "Standalone per-platform senders and error helpers for send_message.",
+   "origin": "core"
+  },
+  {
+   "name": "send_message_targets",
+   "description": "Target parsing and resolution for send_message (platform:chat_id[:thread] → ids).",
+   "origin": "core"
+  },
+  {
+   "name": "send_message_tool",
+   "description": "Send Message Tool -- cross-channel messaging via platform APIs (send, list targets, react); works in both CLI and gateway contexts.",
+   "origin": "core"
+  },
+  {
+   "name": "session_search_tool",
+   "description": "Session Search Tool - long-term conversation recall over the SQLite session DB.",
+   "origin": "core"
+  },
+  {
+   "name": "set_theme_tool",
+   "description": "Set the Thor desktop app's accent colour, light/dark mode and layout, or show a picker card.",
+   "origin": "core"
+  },
+  {
+   "name": "setup_beat_tool",
+   "description": "``setup_beat``: the one onboarding-only tool. It shows a beat's card through the desktop, waits for the user (``CARD_TIMEOUT_S``), and returns their answer with a short reminder of the next beat.",
+   "origin": "core"
+  },
+  {
+   "name": "shell_heredoc",
+   "description": "Conservative heredoc masking for shell-command scanners ('&' guard, blocked-command checks, cron lifecycle_guard) that false-positive on heredoc *bodies*. Stripping every body is unsafe the other way (a fake ``<<`` in quotes can swallow an operator; unquoted bodies expand; ``bash <<'EOF'`` executes), so a body is masked ONLY when every delimiter is quoted, every heredoc has an exact terminator lin",
+   "origin": "core"
+  },
+  {
+   "name": "skill_ledger",
+   "description": "Per-mutation skill audit ledger + single-edit rollback.",
+   "origin": "core"
+  },
+  {
+   "name": "skill_linter",
+   "description": "Structural + convention linter for SKILL.md files.",
+   "origin": "core"
+  },
+  {
+   "name": "skill_lock",
+   "description": "User skill locks, enforced on every agent write path.",
+   "origin": "core"
+  },
+  {
+   "name": "skill_manager_batch",
+   "description": "Atomic multi-op batch path for ``skill_manage``. Origin state (``skill_manage``/``_find_skill``/``_skill_gate_bypass``) is reached lazily through ``tools.skill_manager_tool`` so that module owns it.",
+   "origin": "core"
+  },
+  {
+   "name": "skill_manager_guards",
+   "description": "Write/delete guards for ``skill_manage``. Every guard returns ``None`` when the operation may proceed, else a refusal (error dict or message). Origin-owned state (``_find_skill``, ``_skills_dir``) is reached lazily via ``tools.skill_manager_tool`` so test patches keep working.",
+   "origin": "core"
+  },
+  {
+   "name": "skill_manager_tool",
+   "description": "Skill Manager Tool — agent-managed skill creation & editing.",
+   "origin": "core"
+  },
+  {
+   "name": "skill_provenance",
+   "description": "Skill write-origin provenance: a ContextVar separating background-review skill writes from foreground user-directed writes (the curator only curates skills the self-improvement review fork created; skills a user asked for belong to the user). run_agent.py binds the origin before each tool loop, mirroring AIAgent._memory_write_origin: ``token = set_current_write_origin(...)`` / ``reset_current_writ",
+   "origin": "core"
+  },
+  {
+   "name": "skill_usage",
+   "description": "Skill usage telemetry + provenance for the Curator: a sidecar ``~/.thor/skills/.usage.json`` keyed by skill name (never frontmatter — keeps telemetry out of user-authored SKILL.md and off bundled/hub skills). Counter bumps are best-effort (DEBUG-logged failures never break the tool call); writes are atomic under a cross-process lock. Curator management is an explicit ``created_by: agent`` marker w",
+   "origin": "core"
+  },
+  {
+   "name": "skillevaluator_scan",
+   "description": "Advisory NVIDIA SkillEvaluator Tier 1 scan for skill installs — alongside (never instead of) skills_guard, the enforcement layer. Contract: warn, don't block (the upstream PII scanner false-positives on ``git@github.com`` / ``op://``); prompt only for secrets-class criticals (``--force`` / non-interactive proceed with a loud warning); a missing/crashing/timed-out/unparseable scanner is a no-op. To",
+   "origin": "core"
+  },
+  {
+   "name": "skills_ast_audit",
+   "description": "AST-level deep audit for skill Python files — opt-in diagnostic (``thor skills audit --deep``), not a security gate (SECURITY.md §2.4). Flags dynamic import / attribute access for human review; every pattern has legitimate uses, so findings are hints, not verdicts.",
+   "origin": "core"
+  },
+  {
+   "name": "skills_guard",
+   "description": "Skills Guard — regex static scan of externally-sourced skills plus a trust-aware install policy.",
+   "origin": "core"
+  },
+  {
+   "name": "skills_hub",
+   "description": "Skills Hub — hub state management and the public facade for the source adapters.",
+   "origin": "core"
+  },
+  {
+   "name": "skills_hub_clawhub",
+   "description": "Skills Hub ClawHub adapter (clawhub.ai HTTP API).",
+   "origin": "core"
+  },
+  {
+   "name": "skills_hub_github",
+   "description": "Skills Hub GitHub adapter: API auth, tap providers, and the Contents/Trees source.",
+   "origin": "core"
+  },
+  {
+   "name": "skills_hub_install",
+   "description": "Skills Hub install/uninstall/update operations: quarantine staging, install- target safety (symlink/junction, category-bucket and nested-skill checks), lock-file-backed uninstall, bundle hashing and upstream update checks.",
+   "origin": "core"
+  },
+  {
+   "name": "skills_hub_models",
+   "description": "Skills Hub data models, path validators, and SKILL.md helpers. Leaf module (no imports from tools.skills_hub) so every source adapter module can import it at top level without cycles.",
+   "origin": "core"
+  },
+  {
+   "name": "skills_hub_official",
+   "description": "Skills Hub official sources: repo-shipped optional skills and the centralized Thor index.",
+   "origin": "core"
+  },
+  {
+   "name": "skills_hub_search",
+   "description": "Skills Hub discovery: the centralized Thor index fetch (cached, stale- fallback), the source router, and parallel/unified search across source adapters.",
+   "origin": "core"
+  },
+  {
+   "name": "skills_hub_skillssh",
+   "description": "Skills Hub skills.sh adapter: catalog discovery via skills.sh, content via GitHub.",
+   "origin": "core"
+  },
+  {
+   "name": "skills_hub_sources",
+   "description": "Skills Hub adapters for well-known endpoints, direct URLs, LobeHub, and browse.sh.",
+   "origin": "core"
+  },
+  {
+   "name": "skills_sync",
+   "description": "Skills Sync -- manifest-based seeding and updating of bundled skills. Copies repo skills/ into ~/.thor/skills/, tracking each synced skill's origin hash in .bundled_manifest (v2 \"name:hash\" lines; v1 plain names auto-migrate). NEW skills are copied and recorded; EXISTING skills update only when bundled changed AND the user copy still matches the origin hash (else user-customized -> SKIP); user-DEL",
+   "origin": "core"
+  },
+  {
+   "name": "skills_sync_bundled_ops",
+   "description": "Bundled-skill maintenance ops: reset, diff, list-modified, opt-out, remove-pristine. Profile-scoped paths and patchable helpers resolve through ``_ss()`` at call time.",
+   "origin": "core"
+  },
+  {
+   "name": "skills_sync_optional",
+   "description": "Official optional-skill provenance: hub-lock backfill and restore. Profile-scoped paths and patchable helpers resolve through ``_ss()`` at call time so ``tools.skills_sync`` patches work.",
+   "origin": "core"
+  },
+  {
+   "name": "skills_tool",
+   "description": "Skills Tool — list and view skill documents (progressive disclosure). A skill is a directory holding SKILL.md (YAML frontmatter + instructions) plus optional references/, templates/, assets/, scripts/. `skills_list` returns name/description only; `skill_view` returns full content and linked files. Sibling modules (skills_tool_setup / _plugin / _dedup) re-export here.",
+   "origin": "core"
+  },
+  {
+   "name": "skills_tool_dedup",
+   "description": "skill_view repeat-view dedup registry: per-task cache of (resolved skill name, file_path) -> digest of the skill_view result served. A repeat view whose result is byte-identical returns a short stub — the earlier tool result already carries the content verbatim. Content digests need no file timestamps, so a same-size rewrite in one coarse mtime tick (or on a host whose clock disagrees with the fil",
+   "origin": "core"
+  },
+  {
+   "name": "skills_tool_plugin",
+   "description": "Plugin-provided skill serving for ``skill_view`` (``plugin:skill`` names) plus the JSON / file-serving helpers shared with the local-skill path. Helpers tests patch on the origin module (``_is_skill_disabled``, ``_parse_frontmatter``, ``skill_matches_platform``) resolve lazily.",
+   "origin": "core"
+  },
+  {
+   "name": "skills_tool_setup",
+   "description": "Skill readiness: required env vars, secret capture, and setup notes. Split out of ``tools.skills_tool`` (names re-imported there); module state (``_secret_capture_callback``, ``load_env``) stays there and is read lazily at call time so origin-module patches are honored.",
+   "origin": "core"
+  },
+  {
+   "name": "slash_confirm",
+   "description": "Generic slash-command confirmation primitive (gateway-side).",
+   "origin": "core"
+  },
+  {
+   "name": "spill_safety",
+   "description": "Symlink-safe creation helpers for spill/cache files under ``~/.thor``, where a plain ``open(path, \"w\")`` would follow a pre-planted symlink onto ``~/.bashrc`` etc. New files use ``O_CREAT | O_EXCL`` (fails on ANY existing path, even a dangling link); overwrites ``lstat`` + ``unlink`` first (removes the link, never its target) then create exclusively, so the pair can't be raced. ``private=True`` (d",
+   "origin": "core"
+  },
+  {
+   "name": "stt_lease",
+   "description": "Local-STT lifecycle for the desktop voice-input path: warm-up leases.",
+   "origin": "core"
+  },
+  {
+   "name": "subagent_worktree",
+   "description": "Opt-in git worktree isolation for delegated subagents (``delegation.worktree_isolation``).",
+   "origin": "core"
+  },
+  {
+   "name": "terminal_hints",
+   "description": "Output-pattern failure hints for the terminal tool.",
+   "origin": "core"
+  },
+  {
+   "name": "terminal_scope",
+   "description": "Per-turn terminal scope: profile-scoped TERMINAL_* policy.",
+   "origin": "core"
+  },
+  {
+   "name": "terminal_tool",
+   "description": "Terminal tool: run shell commands in the configured backend.",
+   "origin": "core"
+  },
+  {
+   "name": "terminal_tool_backends",
+   "description": "Execution-environment backends for the terminal tool: per-backend builders, config-to-kwargs shapers, and requirement checkers, routed by dispatch/spec tables. Split out of ``tools/terminal_tool.py``; the terminal tool imports the builders/checkers it uses from here.",
+   "origin": "core"
+  },
+  {
+   "name": "terminal_tool_background",
+   "description": "Background-process launch path: ``terminal(background=true)`` spawns a tracked process via the process registry (Popen locally, ``env.execute`` in a sandbox), stamps gateway routing metadata for completion / watch-pattern notifications and returns the JSON result. Lazy ``tools.terminal_tool`` imports keep the origin's monkeypatch points authoritative.",
+   "origin": "core"
+  },
+  {
+   "name": "terminal_tool_config",
+   "description": "Terminal backend configuration: scope-aware TERMINAL_* reads, env-var parsing, container-cwd sanity checks, plugin-backend classification, and the ``_quiet`` best-effort block shared by the terminal_tool_* modules.",
+   "origin": "core"
+  },
+  {
+   "name": "terminal_tool_guards",
+   "description": "Pre-execution guards for the terminal tool.",
+   "origin": "core"
+  },
+  {
+   "name": "terminal_tool_lifecycle",
+   "description": "Sandbox lifecycle for the terminal tool: idle reaping, teardown, manual/atexit cleanup, and the lazy ensure_task_env bring-up. The env cache dicts and locks stay in tools.terminal_tool (tests patch them there) and are read through it at call time.",
+   "origin": "core"
+  },
+  {
+   "name": "terminal_tool_macos_open",
+   "description": "macOS ``open`` frontmost raise-ladder for the terminal tool.",
+   "origin": "core"
+  },
+  {
+   "name": "terminal_tool_result",
+   "description": "Foreground result post-processing for the terminal tool (cwd dual-write, sudo handling, transform hook, truncation, ANSI strip, redaction, exit-code notes/hints, spill redaction, verification evidence) + exit-code tables. Lazy ``tools.terminal_tool`` lookups keep the origin's monkeypatch points authoritative.",
+   "origin": "core"
+  },
+  {
+   "name": "terminal_tool_sudo",
+   "description": "Sudo password plumbing and shell-command rewrites for the terminal tool: per-scope password cache, /dev/tty prompt, the quote-aware shell scanner behind the real-sudo rewrite (``sudo -S -p ''``) and the compound-background brace-group rewrite, and the NOPASSWD probe. Split out of ``tools/terminal_tool.py``; every public/patched name is re-imported there so ``tools.terminal_tool.<name>`` keeps reso",
+   "origin": "core"
+  },
+  {
+   "name": "thread_context",
+   "description": "Propagate agent-turn context into worker threads that dispatch Thor tools.",
+   "origin": "core"
+  },
+  {
+   "name": "threat_patterns",
+   "description": "Shared threat-pattern library (prompt injection / promptware / exfiltration) for ``agent/prompt_builder.py``, ``tools/memory_tool.py`` and ``agent/tool_dispatch_helpers.py``. Each pattern is ``(regex, pattern_id, scope)``; scope is cumulative: ``\"all\"`` everywhere, ``\"context\"`` adds promptware / C2 / role hijack for context files, memory and tool results (warn-level: that content is not user-auth",
+   "origin": "core"
+  },
+  {
+   "name": "tip_tool",
+   "description": "Point at something in the Thor desktop GUI and say one line about it — the quiet sibling of ``tour`` (same ``data-tour`` handles) with no scrim/spotlight/paging. Fire-and-forget: a tip is not a question, so blocking on a round-trip would stall the reply. Lives in ``desktop_ui`` and withdraws itself when the user turns tips off.",
+   "origin": "core"
+  },
+  {
+   "name": "todo_tool",
+   "description": "Todo tool: in-memory, revisioned task list for multi-step work. State lives on the AIAgent (one per session), is re-injected after context compression, and every write bumps a monotonic revision so UI clients can reject stale updates. One ``todo_list`` tool: pass ``todos`` to write, omit to read; every call returns the full list. No system-prompt mutation.",
+   "origin": "core"
+  },
+  {
+   "name": "tool_backend_helpers",
+   "description": "Shared helpers for tool backend selection.",
+   "origin": "core"
+  },
+  {
+   "name": "tool_labels",
+   "description": "",
+   "origin": "core"
+  },
+  {
+   "name": "tool_output_limits",
+   "description": "Configurable tool-output truncation limits (``tool_output`` in config.yaml): ``max_bytes`` (terminal output cap), ``max_lines`` (read_file pagination cap), ``max_line_length`` (per-line cap before '... [truncated]'). Defaults equal the constants once hardcoded in terminal_tool / file_operations and the reader never raises, so behaviour is unchanged when the section is absent or malformed.",
+   "origin": "core"
+  },
+  {
+   "name": "tool_output_truncate",
+   "description": "Head/tail truncation for oversized tool output (terminal, execute_code, MCP results).",
+   "origin": "core"
+  },
+  {
+   "name": "tool_result_storage",
+   "description": "Tool result persistence -- preserves large outputs instead of truncating. Layers against context overflow: (1) per-tool caps inside each tool; (2) ``maybe_persist_tool_result`` — output over the tool's threshold is persisted and replaced by a preview + path; canonical home is ALWAYS host-side ``$THOR_HOME/cache/spillover/{id}.txt`` (works for sessions that never ran a terminal), remote backends ge",
+   "origin": "core"
+  },
+  {
+   "name": "tool_search",
+   "description": "Progressive tool disclosure (\"tool search\"): MCP/plugin tools and a curated set of event-triggered core tools are replaced in the model-visible array by three bridge tools — tool_search / tool_describe / tool_call. Invariants: core tools (``toolsets._THOR_CORE_TOOLS``) and session-gated GUI toolsets never defer unless named in ``defer``; ANY deferrable tool activates the bridge (the listing scales",
+   "origin": "core"
+  },
+  {
+   "name": "tool_search_catalog",
+   "description": "Deferred-tool catalog for tool search: BM25 retrieval over deferrable tool defs plus the budgeted, byte-stable catalog listing embedded in the bridge.",
+   "origin": "core"
+  },
+  {
+   "name": "tool_search_validation",
+   "description": "Local argument validation for ``tool_call`` against a deferred tool's schema.",
+   "origin": "core"
+  },
+  {
+   "name": "tour_presets",
+   "description": "The built-in tour presets ``gui_tour`` start-without-steps accepts.",
+   "origin": "core"
+  },
+  {
+   "name": "tour_tool",
+   "description": "Guided tour (highlight + narrate UI elements) in the Thor desktop GUI: ``start`` with no steps runs the app's own built-in tour (``preset`` quick or full); for a custom one the agent discovers targets (``action=\"targets\"``), then highlights one step at a time (``show``) or hands over a step list the user pages (``start`` + ``steps``). Round-trips through the gateway blocking-prompt bridge (``tour.",
+   "origin": "core"
+  },
+  {
+   "name": "transcription_audio",
+   "description": "Audio preprocessing for STT.",
+   "origin": "core"
+  },
+  {
+   "name": "transcription_chunking",
+   "description": "Per-provider upload limits and long-audio splitting for cloud STT.",
+   "origin": "core"
+  },
+  {
+   "name": "transcription_cloud",
+   "description": "Cloud STT providers.",
+   "origin": "core"
+  },
+  {
+   "name": "transcription_command",
+   "description": "User-declared and plugin STT providers.",
+   "origin": "core"
+  },
+  {
+   "name": "transcription_common",
+   "description": "Constants, result envelopes and tiny config readers shared by every STT module.",
+   "origin": "core"
+  },
+  {
+   "name": "transcription_local",
+   "description": "Local STT backends.",
+   "origin": "core"
+  },
+  {
+   "name": "transcription_streaming",
+   "description": "Live speech-to-text: feed microphone PCM while the user speaks, get partial and final text.",
+   "origin": "core"
+  },
+  {
+   "name": "transcription_tools",
+   "description": "Speech-to-text transcription used by the gateway for voice messages.",
+   "origin": "core"
+  },
+  {
+   "name": "transcription_whisper_cpp",
+   "description": "Managed whisper.cpp command and first-use, verified model acquisition.",
+   "origin": "core"
+  },
+  {
+   "name": "tts_command_provider",
+   "description": "Shared runner for user-configured shell (\"command\") TTS/STT providers.",
+   "origin": "core"
+  },
+  {
+   "name": "tts_elevenlabs_voices",
+   "description": "ElevenLabs voice search behind ``text_to_speech``'s ``find_voices`` argument.",
+   "origin": "core"
+  },
+  {
+   "name": "tts_streaming",
+   "description": "Provider-agnostic streaming TTS: sentence text → int16 mono PCM chunk iterator.",
+   "origin": "core"
+  },
+  {
+   "name": "tts_text_normalize",
+   "description": "Deterministic cleanup turning assistant Markdown into a spoken script.",
+   "origin": "core"
+  },
+  {
+   "name": "tts_tool",
+   "description": "Text-to-speech tool: config resolution, built-in provider dispatch, output policy, registration.",
+   "origin": "core"
+  },
+  {
+   "name": "tts_tool_delivery",
+   "description": "Long-form chunking, ffmpeg encoding, container repair and delivery packing (``tools.tts_tool``).",
+   "origin": "core"
+  },
+  {
+   "name": "tts_tool_lifecycle",
+   "description": "Local-engine lifecycle for ``tools.tts_tool``: warm-up / release leases.",
+   "origin": "core"
+  },
+  {
+   "name": "tts_tool_local",
+   "description": "Local on-device TTS engines for ``tools.tts_tool``: NeuTTS, Piper, KittenTTS.",
+   "origin": "core"
+  },
+  {
+   "name": "tts_tool_openai",
+   "description": "OpenAI-compatible TTS backends for ``tools.tts_tool``: OpenAI and DeepInfra.",
+   "origin": "core"
+  },
+  {
+   "name": "tts_tool_plugins",
+   "description": "Plugin-registered TTS providers for ``tools.tts_tool``: routes ``tts.provider: <name>`` values that are neither built-in nor ``type: command`` to a plugin :class:`agent.tts_provider.TTSProvider`. Discovery goes through ``thor_cli.plugins._ensure_plugins_discovered`` (imported lazily so the tool module stays importable without the plugin machinery).",
+   "origin": "core"
+  },
+  {
+   "name": "tts_tool_providers",
+   "description": "Cloud TTS backends for ``tools.tts_tool``: Edge, ElevenLabs, xAI, MiniMax, Mistral, Gemini.",
+   "origin": "core"
+  },
+  {
+   "name": "tts_tool_speaker",
+   "description": "Speaker-side streaming pipeline: ``stream_tts_to_speaker``.",
+   "origin": "core"
+  },
+  {
+   "name": "url_safety",
+   "description": "URL safety checks — blocks requests to private/internal network addresses (SSRF).",
+   "origin": "core"
+  },
+  {
+   "name": "video_generation_tool",
+   "description": "``video_generate``: one tool dispatching to a plugin-registered :class:`VideoGenProvider` (``agent/video_gen_provider.py`` ABC, ``agent/video_gen_registry.py``, ``plugins/video_gen/<name>/``).",
+   "origin": "core"
+  },
+  {
+   "name": "vision_tools",
+   "description": "Vision tools: ``vision_analyze`` (image) and ``video_analyze``.",
+   "origin": "core"
+  },
+  {
+   "name": "vision_tools_history_budget",
+   "description": "History-reuse budgets for native vision embeds (config section ``vision``).",
+   "origin": "core"
+  },
+  {
+   "name": "vision_tools_image_prep",
+   "description": "Image format detection, normalization and region cropping for vision tools.",
+   "origin": "core"
+  },
+  {
+   "name": "voice_client_config",
+   "description": "Resolve the active profile's STT/TTS config for CLIENT-DIRECT voice.",
+   "origin": "core"
+  },
+  {
+   "name": "voice_live",
+   "description": "GPT-Live voice chat mode: the full-duplex voice frontend that delegates to Thor.",
+   "origin": "core"
+  },
+  {
+   "name": "voice_mode",
+   "description": "Voice Mode -- push-to-talk recording and playback for the CLI.",
+   "origin": "core"
+  },
+  {
+   "name": "voice_mode_transcript",
+   "description": "Pure-text helpers for voice mode: Whisper hallucination filter, voice-chat stop phrases, and the TTS self-echo guard. No audio dependencies.",
+   "origin": "core"
+  },
+  {
+   "name": "wake_word",
+   "description": "Wake-word (\"Hey Thor\") detection — hands-free session trigger.",
+   "origin": "core"
+  },
+  {
+   "name": "wake_word_engines",
+   "description": "Wake-word hotword engines (pyopen-wakeword / sherpa-onnx KWS / Porcupine).",
+   "origin": "core"
+  },
+  {
+   "name": "web_result_cache",
+   "description": "Result caching for web_search / web_extract; both caches TTL-bounded (default 20 min, ``web.cache_ttl_minutes``; disable with ``web.cache_enabled: false``), only successful responses cache. * **Search memo** — in-memory, per-process, single-flighted: concurrent identical queries share one paid request. Limits bucket to 10/20/50/100 so near-identical requests share an entry. * **Extract cache** — d",
+   "origin": "core"
+  },
+  {
+   "name": "web_tools",
+   "description": "Generic web_search / web_extract tools over pluggable backends.",
+   "origin": "core"
+  },
+  {
+   "name": "web_tools_extract",
+   "description": "web_extract helpers: URL validation, provider resolution, cache-aware dispatch.",
+   "origin": "core"
+  },
+  {
+   "name": "web_tools_rescue",
+   "description": "One-shot keyless-ring rescue for failed keyed/configured web calls.",
+   "origin": "core"
+  },
+  {
+   "name": "web_tools_truncate",
+   "description": "Truncate-and-store pipeline for web_extract (no LLM).",
+   "origin": "core"
+  },
+  {
+   "name": "website_policy",
+   "description": "Website access policy helpers for URL-capable tools.",
+   "origin": "core"
+  },
+  {
+   "name": "working_diff",
+   "description": "Working-tree git diff collection shared by the CLI and gateway ``/diff``.",
+   "origin": "core"
+  },
+  {
+   "name": "write_approval",
+   "description": "Write-approval gate + pending store for memory and skill writes.",
+   "origin": "core"
+  },
+  {
+   "name": "x_search_tool",
+   "description": "X Search tool backed by xAI's built-in ``x_search`` Responses API tool.",
+   "origin": "core"
+  },
+  {
+   "name": "xai_http",
+   "description": "Shared helpers for direct xAI HTTP integrations.",
+   "origin": "core"
+  },
+  {
+   "name": "xai_video_tools",
+   "description": "xAI-specific Imagine video edit and extend tools.",
+   "origin": "core"
+  }
+ ]
+}

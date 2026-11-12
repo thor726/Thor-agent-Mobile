@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<paths xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- Ekspor sesi / snapshot profil / laporan debug disimpan di Download/thor-sesi -->
+    <external-path name="downloads" path="Download/" />
+    <!-- Lampiran sementara di cache aplikasi -->
+    <cache-path name="cache" path="/" />
+</paths>

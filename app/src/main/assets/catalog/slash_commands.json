@@ -1,0 +1,1131 @@
+{
+ "source": "https://github.com/dwisetyabudi15581/Thor-agent.git",
+ "source_module": "thor_cli/commands.py COMMAND_REGISTRY + locales/id.yaml",
+ "generated": "2026-11-12",
+ "count": 105,
+ "categories": [
+  "Info",
+  "Keluar",
+  "Konfigurasi",
+  "Sesi",
+  "Tool & Skill"
+ ],
+ "commands": [
+  {
+   "name": "start",
+   "description": "Akui ping start platform tanpa membalas",
+   "category": "Sesi",
+   "aliases": [],
+   "args_hint": "",
+   "subcommands": [],
+   "gateway_only": true
+  },
+  {
+   "name": "new",
+   "description": "Mulai sesi baru (ID sesi + riwayat baru)",
+   "category": "Sesi",
+   "aliases": [
+    "reset"
+   ],
+   "args_hint": "[name]",
+   "subcommands": []
+  },
+  {
+   "name": "topic",
+   "description": "Aktifkan atau periksa sesi topik DM Telegram",
+   "category": "Sesi",
+   "aliases": [],
+   "args_hint": "[off|help|session-id]",
+   "subcommands": [],
+   "gateway_only": true
+  },
+  {
+   "name": "clear",
+   "description": "Bersihkan layar dan mulai sesi baru",
+   "category": "Sesi",
+   "aliases": [],
+   "args_hint": "",
+   "subcommands": [],
+   "cli_only": true
+  },
+  {
+   "name": "redraw",
+   "description": "Paksa repaint UI penuh (memulihkan dari terminal yang berantakan)",
+   "category": "Sesi",
+   "aliases": [],
+   "args_hint": "",
+   "subcommands": [],
+   "cli_only": true
+  },
+  {
+   "name": "history",
+   "description": "Tampilkan riwayat percakapan",
+   "category": "Sesi",
+   "aliases": [],
+   "args_hint": "",
+   "subcommands": [],
+   "cli_only": true
+  },
+  {
+   "name": "save",
+   "description": "Ekspor percakapan saat ini (perintah /save tanpa argumen menampilkan cara pakainya)",
+   "category": "Sesi",
+   "aliases": [],
+   "args_hint": "<json|md|html> [filename] [redact]",
+   "subcommands": []
+  },
+  {
+   "name": "retry",
+   "description": "Coba ulang pesan terakhir (kirim ulang ke agent)",
+   "category": "Sesi",
+   "aliases": [],
+   "args_hint": "",
+   "subcommands": []
+  },
+  {
+   "name": "prompt",
+   "description": "Susun prompt berikutnya di $EDITOR (markdown), lalu kirim",
+   "category": "Sesi",
+   "aliases": [
+    "compose"
+   ],
+   "args_hint": "[initial text]",
+   "subcommands": [],
+   "cli_only": true
+  },
+  {
+   "name": "undo",
+   "description": "Cadangkan N turn user lalu kirim prompt ulang (default 1)",
+   "category": "Sesi",
+   "aliases": [],
+   "args_hint": "[N]",
+   "subcommands": []
+  },
+  {
+   "name": "rewind",
+   "description": "Mundur ke prompt sebelumnya untuk diedit & dikirim ulang, atau bercabang dari situ (Esc Esc)",
+   "category": "Sesi",
+   "aliases": [],
+   "args_hint": "[N | fork N]",
+   "subcommands": [],
+   "cli_only": true
+  },
+  {
+   "name": "title",
+   "description": "Set judul untuk sesi saat ini",
+   "category": "Sesi",
+   "aliases": [],
+   "args_hint": "[name]",
+   "subcommands": []
+  },
+  {
+   "name": "handoff",
+   "description": "Alihkan sesi ini ke platform messaging (Telegram, Discord, dll.)",
+   "category": "Sesi",
+   "aliases": [],
+   "args_hint": "<platform>",
+   "subcommands": [],
+   "cli_only": true
+  },
+  {
+   "name": "branch",
+   "description": "Percabangkan sesi ini (thread baru di Discord/Telegram/Slack/Matrix; --here tetap di sini)",
+   "category": "Sesi",
+   "aliases": [
+    "fork"
+   ],
+   "args_hint": "[--here] [name]",
+   "subcommands": []
+  },
+  {
+   "name": "worktree",
+   "description": "Tampilkan, daftar, buat, atau bersihkan git worktree terisolasi",
+   "category": "Sesi",
+   "aliases": [],
+   "args_hint": "[new [name]|list|prune [--dry-run]]",
+   "subcommands": [
+    "new",
+    "list",
+    "prune"
+   ],
+   "cli_only": true
+  },
+  {
+   "name": "compress",
+   "description": "Padatkan context percakapan (tambah 'here [N]' untuk menyimpan N turn terakhir; --preview untuk lihat dampaknya)",
+   "category": "Sesi",
+   "aliases": [
+    "compact"
+   ],
+   "args_hint": "[here [N] | focus topic | --preview|--dry-run]",
+   "subcommands": []
+  },
+  {
+   "name": "rollback",
+   "description": "Daftar atau pulihkan checkpoint filesystem (pemulihan menyimpan hasil edit manual kamu; --all menimpa)",
+   "category": "Sesi",
+   "aliases": [],
+   "args_hint": "[number] [--all]",
+   "subcommands": []
+  },
+  {
+   "name": "snapshot",
+   "description": "Buat atau pulihkan snapshot state config/state Thor",
+   "category": "Sesi",
+   "aliases": [
+    "snap"
+   ],
+   "args_hint": "[create|restore <id>|prune]",
+   "subcommands": [],
+   "cli_only": true
+  },
+  {
+   "name": "export",
+   "description": "Ekspor profil (config, skill, tema) ke arsip yang bisa dibagikan",
+   "category": "Konfigurasi",
+   "aliases": [],
+   "args_hint": "[profile] [-o output.tar.gz]",
+   "subcommands": [],
+   "cli_only": true
+  },
+  {
+   "name": "import",
+   "description": "Impor arsip profil yang dibagikan sebagai profil baru",
+   "category": "Konfigurasi",
+   "aliases": [],
+   "args_hint": "<archive.tar.gz> [--name <name>]",
+   "subcommands": [],
+   "cli_only": true
+  },
+  {
+   "name": "stop",
+   "description": "Matikan semua proses background yang berjalan",
+   "category": "Sesi",
+   "aliases": [],
+   "args_hint": "",
+   "subcommands": []
+  },
+  {
+   "name": "discard",
+   "description": "Buang turn yang hilang saat Thor restart supaya antrean chat ini jalan lagi",
+   "category": "Sesi",
+   "aliases": [],
+   "args_hint": "",
+   "subcommands": [],
+   "gateway_only": true
+  },
+  {
+   "name": "pause",
+   "description": "Jeda pekerjaan baru secara global (emergency stop); '/pause off' melanjutkan",
+   "category": "Sesi",
+   "aliases": [],
+   "args_hint": "[reason | off]",
+   "subcommands": [],
+   "gateway_only": true
+  },
+  {
+   "name": "approve",
+   "description": "Setujui perintah berbahaya yang menunggu",
+   "category": "Sesi",
+   "aliases": [],
+   "args_hint": "[session|always]",
+   "subcommands": [],
+   "gateway_only": true
+  },
+  {
+   "name": "deny",
+   "description": "Tolak perintah berbahaya yang menunggu (opsional dengan alasan)",
+   "category": "Sesi",
+   "aliases": [],
+   "args_hint": "[all] [reason]",
+   "subcommands": [],
+   "gateway_only": true
+  },
+  {
+   "name": "bg",
+   "description": "Jalankan prompt di sesi background terpisah",
+   "category": "Sesi",
+   "aliases": [],
+   "args_hint": "<prompt>",
+   "subcommands": []
+  },
+  {
+   "name": "btw",
+   "description": "Ajukan pertanyaan sampingan soal percakapan ini tanpa mengganggunya",
+   "category": "Sesi",
+   "aliases": [],
+   "args_hint": "<question>",
+   "subcommands": []
+  },
+  {
+   "name": "agents",
+   "description": "Tampilkan agent aktif dan task yang berjalan",
+   "category": "Sesi",
+   "aliases": [
+    "tasks"
+   ],
+   "args_hint": "",
+   "subcommands": []
+  },
+  {
+   "name": "journey",
+   "description": "Buka timeline learning journey",
+   "category": "Sesi",
+   "aliases": [
+    "learning",
+    "memory-graph"
+   ],
+   "args_hint": "[list|delete <id>|edit <id>]",
+   "subcommands": [
+    "list",
+    "delete",
+    "edit"
+   ],
+   "cli_only": true
+  },
+  {
+   "name": "queue",
+   "description": "Antrekan prompt untuk turn berikutnya, atau list/edit/rm/move/clear prompt yang diantrekan",
+   "category": "Sesi",
+   "aliases": [
+    "q"
+   ],
+   "args_hint": "[<prompt>|list|edit N <prompt>|rm N|move A B|clear]",
+   "subcommands": [
+    "list",
+    "edit",
+    "rm",
+    "move",
+    "clear",
+    "add"
+   ]
+  },
+  {
+   "name": "steer",
+   "description": "Suntikkan pesan setelah tool call berikutnya tanpa menghentikan proses",
+   "category": "Sesi",
+   "aliases": [
+    "s"
+   ],
+   "args_hint": "<prompt>",
+   "subcommands": []
+  },
+  {
+   "name": "goal",
+   "description": "Set goal tetap yang Thor kerjakan lintas turn sampai tercapai",
+   "category": "Sesi",
+   "aliases": [],
+   "args_hint": "[text | -- <text> | draft <text> | show | gate add <cmd> | pause | resume | clear | status | wait <pid> | unwait]",
+   "subcommands": []
+  },
+  {
+   "name": "heartbeat",
+   "description": "Set prompt berulang yang masuk lagi ke sesi ini saat idle",
+   "category": "Sesi",
+   "aliases": [
+    "hb"
+   ],
+   "args_hint": "[every <interval> <prompt> | status | pause | resume | clear]",
+   "subcommands": [
+    "status",
+    "pause",
+    "resume",
+    "clear"
+   ]
+  },
+  {
+   "name": "refine",
+   "description": "Tinjau percakapan ini sekarang dan simpan pelajarannya ke memory/skill",
+   "category": "Sesi",
+   "aliases": [],
+   "args_hint": "[focus instructions]",
+   "subcommands": []
+  },
+  {
+   "name": "review",
+   "description": "Jalankan subagent independen untuk mereview pekerjaan yang baru dibahas (PR, kode, dokumen)",
+   "category": "Sesi",
+   "aliases": [],
+   "args_hint": "[review instructions]",
+   "subcommands": []
+  },
+  {
+   "name": "loop",
+   "description": "Jalankan ulang prompt pada interval berulang di sesi ini",
+   "category": "Sesi",
+   "aliases": [
+    "proactive"
+   ],
+   "args_hint": "[interval] <prompt> [--times N] [--until <condition>] | status | pause | resume | stop",
+   "subcommands": []
+  },
+  {
+   "name": "plan",
+   "description": "Tulis rencana implementasi markdown ke .thor/plans/ tanpa mengeksekusi apa pun",
+   "category": "Sesi",
+   "aliases": [],
+   "args_hint": "[task]",
+   "subcommands": []
+  },
+  {
+   "name": "moa",
+   "description": "Jalankan satu prompt lewat preset Mixture of Agents default, lalu kembalikan model kamu",
+   "category": "Sesi",
+   "aliases": [],
+   "args_hint": "<prompt>",
+   "subcommands": []
+  },
+  {
+   "name": "subgoal",
+   "description": "Tambah atau kelola kriteria tambahan pada goal aktif",
+   "category": "Sesi",
+   "aliases": [],
+   "args_hint": "[text | remove N | clear]",
+   "subcommands": []
+  },
+  {
+   "name": "status",
+   "description": "Tampilkan info sesi, model, token, dan context",
+   "category": "Sesi",
+   "aliases": [],
+   "args_hint": "",
+   "subcommands": []
+  },
+  {
+   "name": "egress",
+   "description": "Tampilkan status proxy egress Docker",
+   "category": "Sesi",
+   "aliases": [],
+   "args_hint": "[status]",
+   "subcommands": [
+    "status"
+   ]
+  },
+  {
+   "name": "context",
+   "description": "Tampilkan tampilan detail context window dengan gauge pemakaian, rincian kategori, statistik kompresi, dan throughput",
+   "category": "Sesi",
+   "aliases": [
+    "ctx"
+   ],
+   "args_hint": "[all]",
+   "subcommands": [
+    "all"
+   ]
+  },
+  {
+   "name": "whoami",
+   "description": "Tampilkan akses slash command kamu (admin / user)",
+   "category": "Info",
+   "aliases": [],
+   "args_hint": "",
+   "subcommands": []
+  },
+  {
+   "name": "profile",
+   "description": "Tampilkan nama profil aktif dan home directory",
+   "category": "Info",
+   "aliases": [],
+   "args_hint": "",
+   "subcommands": []
+  },
+  {
+   "name": "sethome",
+   "description": "Set chat ini sebagai home channel",
+   "category": "Sesi",
+   "aliases": [
+    "set-home"
+   ],
+   "args_hint": "",
+   "subcommands": [],
+   "gateway_only": true
+  },
+  {
+   "name": "resume",
+   "description": "Lanjutkan sesi yang sebelumnya diberi nama",
+   "category": "Sesi",
+   "aliases": [],
+   "args_hint": "[name]",
+   "subcommands": []
+  },
+  {
+   "name": "sessions",
+   "description": "Jelajahi dan lanjutkan sesi sebelumnya",
+   "category": "Sesi",
+   "aliases": [],
+   "args_hint": "",
+   "subcommands": []
+  },
+  {
+   "name": "config",
+   "description": "Tampilkan konfigurasi saat ini",
+   "category": "Konfigurasi",
+   "aliases": [],
+   "args_hint": "",
+   "subcommands": [],
+   "cli_only": true
+  },
+  {
+   "name": "model",
+   "description": "Ganti model (khusus sesi; --global untuk permanen)",
+   "category": "Konfigurasi",
+   "aliases": [],
+   "args_hint": "[model|reset] [--provider name] [--reasoning level] [--global|--session] [--refresh]",
+   "subcommands": []
+  },
+  {
+   "name": "codex-runtime",
+   "description": "Aktifkan/nonaktifkan runtime codex app-server untuk model OpenAI/Codex",
+   "category": "Konfigurasi",
+   "aliases": [
+    "codex_runtime"
+   ],
+   "args_hint": "[auto|codex_app_server]",
+   "subcommands": []
+  },
+  {
+   "name": "personality",
+   "description": "Set personality yang sudah ditentukan",
+   "category": "Konfigurasi",
+   "aliases": [],
+   "args_hint": "[name]",
+   "subcommands": []
+  },
+  {
+   "name": "statusbar",
+   "description": "Aktifkan/nonaktifkan status bar context/model",
+   "category": "Konfigurasi",
+   "aliases": [
+    "sb"
+   ],
+   "args_hint": "",
+   "subcommands": [],
+   "cli_only": true
+  },
+  {
+   "name": "battery",
+   "description": "Aktifkan/nonaktifkan indikator baterai berwarna di status bar",
+   "category": "Konfigurasi",
+   "aliases": [],
+   "args_hint": "[on|off|status]",
+   "subcommands": [
+    "on",
+    "off",
+    "status"
+   ],
+   "cli_only": true
+  },
+  {
+   "name": "timestamps",
+   "description": "Aktifkan/nonaktifkan timestamp [HH:MM] pada pesan dan /history",
+   "category": "Konfigurasi",
+   "aliases": [
+    "ts"
+   ],
+   "args_hint": "[on|off|status]",
+   "subcommands": [
+    "on",
+    "off",
+    "status"
+   ],
+   "cli_only": true
+  },
+  {
+   "name": "diff",
+   "description": "Tampilkan perubahan git di working directory",
+   "category": "Info",
+   "aliases": [],
+   "args_hint": "[staged|all|session] [--stat] [path...]",
+   "subcommands": [
+    "staged",
+    "all",
+    "session"
+   ]
+  },
+  {
+   "name": "verbose",
+   "description": "Siklus tampilan progres tool: off -> new -> all -> verbose",
+   "category": "Konfigurasi",
+   "aliases": [],
+   "args_hint": "",
+   "subcommands": [],
+   "cli_only": true
+  },
+  {
+   "name": "focus",
+   "description": "Aktifkan/nonaktifkan focus view — hanya tampilkan prompt kamu dan respons akhir",
+   "category": "Konfigurasi",
+   "aliases": [],
+   "args_hint": "[on|off|status]",
+   "subcommands": [
+    "on",
+    "off",
+    "status"
+   ],
+   "cli_only": true
+  },
+  {
+   "name": "footer",
+   "description": "Aktifkan/nonaktifkan footer metadata runtime gateway di balasan akhir",
+   "category": "Konfigurasi",
+   "aliases": [],
+   "args_hint": "[on|off|status]",
+   "subcommands": [
+    "on",
+    "off",
+    "status"
+   ]
+  },
+  {
+   "name": "yolo",
+   "description": "Aktifkan/nonaktifkan mode YOLO (lewati semua persetujuan perintah berbahaya)",
+   "category": "Konfigurasi",
+   "aliases": [],
+   "args_hint": "",
+   "subcommands": []
+  },
+  {
+   "name": "approvals",
+   "description": "Tampilkan atau set mode persetujuan perintah berbahaya yang persisten",
+   "category": "Konfigurasi",
+   "aliases": [],
+   "args_hint": "[manual|smart|off]",
+   "subcommands": [
+    "manual",
+    "smart",
+    "off"
+   ]
+  },
+  {
+   "name": "reasoning",
+   "description": "Kelola reasoning effort dan tampilannya",
+   "category": "Konfigurasi",
+   "aliases": [],
+   "args_hint": "[level|show|hide|full|clamp] [--global]",
+   "subcommands": [
+    "none",
+    "minimal",
+    "low",
+    "medium",
+    "high",
+    "xhigh",
+    "max",
+    "ultra",
+    "show",
+    "hide",
+    "on",
+    "off",
+    "full",
+    "clamp",
+    "--global"
+   ]
+  },
+  {
+   "name": "fast",
+   "description": "Mode cepat — OpenAI Priority Processing / Anthropic Fast Mode (normal/fast/auto/cold/ultrafast)",
+   "category": "Konfigurasi",
+   "aliases": [],
+   "args_hint": "[normal|fast|auto|cold|ultrafast|status] [--global]",
+   "subcommands": [
+    "normal",
+    "fast",
+    "auto",
+    "cold",
+    "ultrafast",
+    "ultra",
+    "status",
+    "on",
+    "off",
+    "--global"
+   ]
+  },
+  {
+   "name": "skin",
+   "description": "Tampilkan atau ganti skin/tema tampilan",
+   "category": "Konfigurasi",
+   "aliases": [],
+   "args_hint": "[name]",
+   "subcommands": [],
+   "cli_only": true
+  },
+  {
+   "name": "indicator",
+   "description": "Pilih gaya indikator sibuk TUI",
+   "category": "Konfigurasi",
+   "aliases": [],
+   "args_hint": "",
+   "subcommands": [],
+   "cli_only": true
+  },
+  {
+   "name": "voice",
+   "description": "Aktifkan/nonaktifkan mode suara",
+   "category": "Konfigurasi",
+   "aliases": [],
+   "args_hint": "[on|off|tts|status]",
+   "subcommands": [
+    "on",
+    "off",
+    "tts",
+    "status"
+   ]
+  },
+  {
+   "name": "wake",
+   "description": "Aktifkan/nonaktifkan wake word listener 'Hey Thor'",
+   "category": "Konfigurasi",
+   "aliases": [],
+   "args_hint": "[on|off|status]",
+   "subcommands": [
+    "on",
+    "off",
+    "status"
+   ],
+   "cli_only": true
+  },
+  {
+   "name": "busy",
+   "description": "Atur perilaku pesan saat Thor sedang bekerja",
+   "category": "Konfigurasi",
+   "aliases": [],
+   "args_hint": "[queue|steer|interrupt|status]",
+   "subcommands": [
+    "queue",
+    "steer",
+    "interrupt",
+    "status"
+   ]
+  },
+  {
+   "name": "autoprune",
+   "description": "Turn automatic pruning of old sessions on or off",
+   "category": "Konfigurasi",
+   "aliases": [],
+   "args_hint": "[on|off|later|status]",
+   "subcommands": [
+    "on",
+    "off",
+    "later",
+    "status"
+   ]
+  },
+  {
+   "name": "tools",
+   "description": "Kelola tool: /tools [list|disable|enable] [nama...]",
+   "category": "Tool & Skill",
+   "aliases": [],
+   "args_hint": "[list|disable|enable] [name...]",
+   "subcommands": [],
+   "cli_only": true
+  },
+  {
+   "name": "toolsets",
+   "description": "Daftar toolset yang tersedia",
+   "category": "Tool & Skill",
+   "aliases": [],
+   "args_hint": "",
+   "subcommands": [],
+   "cli_only": true
+  },
+  {
+   "name": "skills",
+   "description": "Cari, pasang, periksa, atau kelola skill",
+   "category": "Tool & Skill",
+   "aliases": [],
+   "args_hint": "",
+   "subcommands": [
+    "search",
+    "browse",
+    "inspect",
+    "install",
+    "audit",
+    "pending",
+    "approve",
+    "reject",
+    "diff",
+    "approval"
+   ],
+   "cli_only": true
+  },
+  {
+   "name": "memory",
+   "description": "Tinjau penulisan memory yang menunggu / aktif-nonaktifkan gate persetujuannya",
+   "category": "Tool & Skill",
+   "aliases": [],
+   "args_hint": "[pending|approve|reject|approval] [id|on|off]",
+   "subcommands": [
+    "pending",
+    "approve",
+    "reject",
+    "approval"
+   ]
+  },
+  {
+   "name": "bundles",
+   "description": "Daftar skill bundle (alias /<nama> untuk beberapa skill)",
+   "category": "Tool & Skill",
+   "aliases": [],
+   "args_hint": "",
+   "subcommands": []
+  },
+  {
+   "name": "pet",
+   "description": "Aktifkan/nonaktifkan atau adopsi maskot petdex (/pet, /pet list, /pet <slug>)",
+   "category": "Tool & Skill",
+   "aliases": [],
+   "args_hint": "[toggle|list|scale <n>|<slug>]",
+   "subcommands": [
+    "toggle",
+    "list",
+    "scale",
+    "off"
+   ],
+   "cli_only": true
+  },
+  {
+   "name": "hatch",
+   "description": "Buat petdex pet baru dari deskripsi",
+   "category": "Tool & Skill",
+   "aliases": [
+    "generate-pet"
+   ],
+   "args_hint": "[description]",
+   "subcommands": [],
+   "cli_only": true
+  },
+  {
+   "name": "learn",
+   "description": "Pelajari skill yang bisa dipakai ulang dari apa pun yang kamu jelaskan (direktori, URL, chat ini, catatan)",
+   "category": "Tool & Skill",
+   "aliases": [],
+   "args_hint": "<what to learn from>",
+   "subcommands": []
+  },
+  {
+   "name": "init",
+   "description": "Buat atau perbarui instruksi project AGENTS.md dari hasil scan repo",
+   "category": "Tool & Skill",
+   "aliases": [],
+   "args_hint": "[notes]",
+   "subcommands": []
+  },
+  {
+   "name": "cron",
+   "description": "Kelola task terjadwal",
+   "category": "Tool & Skill",
+   "aliases": [],
+   "args_hint": "[subcommand]",
+   "subcommands": [
+    "list",
+    "add",
+    "create",
+    "edit",
+    "pause",
+    "resume",
+    "run",
+    "remove"
+   ],
+   "cli_only": true
+  },
+  {
+   "name": "suggestions",
+   "description": "Tinjau automation yang disarankan (terima/tolak)",
+   "category": "Tool & Skill",
+   "aliases": [
+    "suggest"
+   ],
+   "args_hint": "[accept|dismiss N | catalog]",
+   "subcommands": [
+    "accept",
+    "dismiss",
+    "catalog",
+    "clear"
+   ]
+  },
+  {
+   "name": "blueprint",
+   "description": "Siapkan automation dari template blueprint",
+   "category": "Tool & Skill",
+   "aliases": [
+    "bp"
+   ],
+   "args_hint": "[name] [slot=value ...]",
+   "subcommands": []
+  },
+  {
+   "name": "curator",
+   "description": "Perawatan skill di background (status, run, pin, archive, list-archived)",
+   "category": "Tool & Skill",
+   "aliases": [],
+   "args_hint": "[subcommand]",
+   "subcommands": [
+    "status",
+    "run",
+    "pause",
+    "resume",
+    "pin",
+    "unpin",
+    "restore",
+    "list-archived"
+   ]
+  },
+  {
+   "name": "kanban",
+   "description": "Papan kolaborasi multi-profil (task, link, komentar)",
+   "category": "Tool & Skill",
+   "aliases": [],
+   "args_hint": "[subcommand]",
+   "subcommands": [
+    "init",
+    "boards",
+    "create",
+    "list",
+    "ls",
+    "show",
+    "assign",
+    "reclaim",
+    "reassign",
+    "diagnostics",
+    "diag",
+    "link",
+    "unlink",
+    "claim",
+    "comment",
+    "complete",
+    "edit",
+    "block",
+    "unblock",
+    "archive",
+    "tail",
+    "dispatch",
+    "stats",
+    "notify-subscribe",
+    "notify-list",
+    "notify-unsubscribe",
+    "log",
+    "runs",
+    "heartbeat",
+    "assignees",
+    "context",
+    "specify",
+    "gc"
+   ]
+  },
+  {
+   "name": "reload",
+   "description": "Muat ulang variabel .env ke sesi yang berjalan",
+   "category": "Tool & Skill",
+   "aliases": [],
+   "args_hint": "",
+   "subcommands": [],
+   "cli_only": true
+  },
+  {
+   "name": "reload-mcp",
+   "description": "Muat ulang server MCP dari config",
+   "category": "Tool & Skill",
+   "aliases": [
+    "reload_mcp"
+   ],
+   "args_hint": "",
+   "subcommands": []
+  },
+  {
+   "name": "reload-skills",
+   "description": "Scan ulang ~/.thor/skills/ untuk skill yang baru dipasang atau dihapus",
+   "category": "Tool & Skill",
+   "aliases": [
+    "reload_skills"
+   ],
+   "args_hint": "",
+   "subcommands": []
+  },
+  {
+   "name": "browser",
+   "description": "Sambungkan tool browser ke browser Chromium milikmu via CDP",
+   "category": "Tool & Skill",
+   "aliases": [],
+   "args_hint": "[connect|disconnect|status]",
+   "subcommands": [
+    "connect",
+    "disconnect",
+    "status"
+   ],
+   "cli_only": true
+  },
+  {
+   "name": "plugins",
+   "description": "Daftar plugin yang terpasang beserta statusnya",
+   "category": "Tool & Skill",
+   "aliases": [],
+   "args_hint": "[update|auto-update [on|off]]",
+   "subcommands": [
+    "update",
+    "auto-update"
+   ],
+   "cli_only": true
+  },
+  {
+   "name": "commands",
+   "description": "Jelajahi semua perintah dan skill (dengan halaman)",
+   "category": "Info",
+   "aliases": [],
+   "args_hint": "[page]",
+   "subcommands": [],
+   "gateway_only": true
+  },
+  {
+   "name": "help",
+   "description": "Tampilkan perintah yang tersedia (/help skills untuk daftar skill command, /help <teks> untuk filter)",
+   "category": "Info",
+   "aliases": [],
+   "args_hint": "[skills|<filter>]",
+   "subcommands": []
+  },
+  {
+   "name": "palette",
+   "description": "Buka command palette fuzzy (juga Ctrl+P)",
+   "category": "Info",
+   "aliases": [],
+   "args_hint": "",
+   "subcommands": [],
+   "cli_only": true
+  },
+  {
+   "name": "restart",
+   "description": "Restart gateway dengan rapi setelah run aktif selesai",
+   "category": "Sesi",
+   "aliases": [],
+   "args_hint": "",
+   "subcommands": [],
+   "gateway_only": true
+  },
+  {
+   "name": "usage",
+   "description": "Tampilkan pemakaian token dan rate limit; `reset` menukarkan limit reset Codex yang disimpan",
+   "category": "Info",
+   "aliases": [],
+   "args_hint": "[reset [--force]]",
+   "subcommands": []
+  },
+  {
+   "name": "subscription",
+   "description": "Lihat paket Thor kamu dan ubah lewat browser",
+   "category": "Info",
+   "aliases": [
+    "upgrade"
+   ],
+   "args_hint": "",
+   "subcommands": [],
+   "cli_only": true
+  },
+  {
+   "name": "login",
+   "description": "Masuk dengan akun Thor (connector kamu tetap tersimpan)",
+   "category": "Info",
+   "aliases": [],
+   "args_hint": "",
+   "subcommands": []
+  },
+  {
+   "name": "topup",
+   "description": "Tampilkan saldo Thor kamu dan kelola billing di portal",
+   "category": "Info",
+   "aliases": [],
+   "args_hint": "",
+   "subcommands": []
+  },
+  {
+   "name": "insights",
+   "description": "Tampilkan insight dan analitik pemakaian",
+   "category": "Info",
+   "aliases": [],
+   "args_hint": "[days]",
+   "subcommands": []
+  },
+  {
+   "name": "platforms",
+   "description": "Tampilkan status gateway/platform messaging",
+   "category": "Info",
+   "aliases": [
+    "gateway"
+   ],
+   "args_hint": "",
+   "subcommands": [],
+   "cli_only": true
+  },
+  {
+   "name": "platform",
+   "description": "Jeda, lanjutkan, atau daftar platform gateway yang error",
+   "category": "Info",
+   "aliases": [],
+   "args_hint": "<pause|resume|list> [name]",
+   "subcommands": [],
+   "gateway_only": true
+  },
+  {
+   "name": "copy",
+   "description": "Salin respons assistant terakhir ke clipboard",
+   "category": "Info",
+   "aliases": [],
+   "args_hint": "[number]",
+   "subcommands": [],
+   "cli_only": true
+  },
+  {
+   "name": "paste",
+   "description": "Lampirkan gambar dari clipboard kamu",
+   "category": "Info",
+   "aliases": [],
+   "args_hint": "",
+   "subcommands": [],
+   "cli_only": true
+  },
+  {
+   "name": "image",
+   "description": "Lampirkan file gambar lokal untuk prompt berikutnya",
+   "category": "Info",
+   "aliases": [],
+   "args_hint": "<path>",
+   "subcommands": [],
+   "cli_only": true
+  },
+  {
+   "name": "update",
+   "description": "Perbarui Thor Agent ke versi terbaru",
+   "category": "Info",
+   "aliases": [],
+   "args_hint": "",
+   "subcommands": []
+  },
+  {
+   "name": "version",
+   "description": "Tampilkan versi Thor Agent",
+   "category": "Info",
+   "aliases": [
+    "v"
+   ],
+   "args_hint": "",
+   "subcommands": []
+  },
+  {
+   "name": "debug",
+   "description": "Unggah laporan debug (info sistem + log) dan dapatkan link yang bisa dibagikan",
+   "category": "Info",
+   "aliases": [],
+   "args_hint": "[thor|local]",
+   "subcommands": []
+  },
+  {
+   "name": "quit",
+   "description": "Keluar dari CLI (pakai --delete untuk sekalian hapus riwayat sesi)",
+   "category": "Keluar",
+   "aliases": [
+    "exit"
+   ],
+   "args_hint": "[--delete]",
+   "subcommands": [],
+   "cli_only": true
+  }
+ ]
+}

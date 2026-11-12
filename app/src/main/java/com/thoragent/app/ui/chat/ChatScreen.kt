@@ -215,8 +215,8 @@ fun ChatScreen(
             when (action) {
                 ChatUiAction.OpenModelPicker -> showModelPicker = true
                 ChatUiAction.OpenSessions -> showSessions = true
-                ChatUiAction.OpenSkillHub -> nav.navigate(com.thoragent.app.ui.navigation.ThorRoute.Skills.path)
-                ChatUiAction.OpenTools -> nav.navigate(com.thoragent.app.ui.navigation.ThorRoute.Skills.path)
+                ChatUiAction.OpenSkillHub -> nav.navigate("skillhub")
+                ChatUiAction.OpenTools -> nav.navigate("skillhub")
                 ChatUiAction.OpenHelp -> showSlashPalette = true
                 ChatUiAction.FocusComposer -> composerFocus.requestFocus()
                 ChatUiAction.PickImage -> pickImage.launch(PickVisualMediaRequest(ActivityResultContracts.PickVisualMedia.ImageOnly))

@@ -14,8 +14,8 @@ android {
         applicationId = "com.thoragent.app"
         minSdk = 29
         targetSdk = 36
-        versionCode = 9
-        versionName = "0.8.1-thor-mobile"
+        versionCode = 10
+        versionName = "0.9.0-thor-mobile"
     }
 
     signingConfigs {

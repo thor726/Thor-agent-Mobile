@@ -139,7 +139,8 @@ class MainActivity : ComponentActivity() {
                             connectSlash = { sender -> chatVm.setSlashSender(sender) }
                         )
                     }
-                    composable(Routes.FILES) { FilesScreen(nav) }
+                    // v0.9.0: FILES tidak di sini lagi — naik jadi tab
+                    // utama di MainScaffold (jejer Terminal).
                     composable(Routes.ROOT) { RootScreen(nav) }
                     composable(Routes.PROVIDER) { ProviderScreen(nav) }
                     composable(Routes.SETTINGS) {

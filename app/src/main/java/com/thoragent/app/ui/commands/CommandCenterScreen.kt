@@ -181,7 +181,7 @@ fun CommandCenterScreen(
                     SegmentedRow("Progres tool (/verbose)", listOf("off", "new", "all"), verbose) { vm.setVerbose(it) }
                     SegmentedRow("Skin (/skin)", listOf("thor", "midnight", "ember", "mono"), skin) { vm.setSkin(it) }
                     SegmentedRow(
-                        "Personality (/personality)",
+                        "Gaya jawaban (/personality)",
                         listOf("default", "precise", "ramah", "guru", "senior", "singkat"),
                         personality.ifBlank { "default" }
                     ) { vm.setPersonality(it) }

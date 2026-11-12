@@ -2,6 +2,7 @@ package com.thoragent.app.ui.chat
 
 import androidx.compose.animation.animateContentSize
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.horizontalScroll
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -14,6 +15,7 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.lazy.rememberLazyListState
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.FilterChip
@@ -141,7 +143,11 @@ fun SlashPalette(
             )
 
             Row(
-                Modifier.fillMaxWidth().padding(horizontal = 16.dp, vertical = 2.dp),
+                Modifier.fillMaxWidth().padding(horizontal = 16.dp, vertical = 2.dp)
+                    // v0.9.0: chip kategori bisa digulir menyamping. Tanpa ini
+                    // baris chip terjepit di lebar layar dan label multi-kata
+                    // ("Tool & Skill") membungkus ke bawah — teks "ngebug".
+                    .horizontalScroll(rememberScrollState()),
                 horizontalArrangement = Arrangement.spacedBy(6.dp)
             ) {
                 FilterChip(
@@ -158,7 +164,7 @@ fun SlashPalette(
                     FilterChip(
                         selected = category == cat,
                         onClick = { category = if (category == cat) null else cat },
-                        label = { Text(cat) }
+                        label = { Text(cat, maxLines = 1, softWrap = false) }
                     )
                 }
             }

@@ -101,7 +101,12 @@ fun MainScaffold(
                     onOpenDrawer = onOpenDrawer
                 )
             }
-            composable(ThorRoute.Skills.path) {
+            // v0.9.0: Berkas naik jadi tab utama (jejer Terminal);
+            // SkillHub turun ke Setelan → Lanjutan (rute tetap "skillhub").
+            composable(ThorRoute.Files.path) {
+                com.thoragent.app.ui.files.FilesScreen(nav)
+            }
+            composable("skillhub") {
                 SkillHubScreen(nav)
             }
             composable(ThorRoute.Terminal.path) {
@@ -113,7 +118,7 @@ fun MainScaffold(
                 // tingkat: seksi "Agent" dan seksi "Lanjutan").
                 com.thoragent.app.ui.settings.SettingsScreen(nav)
             }
-            // Rute non-tab (commands/files/root/provider): dibuka dari
+            // Rute non-tab (commands/root/provider): dibuka dari
             // Setelan → "Lanjutan"; tetap terdaftar agar deep-link &
             // aksi lama tetap berfungsi.
             extraDestinations()
@@ -122,13 +127,17 @@ fun MainScaffold(
 }
 
 /**
- * Tab NavigationBar final — label bahasa manusia; menambah/mengubah
- * tab cukup satu baris enum (label, ikon, dan rute tidak bisa tidak
- * sinkron seperti pada BottomItem + bottomBarRoutes terpisah dulu).
+ * ThorRoute — tab NavigationBar final (v0.9.0): label bahasa manusia;
+ * menambah/mengubah tab cukup satu baris enum (label, ikon, dan rute
+ * tidak bisa tidak sinkron seperti pada BottomItem + bottomBarRoutes
+ * terpisah dulu).
+ *
+ * v0.9.0: tab Skill diganti Berkas (naik ke tampilan utama, jejer
+ * Terminal); pintu Skill pindah ke Setelan → Lanjutan → "Skill & Tool".
  */
 enum class ThorRoute(val path: String, val label: String, val icon: ImageVector) {
     Chat("chat", "Chat AI", ThorIcons.Chat),
-    Skills("skillhub", "Skill", ThorIcons.MenuBook),
+    Files("files", "Berkas", ThorIcons.Folder),
     Terminal("terminal", "Terminal", ThorIcons.Terminal),
     Settings("settings", "Setelan", ThorIcons.Settings);
 }

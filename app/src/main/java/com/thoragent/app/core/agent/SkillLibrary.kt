@@ -47,6 +47,8 @@ class SkillLibrary(private val context: Context) {
         File(context.filesDir, "skills").apply { mkdirs() }
     }
 
+    private val assetSync: SkillAssetSync by lazy { SkillAssetSync(AndroidAssetSource(context.assets), editableRoot) }
+
     private var bootstrapped = false
     private var cachedIndex: SkillIndex? = null
 
@@ -56,28 +58,14 @@ class SkillLibrary(private val context: Context) {
         if (bootstrapped) return
         synchronized(this) {
             if (bootstrapped) return
-            val marker = File(editableRoot, ".bootstrapped")
-            if (!marker.exists()) {
-                copyAssetTree("skills", editableRoot)
-                marker.writeText("ok")
-            }
+            // Dijalankan SELALU (bukan hanya saat marker belum ada): instalasi
+            // dari versi lama bisa menyimpan direktori di tempat yang seharusnya
+            // berkas, dan itu membuat SOUL.md gagal dibaca (EISDIR). Pass ini
+            // hanya menyentuh path yang belum ada atau salah tipe, jadi suntingan
+            // pengguna tidak tertimpa.
+            runCatching { assetSync.sync() }
             bootstrapped = true
         }
-    }
-
-    private fun copyAssetTree(assetPath: String, target: File) {
-        target.mkdirs()
-        val children = context.assets.list(assetPath) ?: return
-        if (children.isEmpty()) {
-            // Berkas, bukan direktori.
-            runCatching {
-                context.assets.open(assetPath).use { input ->
-                    File(target.parentFile, target.name).outputStream().use { out -> input.copyTo(out) }
-                }
-            }
-            return
-        }
-        for (child in children) copyAssetTree("$assetPath/$child", File(target, child))
     }
 
     /** Root skill yang aktif: editable bila sudah dibootstrap, selain itu assets. */
@@ -159,11 +147,8 @@ class SkillLibrary(private val context: Context) {
      * DEFAULT_AGENT_IDENTITY).
      */
     fun soulSync(): String {
-        val editable = File(editableRoot, "SOUL.md")
-        if (editable.exists()) return editable.readText()
-        return runCatching {
-            context.assets.open("skills/SOUL.md").bufferedReader().use { it.readText() }
-        }.getOrDefault("")
+        bootstrap()
+        return assetSync.readSoul()
     }
 
     // ─────────────────────────── skill_view ───────────────────────────

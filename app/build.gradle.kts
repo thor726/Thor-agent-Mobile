@@ -1,3 +1,5 @@
+import java.util.Properties
+
 plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
@@ -14,13 +16,31 @@ android {
         applicationId = "com.thoragent.app"
         minSdk = 29
         targetSdk = 36
-        versionCode = 11
-        versionName = "0.10.0-thor-mobile"
+        versionCode = 12
+        versionName = "0.10.1-thor-mobile"
     }
+
+    // Kunci rilis dibaca dari keystore.properties (TIDAK di-commit). Kalau berkas
+    // itu tidak ada — checkout baru, mesin lain, atau CI — build jatuh ke debug
+    // key supaya `assembleRelease` tetap bisa dipakai untuk sideload.
+    val keystoreProps = Properties().apply {
+        val f = rootProject.file("keystore.properties")
+        if (f.exists()) f.inputStream().use { load(it) }
+    }
+    val hasReleaseKey = keystoreProps.getProperty("storeFile")
+        ?.let { rootProject.file(it).exists() } == true
 
     signingConfigs {
         // Ditandatangani debug key: distribusi sideload tanpa Play (sesuai preferensi).
         getByName("debug")
+        if (hasReleaseKey) {
+            create("release") {
+                storeFile = rootProject.file(keystoreProps.getProperty("storeFile"))
+                storePassword = keystoreProps.getProperty("storePassword")
+                keyAlias = keystoreProps.getProperty("keyAlias")
+                keyPassword = keystoreProps.getProperty("keyPassword")
+            }
+        }
     }
 
     buildTypes {
@@ -33,7 +53,11 @@ android {
             isMinifyEnabled = true
             isShrinkResources = true
             proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
-            signingConfig = signingConfigs.getByName("debug")
+            signingConfig = if (hasReleaseKey) {
+                signingConfigs.getByName("release")
+            } else {
+                signingConfigs.getByName("debug")
+            }
         }
     }
 

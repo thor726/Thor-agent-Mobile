@@ -7,6 +7,7 @@ import android.content.Context
 import androidx.work.ExistingPeriodicWorkPolicy
 import androidx.work.PeriodicWorkRequestBuilder
 import androidx.work.WorkManager
+import com.thoragent.app.core.diag.CrashLogger
 import com.thoragent.app.core.service.AgentWorker
 import com.thoragent.app.runtime.ThorRuntime
 import java.util.concurrent.TimeUnit
@@ -18,6 +19,8 @@ class ThorApp : Application() {
 
     override fun onCreate() {
         super.onCreate()
+        // Pasang paling awal: apa pun yang meledak setelah ini meninggalkan jejak.
+        CrashLogger.install(this)
         runtime = ThorRuntime(this)
         createNotificationChannel()
         scheduleKeepAlive()

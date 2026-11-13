@@ -16,8 +16,8 @@ android {
         applicationId = "com.thoragent.app"
         minSdk = 29
         targetSdk = 36
-        versionCode = 12
-        versionName = "0.10.1-thor-mobile"
+        versionCode = 13
+        versionName = "0.10.2-thor-mobile"
     }
 
     // Kunci rilis dibaca dari keystore.properties (TIDAK di-commit). Kalau berkas

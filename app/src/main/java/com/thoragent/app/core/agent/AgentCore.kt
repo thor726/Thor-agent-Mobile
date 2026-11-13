@@ -211,8 +211,11 @@ class AgentCore(
                         tools.execute(tc.name, tc.argsJson, cwd)
                     } catch (ce: CancellationException) {
                         throw ce
-                    } catch (e: Exception) {
-                        "{\"ok\":false,\"error\":${jsonEscape(e.message ?: "eksekusi gagal")}}"
+                    } catch (t: Throwable) {
+                        // Throwable, bukan hanya Exception: OutOfMemoryError /
+                        // StackOverflowError dari output perintah raksasa juga
+                        // harus jadi hasil tool, bukan force close.
+                        "{\"ok\":false,\"error\":${jsonEscape(t.message ?: t::class.simpleName ?: "eksekusi gagal")}}"
                     }
                 } else {
                     "{\"ok\":false,\"error\":\"pengguna menolak eksekusi perintah\"}"

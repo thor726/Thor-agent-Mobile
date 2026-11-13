@@ -1,7 +1,6 @@
 package com.thoragent.app.core.exec
 
 import com.thoragent.app.core.root.RootManager
-import com.topjohnwu.superuser.CallbackList
 import com.topjohnwu.superuser.Shell
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
@@ -17,6 +16,38 @@ import java.util.concurrent.TimeUnit
 class AndroidShellRunner(private val rootManager: RootManager) : ExecutionInterface {
 
     override val runnerName: String = "AndroidShellRunner"
+
+    /**
+     * Penyimpan baris berbatas untuk libsu. Mendelegasikan seluruh operasi list
+     * ke [store] dan hanya menahan [limit] baris pertama.
+     */
+    internal class BoundedSink(
+        private val limit: Int,
+        private val onAdd: (String) -> Unit,
+        // Delegasi HARUS list yang sama dengan penyimpanan; kalau tidak,
+        // res.out terbaca kosong karena add() menulis ke list lain.
+        private val store: MutableList<String> = mutableListOf()
+    ) : MutableList<String> by store {
+
+        override fun add(element: String): Boolean {
+            onAdd(element)
+            if (store.size < limit) store.add(element)
+            return true
+        }
+
+        override fun addAll(elements: Collection<String>): Boolean {
+            elements.forEach { add(it) }
+            return true
+        }
+    }
+
+    companion object {
+        /** Batas baris yang ditahan di memori per perintah. */
+        const val MAX_LINES = 20_000
+
+        /** Batas karakter saat hasil digabung menjadi satu string. */
+        const val MAX_CHARS = 512 * 1024
+    }
     override val isRooted: Boolean get() = Shell.isAppGrantedRoot() == true
 
     override suspend fun isAvailable(): Boolean = withContext(Dispatchers.IO) {
@@ -69,16 +100,12 @@ class AndroidShellRunner(private val rootManager: RootManager) : ExecutionInterf
                 0, "$runnerName${if (root) "(root)" else ""}"
             )
         }
-        val out = object : CallbackList<String>() {
-            override fun onAddElement(line: String?) {
-                line?.let { onLine(it) }
-            }
-        }
-        val err = object : CallbackList<String>() {
-            override fun onAddElement(line: String?) {
-                line?.let { onLine("[stderr] $it") }
-            }
-        }
+        // Sink berbatas: libsu mengalirkan baris lewat add(). CallbackList biasa
+        // menyimpan SEMUA baris sehingga perintah bervolume besar (debug repo,
+        // curl berkas panjang) bisa menghabiskan heap -> OutOfMemoryError.
+        // Baris tetap diteruskan ke onLine() walau penyimpanan sudah penuh.
+        val out = BoundedSink(MAX_LINES, onAdd = { line -> onLine(line) })
+        val err = BoundedSink(MAX_LINES, onAdd = { line -> onLine("[stderr] $line") })
         val future = shell.newJob()
             .add(wrap(command, cwd))
             .to(out, err)
@@ -92,9 +119,15 @@ class AndroidShellRunner(private val rootManager: RootManager) : ExecutionInterf
             )
         }
         val sbOut = StringBuilder()
-        for (l in res.out) sbOut.appendLine(l)
+        for (l in res.out) {
+            if (sbOut.length + l.length > MAX_CHARS) break
+            sbOut.appendLine(l)
+        }
         val sbErr = StringBuilder()
-        for (l in res.err) sbErr.appendLine(l)
+        for (l in res.err) {
+            if (sbErr.length + l.length > MAX_CHARS) break
+            sbErr.appendLine(l)
+        }
         ExecResult(
             command = command,
             exitCode = res.code,

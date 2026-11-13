@@ -13,6 +13,7 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.viewModelScope
 import com.thoragent.app.core.agent.AgentEvent
 import com.thoragent.app.core.agent.AgentTools
+import com.thoragent.app.core.diag.CrashLogger
 import com.thoragent.app.core.llm.LlmMessage
 import com.thoragent.app.core.llm.LlmUsage
 import com.thoragent.app.core.provider.ProviderProfile
@@ -29,6 +30,7 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.flatMapLatest
 import kotlinx.coroutines.flow.flowOf
@@ -107,6 +109,10 @@ class ChatViewModel(app: Application) : AndroidViewModel(app) {
 
     val sessions: StateFlow<List<SessionEntity>> =
         rt.db.sessionDao().observeSessions()
+            // Error baca DB (mis. baris terlalu besar / DB korup) TIDAK boleh
+            // mematikan proses: tanpa catch, exception lahir di dalam flow dan
+            // langsung jadi force close tanpa pesan.
+            .catch { _toast.tryEmit("gagal membaca sesi: ${it.message}") ; emit(emptyList()) }
             .stateIn(viewModelScope, SharingStarted.WhileSubscribed(5000), emptyList())
 
     private val _sessionId = MutableStateFlow<Long?>(null)
@@ -114,7 +120,14 @@ class ChatViewModel(app: Application) : AndroidViewModel(app) {
 
     val messages: StateFlow<List<MessageEntity>> =
         _sessionId.flatMapLatest { id ->
-            if (id == null) flowOf(emptyList()) else rt.db.messageDao().observeMessages(id)
+            if (id == null) {
+                flowOf(emptyList())
+            } else {
+                // catch di dalam: satu sesi yang datanya bermasalah tidak
+                // menghentikan seluruh flow, dan aplikasi tetap hidup.
+                rt.db.messageDao().observeMessages(id)
+                    .catch { _toast.tryEmit("gagal membaca pesan: ${it.message}"); emit(emptyList()) }
+            }
         }.stateIn(viewModelScope, SharingStarted.WhileSubscribed(5000), emptyList())
 
     val streamingText = MutableStateFlow("")
@@ -646,7 +659,7 @@ class ChatViewModel(app: Application) : AndroidViewModel(app) {
                                 MessageEntity(
                                     sessionId = sid, role = "assistant", kind = "tool_call",
                                     content = "", toolCallId = ev.id, toolName = ev.name,
-                                    toolArgs = prettyJson(ev.argsJson)
+                                    toolArgs = capStore(prettyJson(ev.argsJson), MAX_STORED_TOOL_ARGS)
                                 )
                             )
                             is AgentEvent.ToolResult -> rt.db.messageDao().insert(
@@ -661,7 +674,7 @@ class ChatViewModel(app: Application) : AndroidViewModel(app) {
                 }
                 if (sb.isNotBlank()) {
                     rt.db.messageDao().insert(
-                        MessageEntity(sessionId = sid, role = "assistant", kind = "text", content = sb.toString())
+                        MessageEntity(sessionId = sid, role = "assistant", kind = "text", content = capStore(sb.toString(), MAX_STORED_TEXT))
                     )
                 }
                 insertAssistantNotice(
@@ -730,6 +743,21 @@ class ChatViewModel(app: Application) : AndroidViewModel(app) {
                 } else {
                     rt.db.sessionDao().rename(sid, args.take(60))
                     _toast.tryEmit("judul sesi diubah: $args")
+                }
+                true
+            }
+            // Laporan crash terakhir: satu-satunya cara pengguna mengirim jejak
+            // force close tanpa adb. Ditampilkan sebagai pesan agar bisa disalin.
+            "crash" -> {
+                val trace = CrashLogger.lastFromDisk(getApplication()) ?: CrashLogger.last()
+                if (trace == null) {
+                    _toast.tryEmit("tidak ada crash tercatat di perangkat ini")
+                } else {
+                    insertAssistantNotice(
+                        "**[laporan crash terakhir]** — salin seluruh teks di bawah:\n\n```\n" +
+                            trace.take(12_000) + "\n```"
+                    )
+                    _toast.tryEmit("laporan ditampilkan — tekan lama untuk menyalin")
                 }
                 true
             }
@@ -1753,6 +1781,12 @@ class ChatViewModel(app: Application) : AndroidViewModel(app) {
             "Rubah Listrik", "Naga Kecil", "Kucing Kilat", "Burung Petir",
             "Kodok Emas", "Serigala Bulan", "Kupu-kupu Neon"
         )
+
+        /** Balasan akhir maksimum yang disimpan (jauh di bawah batas CursorWindow). */
+        const val MAX_STORED_TEXT = 200_000
+
+        /** Argumen tool (mis. isi berkas dari write_file) maksimum yang disimpan. */
+        const val MAX_STORED_TOOL_ARGS = 24_000
     }
 
     // ===================== LOOP AGENT =====================
@@ -1860,7 +1894,7 @@ class ChatViewModel(app: Application) : AndroidViewModel(app) {
                                     MessageEntity(
                                         sessionId = sid, role = "assistant", kind = "tool_call",
                                         content = "", toolCallId = ev.id, toolName = ev.name,
-                                        toolArgs = prettyJson(ev.argsJson)
+                                        toolArgs = capStore(prettyJson(ev.argsJson), MAX_STORED_TOOL_ARGS)
                                     )
                                 )
                             }
@@ -1901,7 +1935,7 @@ class ChatViewModel(app: Application) : AndroidViewModel(app) {
                     rt.db.messageDao().insert(
                         MessageEntity(
                             sessionId = sid, role = "assistant", kind = "text",
-                            content = finalText.toString()
+                            content = capStore(finalText.toString(), MAX_STORED_TEXT)
                         )
                     )
                     // mode suara (/voice): bacakan balasan via TTS on-device
@@ -1913,7 +1947,7 @@ class ChatViewModel(app: Application) : AndroidViewModel(app) {
                     }
                 }
                 after?.invoke()
-            } catch (e: Exception) {
+            } catch (e: Throwable) {
                 if (e is kotlinx.coroutines.CancellationException) {
                     _toast.tryEmit("dihentikan pengguna")
                 } else {
@@ -1958,6 +1992,19 @@ class ChatViewModel(app: Application) : AndroidViewModel(app) {
     }
 
     /** Persetujuan interaktif untuk tool berbahaya — dipanggil SEBELUM eksekusi. */
+    /**
+     * Batasi ukuran teks SEBELUM disimpan ke Room.
+     *
+     * Room membaca baris lewat CursorWindow (~2 MB); satu baris yang lebih besar
+     * membuat pembacaan berikutnya gagal (`Row too big to fit into CursorWindow`)
+     * dan — karena flow `messages` — langsung mematikan aplikasi. Balasan akhir
+     * hasil debug kode dan argumen `write_file` bisa sebesar itu, jadi keduanya
+     * dipotong di sini, bukan setelah crash.
+     */
+    private fun capStore(text: String, limit: Int): String =
+        if (text.length <= limit) text
+        else text.take(limit) + "\n… [dipotong ${text.length - limit} karakter saat disimpan]"
+
     private suspend fun approveTool(id: String, name: String, argsJson: String): Boolean {
         // HARDLINE adalah lantai keras: mode yolo tidak membebaskannya.
         if (rt.tools.hardlineReasonFor(name, argsJson) != null) return false
@@ -1979,4 +2026,5 @@ class ChatViewModel(app: Application) : AndroidViewModel(app) {
     private fun prettyJson(raw: String): String = runCatching {
         Json.parseToJsonElement(raw).toString()
     }.getOrElse { raw }
+
 }

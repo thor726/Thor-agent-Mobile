@@ -80,7 +80,7 @@ object MobileCommands {
         "personality", "indicator", "voice", "fast", "palette",
         // Info
         "status", "usage", "context", "version", "profile", "whoami", "help",
-        "commands", "insights", "debug", "update", "image",
+        "commands", "insights", "debug", "update", "image", "crash",
         // Tool & skill
         "skills", "tools", "toolsets", "learn", "plan", "goal", "subgoal",
         "compress", "journey", "reload", "reload-skills", "memory", "pet",
